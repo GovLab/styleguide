@@ -11,19 +11,19 @@ $(document).ready(function($) {
         $overlay.addClass('m-active');
     });
 
-    $overlay.click(function() {
-        $('.b-main-menu').removeClass('m-active');
-        $(this).removeClass('m-active');
-    });
+    // $overlay.click(function() {
+    //     $('.b-main-menu').removeClass('m-active');
+    //     $(this).removeClass('m-active');
+    // });
 
     // Search Field Logic
     $('.js-search-trigger').click(function() {
-        $('.e-search').addClass('m-active');
+        $(this).parent().addClass('m-active');
         $overlay.addClass('m-active');
     });
 
     $overlay.click(function() {
-        $('.e-search').removeClass('m-active');
+        $('.m-active').removeClass('m-active');
         $(this).removeClass('m-active');
     });
 
@@ -33,10 +33,10 @@ $(document).ready(function($) {
         $overlay.addClass('m-active');
     });
 
-    $overlay.click(function() {
-        $('.e-project-item').removeClass('m-active');
-        $overlay.removeClass('m-active');
-    });
+    // $overlay.click(function() {
+    //     $('.e-project-item').removeClass('m-active');
+    //     $overlay.removeClass('m-active');
+    // });
 
     $('.js-bio-toggle').click(function() {
         $(this).parent().toggleClass('m-active');

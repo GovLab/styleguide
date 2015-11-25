@@ -1,0 +1,162 @@
+.b-footer {
+    background-color: $gray-80;
+    color: $white-80;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    font-size: 16px;
+
+    @include breakpoint($desktop) {
+        padding: 45px 0;
+
+        .e-wrap {
+            @include wrap;
+            display: -webkit-flex;
+            display: flex;
+        }
+    }
+    .e-content {
+        -webkit-flex: 1;
+        flex: 1;
+        &:nth-child(3n) { margin-right: 0; }
+
+        @include breakpoint($desktop) { margin-right: 60px; }
+            
+        @include breakpoint($mobile-only) { text-align: center; }
+
+        h4 {
+            margin: 40px 0 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: $white
+        }
+
+        .e-partner-logo {
+            display: block;
+
+
+            > img { 
+                max-width: 90%; 
+                padding: 10px 0;
+                max-height: 60px;
+                opacity: .5;
+                @include transition;
+
+                &:hover {
+                    opacity: 1;
+                    @include transition;
+                }   
+            }
+
+            &.m-google img {
+                max-height: 50px;
+                max-width: 70%;
+            }
+
+            &.m-mit img {
+                max-height: 70px;
+            }
+        }
+    }
+
+.e-content.m-sections {
+    a {
+        display: block;
+        box-sizing: border-box;
+        color: $white-70;
+        padding: 5px 10px;
+        text-decoration: none;
+        margin-left: -10px;
+        margin-right: 10px;
+        @include transition;
+        
+
+        @include breakpoint($desktop) { 
+            display: inline-block; 
+            width: 49%;
+        }
+
+        &:hover {
+            color: $white;
+            background-color: $white-10;
+            @include transition;
+            
+        }
+    }
+}
+
+.b-build-team {
+    background-color: $gray-70;
+    padding: 20px;
+    text-align: center;
+
+
+    @include breakpoint($desktop) {
+        text-align: left;
+        padding: 20px 0;
+    }
+
+    .e-wrap {
+        @include wrap;
+
+        .e-social-media {
+            text-align: center;
+
+            @include breakpoint($desktop) { float: right; }
+
+            a {
+                padding: 10px 15px;
+                cursor: pointer;
+            }
+        }
+
+        a {
+            color: $white-70;
+            font-weight: 400;
+
+            &:hover { color: $white; }
+        }
+
+        p {
+            margin: 0;
+            color: $white-60;
+        }
+    }
+}
+
+}
+
+.b-copyright {
+    background-color: $gray-90;
+    text-align: center;
+    padding: 20px;
+
+    @include breakpoint($desktop) {
+        padding: 20px;
+        text-align: left;
+    }
+
+    .e-wrap {
+        @include wrap;
+        color: $white-70;
+        font-size: 14px;
+
+        .e-cc-badge {
+            margin-right: 25px;
+            margin-top: 5px;
+            @include breakpoint($mobile-only) { display: block; }
+            @include breakpoint($desktop) { float: left; }
+        }
+
+        a {
+            margin: 0;
+            line-height: 1.2;
+            color: $white-70;
+
+            &:hover {
+                color: $white;
+            }
+        }
+
+    }
+}
+

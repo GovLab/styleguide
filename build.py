@@ -160,7 +160,7 @@ if __name__ == '__main__':
     site = {}
 
     cleanup()
-    create_custom_templates(ctxt['projects'])
+    # create_custom_templates(ctxt['projects'])
 
     # Accept CLI parameter to turn the auto reloader on and off.
     if len(argv) == 2:
@@ -178,6 +178,6 @@ if __name__ == '__main__':
     site['searchpath'] = _SEARCHPATH
     site['staticpaths'] = ['static']
 
-    start_sass()
-    start_web_server()
+    # start_sass()
+    # start_web_server()
     make_site(**site).render(use_reloader=auto)
