@@ -78,9 +78,12 @@ button:focus {
   display: flex;
   /* NEW, Spec - Firefox, Chrome, Opera */
   background-color: #333;
-  padding: 10px 20px;
   text-align: center;
-  color: white; }
+  color: white;
+  padding: 5px; }
+  @media (min-width: 1025px) {
+    .b-top-nav {
+      padding: 10px 20px; } }
   .b-top-nav a {
     color: currentColor; }
   .b-top-nav .e-logo {
@@ -96,13 +99,19 @@ button:focus {
     vertical-align: middle; }
     .b-top-nav .e-logo img {
       max-width: 100px; }
+      @media (min-width: 768px) {
+        .b-top-nav .e-logo img {
+          max-width: 140px; } }
       @media (min-width: 1025px) {
         .b-top-nav .e-logo img {
           max-width: 140px; } }
   .b-top-nav .e-nav-item {
-    padding: 15px 10px 10px;
     display: inline-block;
-    cursor: pointer; }
+    cursor: pointer;
+    padding: 5px; }
+    @media (min-width: 1025px) {
+      .b-top-nav .e-nav-item {
+        padding: 15px 10px 10px; } }
     .b-top-nav .e-nav-item i {
       opacity: .2;
       transition: all .4s ease; }
@@ -119,10 +128,18 @@ button:focus {
     /* IE 9 */
     transform: scale(1.6);
     /* IE 10, Fx 16+, Op 12.1+ */ }
+  @media (max-width: 767px) {
+    .b-top-nav .e-nav-item.e-nav-trigger {
+      position: absolute; } }
+  @media (max-width: 767px) {
+    .b-top-nav .e-nav-item.m-search-container {
+      display: none; } }
+  @media (min-width: 1025px) {
+    .b-top-nav .e-nav-item.m-search-container {
+      top: -4px; } }
 
 .b-search {
-  display: inline-block;
-  position: relative; }
+  display: inline-block; }
   .b-search input {
     border: 0;
     color: white;
@@ -203,20 +220,17 @@ button:focus {
     font-size: 18px;
     padding: 30px;
     color: rgba(255, 255, 255, 0.7);
-    text-align: center;
+    text-align: right;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px; }
-    @media (min-width: 1025px) {
+    @media (max-width: 767px) {
       .b-main-menu a {
-        text-align: right; } }
+        text-align: center; } }
     .b-main-menu a:hover {
       background-color: rgba(0, 0, 0, 0.1);
       color: white; }
-
-.b-top-nav .b-search {
-  top: -4px; }
 
 .b-footer {
   background-color: rgba(0, 0, 0, 0.8);

@@ -26,13 +26,13 @@
         font-size: 18px;
         padding: 30px;
         color: $white-70;
-        text-align: center;
+        text-align: right;
         border-bottom: 1px solid $white-10;
         text-transform: uppercase;
         font-weight: 600;
         letter-spacing: 1px;
 
-        @include breakpoint($desktop) { text-align: right; }
+        @include breakpoint($mobile-only) { text-align: center; }
 
         &:hover { 
             background-color: $gray-10; 
