@@ -1,58 +1,87 @@
 .b-search {
-    display: -webkit-flex;
-    display: flex;
+    display: inline-block;
     position: relative;
-    z-index: 20;
-    margin: 0;
-    @include breakpoint($mobile-only) { display: block; }
-    
-    .e-search-trigger {
-        opacity: .2;
-        color: $white;
-    }
 
     input {
-        max-height: 30px;
-        vertical-align: 5px;
-        opacity: 0;
+        border: 0;
+        color: $white;
+        display: inline-block;
+        vertical-align: bottom;
         @include transition;
-        @include breakpoint($desktop) { margin: 8px 0 22px; }
+    }
+
+    input:focus { 
+        background-color: $white-30;
+        outline: none; 
     }
 
     input[type='text'] {
-        padding: 4px 6px;
-        -webkit-flex: 1;
-        flex: 1;
-        margin-left: 10px;
-
-        border: 0;
-        color: $white;
-        background-color: $white-10;
-
-        &:focus { 
-            background-color: $white-30;
-            outline: none; 
-        }
+        @include flex(1);
+        background-color: $white-10; 
+        max-width: 0;
+        padding: 4px 0;       
     }
 
     input[type='submit'] {
-        background-color: $white-20;
-        border: 0;
-        color: $white-70;
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: .6px;
-        padding: 4px 12px;
+        padding: 8px 0;
+        background-color: transparent;
+        @include material-icons;
+        line-height: 0.6;
+        color: $white;
+        opacity: .2;
+    }
+
+    input[type='submit']:hover {
+        opacity: 1;
     }
 }
 
-.b-search.m-active input {
-    opacity: 1;
+.b-search.m-active {
+    z-index: 11;
 
-    @include transition;
+    input[type='text'] {
+        max-width: 300px;
+        padding: 4px 6px;
+        background-color: $white-30;
+    }
 
-    @include breakpoint($desktop) { max-width: 300px; }
+    input[type='submit'] { 
+        padding: 8px; 
+        color: $white;
+        opacity: 1;
+    }
 }
+
+// .b-search {
+//     display: -webkit-flex;
+//     display: flex;
+//     position: relative;
+//     z-index: 20;
+//     margin: 0;
+//     @include breakpoint($mobile-only) { display: block; }
+    
+//     .e-search-trigger {
+//         opacity: .2;
+//         color: $white;
+//     }
+
+//     input {
+//         max-height: 30px;
+//         vertical-align: 5px;
+//         opacity: 0;
+//         @include transition;
+//         @include breakpoint($desktop) { margin: 8px 0 22px; }
+//     }
+
+
+// }
+
+// .b-search.m-active input {
+//     opacity: 1;
+
+//     @include transition;
+
+//     @include breakpoint($desktop) { max-width: 300px; }
+// }
 
 

@@ -1,7 +1,7 @@
 // Breakpoints
 
-$mobile-only: max-width 800px;
-$tablet: max-width 1024px;
+$mobile-only: max-width 767px;
+$tablet: min-width 768px max-width 1024px;
 $desktop: 1025px;
 
 
@@ -57,4 +57,27 @@ $blue-20k: #006e8f;
 @mixin circle {
     overflow: hidden;
     border-radius: 50%;
+}
+
+@mixin flex($n) {
+    -webkit-box-flex: $n;   /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: $n;       /* Safari 6.1+. iOS 7.1+, BB10 */
+    -ms-flex: $n;           /* IE 10 */
+    flex: $n;               /* NEW, Spec - Firefox, Chrome, Opera */
+}
+
+@mixin material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
 }

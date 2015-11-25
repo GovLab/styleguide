@@ -1,11 +1,8 @@
-// @import 'search';
-
 .b-top-nav {
     display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
     display: -ms-flexbox;  /* TWEENER - IE 10 */
     display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
     display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
-
     background-color: $black;
     padding: 10px 20px;
     text-align: center;
@@ -14,11 +11,9 @@
     a { color: currentColor; }
 
     .e-logo {
-        -webkit-box-flex: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
-        width: 20%;            /* For old syntax, otherwise collapses. */
-        -webkit-flex: 1;       /* Safari 6.1+. iOS 7.1+, BB10 */
-        -ms-flex: 1;           /* IE 10 */
-        flex: 1;               /* NEW, Spec - Firefox, Chrome, Opera */
+        @include flex(1);
+        padding: 5px 0 0;
+        vertical-align: middle;
 
         img {
             max-width: 100px;
@@ -26,22 +21,23 @@
         }
     }
 
-    .e-nav-group { padding: 5px 0; }
+    .e-nav-item {
+        padding: 15px 10px 10px;
+        display: inline-block;
+        cursor: pointer;
 
-    .e-nav-trigger {
-        
+        i {
+            opacity: .2;
+            @include transition;
+
+            &:hover { opacity: 1; }
+        }
     }
 
     .e-social-media {
         @include breakpoint($mobile-only) { display: none; }
 
-        a {
-            padding: 0 10px;
-            display: inline-block;
-            @include transition;
-        }
-
-        a:hover { 
+        a:hover i { 
             transform: scale(1.6);
     -webkit-transform: scale(1.6); /* Ch <36, Saf 5.1+, iOS, An =<4.4.4 */
         -ms-transform: scale(1.6); /* IE 9 */
@@ -50,120 +46,21 @@
     }
 }
 
+@import 'search';
+@import 'off-canvas';
 
-// .b-top-nav {
-//     display: -webkit-flex;
-//     display: flex;
-//     background-color: $black;
-//     padding: 0;
-//     justify-items: center;
+.b-top-nav .b-search { top: -4px; } // Fixes a small alignment issue 
 
-//     @include breakpoint($desktop) { padding: 10px; }
-//     @include breakpoint($mobile-only) { height: 90px; }
 
-//     .e-nav-group,
-//     .e-social-media,
-//     .e-logo {
-//         -webkit-flex: 1;
-//         flex: 1;
-//     }
 
-//     .e-nav-item {
-//         color: $white-20;
-//         display: inline-block;
-//         cursor: pointer;
 
-//         &:hover { color: $white; }
 
-//         @include breakpoint($desktop) { padding: 10px 15px; }
-//     }
 
-//     .e-nav-group {
-//         -webkit-flex: none;
-//         flex: none;
-//         position: absolute;
-//         z-index: 20;
 
-//         @include breakpoint($mobile-only) {
-//             width: 100%;
-//             padding: 13px 15px 6px 15px;
-//         }
 
-//         @include breakpoint($desktop) {
-//             display: -webkit-flex;
-//             display: flex;
-//             position: relative;
-//             width: 30%;
-//         }
-//     }
 
-//     .e-nav-trigger {
-//         @include breakpoint($mobile-only) { display: block; }
-//     }
 
-//     .e-logo {
-//         text-align: center;
-//         padding: 10px 0 5px 0;
 
-//         img {
-//             max-width: 100px;
 
-//             @include breakpoint($desktop) { max-width: 140px; }
-//         }
-//     }
-
-//     .e-social-media {
-//         text-align: right;
-//         display: block;
-
-//         @include breakpoint($mobile-only) { display: none; }
-
-//         a { @include transition; }
-//         a:hover { transform: scale(1.4); }
-//     }
-// }
-
-// .b-main-menu {
-//     position: fixed;
-//     left: -100%;
-//     top: 0;
-//     bottom: 0;
-//     right: 100%;
-//     z-index: 20;
-//     box-shadow: 0 0 20px $gray-40;
-//     background-color: $black;
-//     -webkit-flex-flow: column;
-//     flex-flow: column;
-
-//     @include breakpoint($desktop) { left: -28%; }
-
-//     @include transition;
-
-//     &.m-active {
-//         left: 0;
-//         right: 70px;
-
-//         @include breakpoint($desktop) { right: 72%; }
-//     }
-
-//     a {
-//         display: block;
-//         font-size: 18px;
-//         padding: 30px;
-//         color: $white-70;
-//         text-align: center;
-//         border-bottom: 1px solid $white-10;
-//         text-transform: uppercase;
-//         font-weight: 600;
-//         letter-spacing: 1px;
-
-//         @include breakpoint($desktop) { text-align: right; }
-
-//         &:hover { 
-//             background-color: $gray-10; 
-//             color: $white;
-//         }
-//     }
-// }
 
 
