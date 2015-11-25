@@ -81,7 +81,7 @@ button:focus {
   text-align: center;
   color: white;
   padding: 5px; }
-  @media (min-width: 1025px) {
+  @media (min-width: 768px) {
     .b-top-nav {
       padding: 10px 20px; } }
   .b-top-nav a {
@@ -102,14 +102,11 @@ button:focus {
       @media (min-width: 768px) {
         .b-top-nav .e-logo img {
           max-width: 140px; } }
-      @media (min-width: 1025px) {
-        .b-top-nav .e-logo img {
-          max-width: 140px; } }
   .b-top-nav .e-nav-item {
     display: inline-block;
     cursor: pointer;
     padding: 5px; }
-    @media (min-width: 1025px) {
+    @media (min-width: 768px) {
       .b-top-nav .e-nav-item {
         padding: 15px 10px 10px; } }
     .b-top-nav .e-nav-item i {
@@ -134,8 +131,9 @@ button:focus {
   @media (max-width: 767px) {
     .b-top-nav .e-nav-item.m-search-container {
       display: none; } }
-  @media (min-width: 1025px) {
+  @media (min-width: 768px) {
     .b-top-nav .e-nav-item.m-search-container {
+      position: relative;
       top: -4px; } }
 
 .b-search {
@@ -206,12 +204,18 @@ button:focus {
   -webkit-flex-flow: column;
   flex-flow: column;
   transition: all .4s ease; }
+  @media (min-width: 768px) {
+    .b-main-menu {
+      left: -48%; } }
   @media (min-width: 1025px) {
     .b-main-menu {
       left: -28%; } }
   .b-main-menu.m-active {
     left: 0;
     right: 70px; }
+    @media (min-width: 768px) {
+      .b-main-menu.m-active {
+        right: 52%; } }
     @media (min-width: 1025px) {
       .b-main-menu.m-active {
         right: 72%; } }
@@ -225,9 +229,6 @@ button:focus {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px; }
-    @media (max-width: 767px) {
-      .b-main-menu a {
-        text-align: center; } }
     .b-main-menu a:hover {
       background-color: rgba(0, 0, 0, 0.1);
       color: white; }

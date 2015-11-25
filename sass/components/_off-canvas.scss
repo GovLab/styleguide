@@ -10,6 +10,7 @@
     -webkit-flex-flow: column;
     flex-flow: column;
 
+    @include breakpoint($tablet) { left: -48%; }
     @include breakpoint($desktop) { left: -28%; }
 
     @include transition;
@@ -18,6 +19,7 @@
         left: 0;
         right: 70px;
 
+        @include breakpoint($tablet) { right: 52%; }
         @include breakpoint($desktop) { right: 72%; }
     }
 
@@ -31,8 +33,6 @@
         text-transform: uppercase;
         font-weight: 600;
         letter-spacing: 1px;
-
-        @include breakpoint($mobile-only) { text-align: center; }
 
         &:hover { 
             background-color: $gray-10; 

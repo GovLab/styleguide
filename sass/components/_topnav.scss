@@ -7,7 +7,7 @@
     text-align: center;
     color: $white;
     padding: 5px;
-    @include breakpoint($desktop) { padding: 10px 20px; }
+    @include breakpoint($tablet) { padding: 10px 20px; }
 
     a { color: currentColor; }
 
@@ -19,7 +19,6 @@
         img {
             max-width: 100px;
             @include breakpoint($tablet) { max-width: 140px; }
-            @include breakpoint($desktop) { max-width: 140px; }
         }
     }
 
@@ -28,7 +27,7 @@
         cursor: pointer;
         padding: 5px;
         
-        @include breakpoint($desktop) { padding: 15px 10px 10px; }
+        @include breakpoint($tablet) { padding: 15px 10px 10px; }
 
         i {
             opacity: .2;
@@ -55,7 +54,10 @@
 
     .e-nav-item.m-search-container {
         @include breakpoint($mobile-only) { display: none; }
-        @include breakpoint($desktop) { top: -4px; }// Fixes a small alignment issue 
+        @include breakpoint($tablet) { 
+            position: relative;
+            top: -4px; // Fixes a small alignment issue 
+        }
     }
 }
 
