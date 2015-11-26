@@ -1,5 +1,9 @@
+{% import '_macros.html' as modules %}
+
 <!-- Main Menu (Off Canvas) -->
 <nav class="b-main-menu">
+    {{ modules.search('m-negative m-fixed') }}
+    
     <a href="./">Home</a>
     <a href="./about.html">About</a>
     <a href="./projects.html">Projects</a>
