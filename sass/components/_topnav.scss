@@ -1,20 +1,18 @@
 .b-top-nav {
-    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox;  /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
     background-color: $black;
-    text-align: center;
     color: $white;
     padding: 5px;
+    position: relative;
+
     @include breakpoint($tablet) { padding: 10px 20px; }
+
 
     a { color: currentColor; }
 
     .e-logo {
-        @include flex(1);
-        padding: 5px 0 0;
-        vertical-align: middle;
+        padding: 5px 0 0 0;
+        text-align: center;
+        display: block;
 
         img {
             max-width: 100px;
@@ -22,48 +20,33 @@
         }
     }
 
+    .e-nav-group { 
+        position: absolute; 
+        top: 0;
+
+        &.m-left { left: 0; }
+        &.m-right { right: 0; }
+    }
+
     .e-nav-item {
+        padding: 11px;
         display: inline-block;
-        cursor: pointer;
-        padding: 5px;
-        
-        @include breakpoint($tablet) { padding: 15px 10px 10px; }
-
-        i {
-            opacity: .2;
-            @include transition;
-
-            &:hover { opacity: 1; }
-        }
+        @include breakpoint($tablet) { padding: 20px; }
     }
 
-    .e-social-media {
-        @include breakpoint($mobile-only) { display: none; }
-
-        a:hover i { 
-            transform: scale(1.6);
-    -webkit-transform: scale(1.6); /* Ch <36, Saf 5.1+, iOS, An =<4.4.4 */
-        -ms-transform: scale(1.6); /* IE 9 */
-            transform: scale(1.6); /* IE 10, Fx 16+, Op 12.1+ */
-        }
-    }
-
-    .e-nav-item.e-nav-trigger {
-        @include breakpoint($mobile-only) { position: absolute; }
-    }    
-
-    .e-nav-item.m-search-container {
-        @include breakpoint($mobile-only) { display: none; }
-        @include breakpoint($tablet) { 
-            position: relative;
-            top: -4px; // Fixes a small alignment issue 
-        }
-    }
+    .e-nav-item.m-container { padding: 0; }
 }
 
-@import 'search';
-@import 'off-canvas';
+.b-top-nav {
+    .e-social-media { display: none; }
+    .e-search-container {
+        @include breakpoint($mobile-only) { display: none; }
+    }
 
+    @include breakpoint($tablet) {
+        .e-social-media { display: block; }
+    }
+}
 
 
 
