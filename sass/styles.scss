@@ -13,11 +13,20 @@
 
 body {
     // background-color: red;
-    background-color: green;
+    // background-color: $purple;
 }
 
 
 // Temp Stuff
-.b-footer {
-    margin-top: 800px;
+section {
+    padding: 40px 0;
 }
+
+section.negative {
+    background-color: $purple;
+}
+
+.b-footer {
+    margin-top: 103px;
+}
+

@@ -13,13 +13,16 @@
     <link rel="stylesheet" href="static/vendor/slick.css">
     <link rel="stylesheet" href="static/styles/styles.css">
 </head>
+
 <body id="{% block page_id %}{% endblock %}">
+    {% import '_macros.html' as modules %}
+
     {% include 'includes/top-nav.html' %}
     {% include 'includes/off-canvas.html' %}
 
     {% block content %}{% endblock %}
     
-    {% include 'includes/build-team.html' %}
+    {# {% include 'includes/build-team.html' %} #}
     {% include 'includes/footer.html' %}
     {% include 'includes/copyright.html' %}
         
