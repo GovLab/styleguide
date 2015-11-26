@@ -7,8 +7,13 @@
 
 // components
 @import 'components/base';
+@import 'components/typography';
+@import 'components/layout';
+@import 'components/search';
+@import 'components/off-canvas';
 @import 'components/topnav';
 @import 'components/footer';
+
 
 
 body {

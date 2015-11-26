@@ -21,27 +21,40 @@
     
 
 <header class="b-top-nav">
-    
-    <div class="e-nav-group">
+
+    <div class="e-nav-group m-left">
         <span class="e-nav-item js-nav-trigger e-nav-trigger">
             <i class="material-icons">menu</i>
         </span>
-        <span class="e-nav-item m-search-container">
-            
+        <span class="e-nav-item m-container e-search-container">
+            <form class="b-search " action="">
+        <input class="js-search-value" type="text">
+        <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+    </form>
         </span>
+    </div>
+
+    <div class="e-nav-group m-right e-social-media">
+        <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
+        <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
     </div>
 
     <a class="e-logo" href="./">
         <img src="static/img/govlab-logo-white.png" alt="">
     </a>
 
-    <div class="e-social-media e-nav-group">
-        <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
-        <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
-    </div>
+
+
 </header>
-    <!-- Main Menu (Off Canvas) -->
+    
+
+<!-- Main Menu (Off Canvas) -->
 <nav class="b-main-menu">
+    <form class="b-search m-negative m-fixed" action="">
+        <input class="js-search-value" type="text">
+        <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+    </form>
+    
     <a href="./">Home</a>
     <a href="./about.html">About</a>
     <a href="./projects.html">Projects</a>
