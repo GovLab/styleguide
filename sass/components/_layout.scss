@@ -10,3 +10,7 @@
         padding-right: 0;
     }
 }
+
+.b-grid-container {
+    @include flexbox;
+}
