@@ -1,3 +1,4 @@
+
 .b-wrap {
     max-width: $desktop;
     margin-left: auto;
@@ -13,4 +14,47 @@
 
 .b-grid-container {
     @include flexbox;
+    -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+
+    @include breakpoint($mobile-only) { 
+       -webkit-flex-direction: column;
+               flex-direction: column;
+    }
+
+    &.m-wrap {
+        @extend .b-wrap;
+    }
+    
+    .e-column {
+        @include flex(1);
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    &.m-bare .e-column {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .e-half {
+        @extend .e-column;
+        flex-basis: 50%;
+    }
+
+    .e-third {
+        @extend .e-column;
+        @include breakpoint($tablet) { flex-basis: 33%; }
+    }
+
+    .e-quarter {
+        @extend .e-column;
+        @include breakpoint($tablet) {  flex-basis: 50%; }
+        @include breakpoint($desktop) { flex-basis: 25%; }
+    }
 }
+
+// .e-column:first-child  { background-color: $purple;}
+// .e-column:nth-child(2) { background-color: $blue;}
+// .e-column:nth-child(3) { background-color: $orange;}
+// .e-column:last-child   { background-color: $teal;}

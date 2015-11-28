@@ -69,9 +69,6 @@ body {
 a {
   text-decoration: none;
   color: currentColor; }
-  @media (max-width: 768px) {
-    a {
-      background-color: rgba(0, 0, 0, 0.1); } }
 
 a:hover {
   text-decoration: underline;
@@ -129,28 +126,51 @@ table {
     margin: 0;
     line-height: 1.2; }
 
-.b-wrap {
+.b-wrap, .b-grid-container.m-wrap {
   max-width: 1025px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px; }
   @media (min-width: 1025px) {
-    .b-wrap {
+    .b-wrap, .b-grid-container.m-wrap {
       padding-left: 0;
       padding-right: 0; } }
 
 .b-grid-container {
   display: -webkit-box;
-  /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;
-  /* OLD - Firefox 19- (buggy but mostly works) */
   display: -ms-flexbox;
-  /* TWEENER - IE 10 */
   display: -webkit-flex;
-  /* NEW - Chrome */
   display: flex;
-  /* NEW, Spec - Opera 12.1, Firefox 20+ */ }
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  @media (max-width: 767px) {
+    .b-grid-container {
+      -webkit-flex-direction: column;
+      flex-direction: column; } }
+  .b-grid-container .e-column, .b-grid-container .e-half, .b-grid-container .e-third, .b-grid-container .e-quarter {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding-left: 30px;
+    padding-right: 30px; }
+  .b-grid-container.m-bare .e-column, .b-grid-container.m-bare .e-half, .b-grid-container.m-bare .e-third, .b-grid-container.m-bare .e-quarter {
+    padding-left: 0;
+    padding-right: 0; }
+  .b-grid-container .e-half {
+    flex-basis: 50%; }
+  @media (min-width: 768px) {
+    .b-grid-container .e-third {
+      flex-basis: 33%; } }
+  @media (min-width: 768px) {
+    .b-grid-container .e-quarter {
+      flex-basis: 50%; } }
+  @media (min-width: 1025px) {
+    .b-grid-container .e-quarter {
+      flex-basis: 25%; } }
 
 .b-search {
   width: 100%;

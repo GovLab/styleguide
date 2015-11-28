@@ -2,7 +2,7 @@
 
 $mobile-only: max-width 767px;
 $tablet: min-width 768px;
-$touch: max-width 768px;
+$touch: max-width 1024px;
 $desktop: 1025px;
 
 
@@ -60,20 +60,28 @@ $blue-20k: #006e8f;
     border-radius: 50%;
 }
 
-
 @mixin flexbox {
-    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 }
 
-@mixin flex($n) {
-    -webkit-box-flex: $n;   /* OLD - iOS 6-, Safari 3.1-6 */
-    -webkit-flex: $n;       /* Safari 6.1+. iOS 7.1+, BB10 */
-    -ms-flex: $n;           /* IE 10 */
-    flex: $n;               /* NEW, Spec - Firefox, Chrome, Opera */
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
 }
 
 @mixin material-icons {
