@@ -78,7 +78,7 @@ h1 {
   font-weight: 100;
   text-transform: uppercase;
   text-align: center;
-  font-size: 36px; }
+  font-size: 30px; }
   @media (min-width: 768px) {
     h1 {
       font-size: 50px; } }
@@ -91,10 +91,21 @@ h2 {
   text-transform: uppercase; }
   @media (min-width: 768px) {
     h2 {
-      font-size: 36px; } }
+      font-size: 28px; } }
   @media (min-width: 1025px) {
     h2 {
-      font-size: 28px; } }
+      font-size: 32px; } }
+
+h3 {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 400; }
+  @media (min-width: 768px) {
+    h3 {
+      font-size: 22px; } }
+  @media (min-width: 1025px) {
+    h3 {
+      font-size: 26px; } }
 
 pre {
   background-color: rgba(0, 0, 0, 0.1);
@@ -157,6 +168,10 @@ table {
     flex: 1;
     padding-left: 30px;
     padding-right: 30px; }
+    @media (max-width: 767px) {
+      .b-grid-container .e-column, .b-grid-container .e-half, .b-grid-container .e-third, .b-grid-container .e-quarter {
+        padding-left: 15px;
+        padding-right: 15px; } }
   .b-grid-container.m-bare .e-column, .b-grid-container.m-bare .e-half, .b-grid-container.m-bare .e-third, .b-grid-container.m-bare .e-quarter {
     padding-left: 0;
     padding-right: 0; }
@@ -421,6 +436,47 @@ table {
       color: rgba(255, 255, 255, 0.7); }
       .b-copyright .e-wrap a:hover {
         color: white; }
+
+.b-divider {
+  background-color: #333;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  line-height: 1.3;
+  color: white; }
+  .b-divider :first-child {
+    margin-top: 0; }
+  .b-divider :last-child {
+    margin-bottom: 0; }
+  .b-divider h1 {
+    text-transform: none;
+    margin-bottom: 0; }
+    @media (min-width: 768px) {
+      .b-divider h1 {
+        font-size: 40px; } }
+  .b-divider h1 + h2 {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase; }
+    @media (min-width: 768px) {
+      .b-divider h1 + h2 {
+        font-size: 22px; } }
+  .b-divider h2 {
+    text-transform: none;
+    font-weight: 100; }
+
+.b-divider.m-purple {
+  background-color: #523080; }
+
+.b-divider.m-blue {
+  background-color: #008ab3; }
+
+.b-divider.m-orange {
+  background-color: #ee5b43; }
+
+.b-divider.m-teal {
+  background-color: #008895; }
 
 section {
   padding: 40px 0; }

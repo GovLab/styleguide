@@ -30,6 +30,11 @@
         @include flex(1);
         padding-left: 30px;
         padding-right: 30px;
+
+        @include breakpoint($mobile-only) {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
     }
 
     &.m-bare .e-column {
@@ -39,21 +44,23 @@
 
     .e-half {
         @extend .e-column;
-        flex-basis: 50%;
+        // Need to prefix this
+        flex-basis: 50%; 
     }
 
     .e-third {
         @extend .e-column;
-        @include breakpoint($tablet) { flex-basis: 33%; }
+        @include breakpoint($tablet) { flex-basis: 33%; } // Need to prefix this
     }
 
     .e-quarter {
         @extend .e-column;
-        @include breakpoint($tablet) {  flex-basis: 50%; }
-        @include breakpoint($desktop) { flex-basis: 25%; }
+        @include breakpoint($tablet) {  flex-basis: 50%; } // Need to prefix this
+        @include breakpoint($desktop) { flex-basis: 25%; } // Need to prefix this
     }
 }
 
+// Debug Styles
 // .e-column:first-child  { background-color: $purple;}
 // .e-column:nth-child(2) { background-color: $blue;}
 // .e-column:nth-child(3) { background-color: $orange;}

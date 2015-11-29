@@ -22,7 +22,7 @@ h1 {
     font-weight: 100;
     text-transform: uppercase;
     text-align: center;
-    font-size: 36px;
+    font-size: 30px;
 
     @include breakpoint($tablet) { font-size: 50px; }
     @include breakpoint($desktop) { font-size: 60px; }
@@ -32,8 +32,18 @@ h2 {
     font-size: 20px;
     text-transform: uppercase;
 
-    @include breakpoint($tablet) { font-size: 36px; }
-    @include breakpoint($desktop) { font-size: 28px; }
+    @include breakpoint($tablet) { font-size: 28px; }
+    @include breakpoint($desktop) { font-size: 32px; }
+}
+
+
+h3 {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 400;
+
+    @include breakpoint($tablet) { font-size: 22px; }
+    @include breakpoint($desktop) { font-size: 26px; }
 }
 
 pre {
