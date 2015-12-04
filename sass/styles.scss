@@ -9,11 +9,13 @@
 @import 'components/base';
 @import 'components/typography';
 @import 'components/layout';
+@import 'components/button';
 @import 'components/search';
 @import 'components/off-canvas';
 @import 'components/topnav';
 @import 'components/footer';
 @import 'components/divider';
+@import 'components/slide';
 
 
 
@@ -23,16 +25,5 @@ body {
 }
 
 
-// Temp Stuff
-section {
-    padding: 40px 0;
-}
 
-section.negative {
-    background-color: $purple;
-}
-
-.b-footer {
-    margin-top: 103px;
-}
 
