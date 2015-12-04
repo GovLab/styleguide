@@ -26,10 +26,16 @@
         @extend .b-wrap;
     }
     
-    .e-column {
+    // Auxiliary Class - This will not go to the HTML files
+    .e-column { 
         @include flex(1);
         padding-left: 30px;
         padding-right: 30px;
+        
+        @include breakpoint($desktop) {
+            &:first-of-type { padding-left: 0; }
+            &:last-of-type  { padding-right: 0;}
+        }
 
         @include breakpoint($mobile-only) {
             padding-left: 15px;
