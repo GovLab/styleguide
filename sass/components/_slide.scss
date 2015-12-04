@@ -1,0 +1,69 @@
+.b-slide {
+    background-color: $black;
+    color: $white;
+    padding: 20px 0;
+
+    > header {
+        @extend .b-wrap;
+        @include breakpoint($mobile-only) { text-align: center; }
+    }
+
+    > header > h4 { 
+        font-weight: 300; 
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        @include breakpoint($tablet) { margin-top: 0; }
+    }
+
+    p { font-weight: 300;}
+    p a { text-decoration: underline; }
+
+    
+
+    .e-slider-index {
+        > span {
+            @include circle;
+            height: 8px;
+            width: 8px;
+            background-color: $white-20;
+            display: inline-block;
+        }
+
+        .m-active { background-color: $white-50; }
+    }
+
+    .e-content {
+        @extend .b-wrap;
+        @extend .b-grid-container;
+        
+        h2,
+        h3 {
+            font-weight: 100;
+            line-height: 1.2;
+            text-transform: none;
+        }
+
+        h2 { 
+            font-size: 40px;
+
+
+        }
+        h3 { font-size: 20px; }
+        h3 strong { font-weight: 600; }
+        
+    }
+
+    .e-action-group {
+
+    }
+
+    .e-action {
+        @include breakpoint($mobile-only) { margin-bottom: 10px; }   
+    }
+}
+
+.b-slide.m-purple { background-color: $purple; }
+.b-slide.m-blue { background-color: $blue; }
+.b-slide.m-orange { background-color: $orange; }
+.b-slide.m-teal { background-color: $teal; }
