@@ -1,0 +1,25 @@
+.b-page-section {
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    .e-title {
+        text-align: center;
+        font-weight: 100;
+    }
+
+    h4 { text-transform: uppercase; }
+}
+
+.b-page-section.m-purple,
+.b-page-section.m-black, 
+.b-page-section.m-teal,  
+.b-page-section.m-orange,
+.b-page-section.m-blue {
+    color: $white;
+} 
+
+.b-page-section.m-purple { background-color: $purple; }
+.b-page-section.m-black  { background-color: $black;  }
+.b-page-section.m-teal   { background-color: $teal;   }
+.b-page-section.m-orange { background-color: $orange; }
+.b-page-section.m-blue   { background-color: $blue;   }

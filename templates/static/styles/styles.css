@@ -137,14 +137,14 @@ table {
     margin: 0;
     line-height: 1.2; }
 
-.b-wrap, .b-grid-container.m-wrap, .b-slide > header, .b-slide .e-content, .b-sticky .e-wrap {
+.b-wrap, .b-grid-container.m-wrap, .b-slide > header, .b-slide .e-content, .b-sticky .e-wrap, .b-progress.m-wrap {
   max-width: 1025px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px; }
   @media (min-width: 1025px) {
-    .b-wrap, .b-grid-container.m-wrap, .b-slide > header, .b-slide .e-content, .b-sticky .e-wrap {
+    .b-wrap, .b-grid-container.m-wrap, .b-slide > header, .b-slide .e-content, .b-sticky .e-wrap, .b-progress.m-wrap {
       padding-left: 0;
       padding-right: 0; } }
 
@@ -733,6 +733,37 @@ table {
 .b-top-section.m-teal {
   background-color: #008895; }
 
+.b-page-section {
+  padding-top: 30px;
+  padding-bottom: 30px; }
+  .b-page-section .e-title {
+    text-align: center;
+    font-weight: 100; }
+  .b-page-section h4 {
+    text-transform: uppercase; }
+
+.b-page-section.m-purple,
+.b-page-section.m-black,
+.b-page-section.m-teal,
+.b-page-section.m-orange,
+.b-page-section.m-blue {
+  color: white; }
+
+.b-page-section.m-purple {
+  background-color: #523080; }
+
+.b-page-section.m-black {
+  background-color: #333; }
+
+.b-page-section.m-teal {
+  background-color: #008895; }
+
+.b-page-section.m-orange {
+  background-color: #ee5b43; }
+
+.b-page-section.m-blue {
+  background-color: #008ab3; }
+
 @media (max-width: 767px) {
   .b-progress {
     border: 1px solid rgba(255, 255, 255, 0.4);
@@ -743,11 +774,11 @@ table {
     margin-top: 20px; } }
 @media (min-width: 1025px) {
   .b-progress {
-    width: calc(100% - 120px);
+    width: 100%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     margin-top: 70px;
     margin-bottom: 20px;
-    margin-left: 120px;
+    padding-left: 120px;
     position: relative; } }
 @media (max-width: 767px) {
   .b-progress:before {
@@ -813,5 +844,23 @@ table {
   width: 70%; }
 .b-progress.m-complete:after {
   width: 100%; }
+
+.b-breadcrumbs {
+  max-width: 1025px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 20px; }
+  .b-breadcrumbs a,
+  .b-breadcrumbs span {
+    margin-top: -2px;
+    display: inline-block;
+    vertical-align: top; }
+  .b-breadcrumbs span,
+  .b-breadcrumbs .material-icons {
+    color: rgba(255, 255, 255, 0.4); }
+  .b-breadcrumbs a {
+    color: rgba(255, 255, 255, 0.9); }
+  .b-breadcrumbs a:hover {
+    text-decoration: underline; }
 
 /*# sourceMappingURL=styles.css.map */
