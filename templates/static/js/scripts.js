@@ -11,28 +11,17 @@ $(document).ready(function($) {
         $overlay.addClass('m-active');
     });
 
-    // $overlay.click(function() {
-    //     $('.b-main-menu').removeClass('m-active');
-    //     $(this).removeClass('m-active');
-    // });
-
     // Search Field Logic
     $('.js-search-trigger').click(function() {
         $(this).parent().addClass('m-active');
         $overlay.addClass('m-active');
     });
 
-    $overlay.click(function() {
-        $('.m-active').removeClass('m-active');
-        $(this).removeClass('m-active');
+    // Modal Logic 
+    $(".js-modal-trigger").click(function() {
+        $(".b-modal").addClass("m-active");
+        $overlay.addClass('m-active');
     });
-
-
-    // <script type="text/javascript">
-    $('.b-slider').slick({
-    });
-
-
 
     // Tooltip Logic
     $('.js-tooltip-trigger').click(function() {
@@ -40,10 +29,39 @@ $(document).ready(function($) {
         $overlay.addClass('m-active');
     });
 
+
+    $overlay.click(function() {
+        $('.m-active').removeClass('m-active');
+        $(this).removeClass('m-active');
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $('.js-bio-toggle').click(function() {
         $(this).parent().toggleClass('m-active');
     })
-
 
     // Search
     $('.js-search-submit').click(function(event) {

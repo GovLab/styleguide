@@ -863,4 +863,42 @@ table {
   .b-breadcrumbs a:hover {
     text-decoration: underline; }
 
+.b-modal {
+  background: white;
+  position: fixed;
+  width: 50%;
+  top: 12vh;
+  left: 50%;
+  margin: 0 0 0 -25%;
+  /* Embiggen */
+  transform: scale(1.5);
+  /* prefix me */
+  /* Hidden */
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 30px 45px;
+  transition: all .4s ease;
+  z-index: 11; }
+  .b-modal .e-content {
+    max-height: 70vh;
+    overflow-y: scroll; }
+    .b-modal .e-content :first-child {
+      margin-top: 0; }
+    .b-modal .e-content h2 {
+      font-size: 20px; }
+    .b-modal .e-content h3 {
+      font-size: 18px; }
+    .b-modal .e-content h4 {
+      font-size: 16px; }
+
+.b-modal.m-active {
+  /* Regular size and visible */
+  transform: scale(1);
+  /* prefix me */
+  opacity: 1;
+  transition: all .4s ease;
+  /* Clickable */
+  pointer-events: auto; }
+
 /*# sourceMappingURL=styles.css.map */
