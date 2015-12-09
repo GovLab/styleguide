@@ -1,24 +1,9 @@
 .b-featured-content-wrapper {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-flow: column;
-    flex-flow: column;
 
     .e-banner-container {
-        -webkit-flex: 0 0 1;
-        flex: 0 0 1;
+
    }
 }
-
-// .m-event {
-//     order: 2;
-// }
-// .m-article {
-//     order: 1;
-// }
-// .m-project {
-//     order: 3;
-// }
 
 .b-featured-content {
     padding: 0 0 40px 0;

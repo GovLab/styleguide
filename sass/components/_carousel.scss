@@ -1,0 +1,44 @@
+.b-slider {
+    // Here we overwrite the styles from Slick.js
+    // Keeping the default functionality of the NEXT and PREV buttons
+
+    .slick-arrow {
+        position: absolute;
+        top: 45%;
+        z-index: 1;
+        background-color: transparent;
+        border: 0;
+        @include material-icons;
+        color: transparent;
+
+        &:before,
+        &:after {
+            color: $white_20;
+            font-size: 60px;
+            @include transition;
+        }
+
+        &:hover:before,
+        &:hover:after {
+            color: $white_60;
+            @include transition;
+        }
+    }
+
+    .slick-prev {
+        left: 0;
+
+        &:before {
+            
+            content: 'keyboard_arrow_left'
+        }
+    }
+
+    .slick-next {
+        right: 0;
+
+        &:after {
+            content: 'keyboard_arrow_right'
+        }
+    }
+}

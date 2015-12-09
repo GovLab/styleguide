@@ -27,16 +27,18 @@ $(document).ready(function($) {
         $(this).removeClass('m-active');
     });
 
+
+    // <script type="text/javascript">
+    $('.b-slider').slick({
+    });
+
+
+
     // Tooltip Logic
     $('.js-tooltip-trigger').click(function() {
         $(this).addClass('m-active');
         $overlay.addClass('m-active');
     });
-
-    // $overlay.click(function() {
-    //     $('.e-project-item').removeClass('m-active');
-    //     $overlay.removeClass('m-active');
-    // });
 
     $('.js-bio-toggle').click(function() {
         $(this).parent().toggleClass('m-active');
