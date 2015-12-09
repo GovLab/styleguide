@@ -1,0 +1,49 @@
+.b-sticky {
+    background-color: #333;
+    padding: 25px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    box-shadow: 0 0 10px $gray-20;
+    z-index: 1;
+
+    .e-wrap {
+        @extend .b-wrap;
+        color: $white-60;
+
+        .e-title {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            font-size: 20px;
+
+            @include breakpoint($mobile-only) { font-size: 16px; }
+        }
+        
+        p {
+            margin: 10px 0;
+        }
+
+        p a { color: $white-90; }
+        p a:hover { text-decoration: underline; }
+
+        .e-close {
+            float: right;
+            margin-right: 10px;
+            opacity: .6;
+            cursor: pointer;
+
+            &:hover { opacity: 1; }   
+        }
+    }
+}
+
+.b-sticky.m-purple  { background-color: $purple; }
+.b-sticky.m-blue    { background-color: $blue;   }
+.b-sticky.m-orange  { background-color: $orange; }
+.b-sticky.m-teal    { background-color: $teal;   }
+.b-sticky.m-alert   { background-color: $orange; }
+.b-sticky.m-error   { background-color: $red;    }
+.b-sticky.m-success { background-color: $green;  }
