@@ -9,11 +9,11 @@
     }
 
     @include breakpoint($desktop) {
-        width: calc(100% - 120px);
+        width: 100%;
         border-bottom: 1px solid $white-20;
         margin-top: 70px;
         margin-bottom: 20px;
-        margin-left: 120px;
+        padding-left: 120px;
         position: relative;
     }
 
@@ -90,4 +90,8 @@
     &.m-prototype:after { width: 35%;  }
     &.m-test:after      { width: 70%;  }
     &.m-complete:after  { width: 100%; }
+}
+
+.b-progress.m-wrap {
+    @extend .b-wrap;
 }
