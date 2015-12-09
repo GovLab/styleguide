@@ -50,19 +50,18 @@
 
     .e-half {
         @extend .e-column;
-        // Need to prefix this
-        flex-basis: 50%; 
+        @include flex-basis(50%); 
     }
 
     .e-third {
         @extend .e-column;
-        @include breakpoint($tablet) { flex-basis: 33%; } // Need to prefix this
+        @include breakpoint($tablet) { @include flex-basis(33%); }
     }
 
     .e-quarter {
         @extend .e-column;
-        @include breakpoint($tablet) {  flex-basis: 50%; } // Need to prefix this
-        @include breakpoint($desktop) { flex-basis: 25%; } // Need to prefix this
+        @include breakpoint($tablet) {  @include flex-basis(50%); }
+        @include breakpoint($desktop) { @include flex-basis(25%); }
     }
 }
 

@@ -43,8 +43,9 @@ $teal-20k: #00616b;
 $blue: rgba(0,138,179,1);
 $blue-20k: #006e8f;
 
-$green: green;
-$red: red;
+$green: rgba(25,125,50,1);
+$red: rgba(195,0,20,1);
+
 
 
 
@@ -87,6 +88,11 @@ $red: red;
   -ms-flex-order: $val;     
   -webkit-order: $val;  
   order: $val;
+}
+
+@mixin flex-basis($val) {
+  flex-basis: $val;
+  -webkit-flex-basis: $val;
 }
 
 @mixin material-icons {

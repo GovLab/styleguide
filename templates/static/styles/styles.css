@@ -181,16 +181,20 @@ table {
     padding-left: 0;
     padding-right: 0; }
   .b-grid-container .e-half, .b-slide .e-content .e-half {
-    flex-basis: 50%; }
+    flex-basis: 50%;
+    -webkit-flex-basis: 50%; }
   @media (min-width: 768px) {
     .b-grid-container .e-third, .b-slide .e-content .e-third {
-      flex-basis: 33%; } }
+      flex-basis: 33%;
+      -webkit-flex-basis: 33%; } }
   @media (min-width: 768px) {
     .b-grid-container .e-quarter, .b-slide .e-content .e-quarter {
-      flex-basis: 50%; } }
+      flex-basis: 50%;
+      -webkit-flex-basis: 50%; } }
   @media (min-width: 1025px) {
     .b-grid-container .e-quarter, .b-slide .e-content .e-quarter {
-      flex-basis: 25%; } }
+      flex-basis: 25%;
+      -webkit-flex-basis: 25%; } }
 
 .b-button {
   display: inline-block;
@@ -677,25 +681,25 @@ table {
       .b-sticky .e-wrap .e-close:hover {
         opacity: 1; }
 
+.b-sticky.m-error,
+.b-sticky.m-red {
+  background-color: #c30014; }
+
+.b-sticky.m-success,
+.b-sticky.m-green {
+  background-color: #197d32; }
+
+.b-sticky.m-alert,
+.b-sticky.m-orange {
+  background-color: #ee5b43; }
+
 .b-sticky.m-purple {
   background-color: #523080; }
 
 .b-sticky.m-blue {
   background-color: #008ab3; }
 
-.b-sticky.m-orange {
-  background-color: #ee5b43; }
-
 .b-sticky.m-teal {
   background-color: #008895; }
-
-.b-sticky.m-alert {
-  background-color: #ee5b43; }
-
-.b-sticky.m-error {
-  background-color: red; }
-
-.b-sticky.m-success {
-  background-color: green; }
 
 /*# sourceMappingURL=styles.css.map */

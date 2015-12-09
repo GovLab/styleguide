@@ -40,10 +40,12 @@
     }
 }
 
+.b-sticky.m-error,
+.b-sticky.m-red     { background-color: $red;    }
+.b-sticky.m-success,
+.b-sticky.m-green   { background-color: $green;  }
+.b-sticky.m-alert,
+.b-sticky.m-orange  { background-color: $orange; }
 .b-sticky.m-purple  { background-color: $purple; }
 .b-sticky.m-blue    { background-color: $blue;   }
-.b-sticky.m-orange  { background-color: $orange; }
 .b-sticky.m-teal    { background-color: $teal;   }
-.b-sticky.m-alert   { background-color: $orange; }
-.b-sticky.m-error   { background-color: $red;    }
-.b-sticky.m-success { background-color: $green;  }
