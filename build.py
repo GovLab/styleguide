@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from os import path, getcwd, makedirs, listdir, remove, chdir
+from os import path, getcwd, listdir, remove, chdir
 from sys import argv
+import subprocess
 from yaml import load
 from shutil import rmtree
 from slugify import slugify
 from datetime import date, datetime
-from staticjinja import make_site
 from unidecode import unidecode
-import subprocess
-import threading
-import atexit
+import staticjinja
+import argh
+from watchdog.events import FileSystemEventHandler
 
-_AUTO_RELOAD = True
+from govlabstatic.cli import Manager
 
 _TODAY = date.today()
 
@@ -20,164 +20,141 @@ _TODAY = date.today()
 _SASSPATH = path.join(getcwd(), 'sass')
 _SEARCHPATH = path.join(getcwd(), 'templates')
 _OUTPUTPATH = path.join(getcwd(), 'site')
+_DATAPATH = path.join(getcwd(), 'data')
 
 # Load the data we want to use in the templates.
-_EVENTS = path.join(getcwd(), 'data/events.yaml')
-_PROJECTS = path.join(getcwd(), 'data/projects.yaml')
-_TEAM = path.join(getcwd(), 'data/team.yaml')
-_FUNDERS = path.join(getcwd(), 'data/funders.yaml')
+_EVENTS = path.join(_DATAPATH, 'events.yaml')
+_PROJECTS = path.join(_DATAPATH, 'projects.yaml')
+_TEAM = path.join(_DATAPATH, 'team.yaml')
+_FUNDERS = path.join(_DATAPATH, 'funders.yaml')
 
 _SLUG = lambda x: slugify(unicode(unidecode(unicode(x).lower())) if x else u'')
 
-# http://stackoverflow.com/a/287944
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 def filters():
     return {'slug': _SLUG}
 
 
-def context():
-    dic = {}
+def clean():
+    '''
+    Clean the output folder.
+    '''
 
-    dic['events'] = load(open(_EVENTS))
-    dic['projects'] = load(open(_PROJECTS))
-    dic['team'] = load(open(_TEAM))
-    dic['funders'] = load(open(_FUNDERS))
-    dic['events_slider_counter'] = 0
-    dic['projects_slider_counter'] = 0
-
-    for x in dic['events']:
-        x['date'] = datetime.strptime(x['date'], '%m-%d-%Y').date()
-        x['has_passed'] = x['date'] < _TODAY
-        x['is_featured'] = str(x.get('is_featured', '')).lower()
-
-        if x['is_featured'] in ['1', 'true', 'yes', 'on']:
-            x['is_featured'] = True
-
-            if x['date'] >= _TODAY:
-                dic['events_slider_counter'] += 1
-
-        else:
-            x['is_featured'] = False
-
-    for x in dic['projects']:
-        x['is_featured'] = str(x.get('is_featured', '')).lower()
-
-        if x['is_featured'] in ['1', 'true', 'yes', 'on']:
-            x['is_featured'] = True
-            dic['projects_slider_counter'] += 1
-
-        else:
-            x['is_featured'] = False
-
-    dic['events'].sort(key=lambda x: x['date'])
-
-    return dic
-
-
-def cleanup():
-    # Remove templates that are no longer needed.
-    for filename in listdir(_SEARCHPATH):
-        filepath = '%s/%s' % (_SEARCHPATH, filename)
-
-        if filename.startswith('project-') and path.isfile(filepath):
-            remove(filepath)
-
-    # Clean the output folder.
     if path.exists(_OUTPUTPATH):
         rmtree(_OUTPUTPATH)
 
-    makedirs(_OUTPUTPATH)
+
+def render_project_detail_pages(env, template, **kwargs):
+    '''
+    staticjinja rule for generating all individual project detail pages.
+    '''
+
+    template = env.get_template('_project.html')
+    for index, project in enumerate(kwargs['projects']):
+        out = 'project-%s.html' % (_SLUG(project['title']),)
+        template.stream(project=project, **kwargs).\
+            dump(path.join(env.outpath, out))
 
 
-def create_custom_templates(projects):
-    template = open('%s/project.html' % _SEARCHPATH).read()
+class ReloadingContext(FileSystemEventHandler):
+    '''
+    Regenerates a template context, and the static site, whenever files
+    in the data directory change.
+    '''
 
-    for index, project in enumerate(projects):
-        filename = _SLUG(project['title'])
-        new_file = open('%s/project-%s.html' % (_SEARCHPATH, filename), 'w+')
-        new_page = template.replace('projects[0]', 'projects[%d]' % index)
+    path = _DATAPATH
 
-        new_file.write(new_page)
-        new_file.close()
+    def __init__(self):
+        FileSystemEventHandler.__init__(self)
+        self.cache_context()
 
+    def get(self):
+        return self._cached_context
 
-def start_web_server():
-    def run_server():
-        import SimpleHTTPServer
-        import SocketServer
+    def add_to(self, manager):
+        self.site = manager.site
+        manager.watcher.observer.schedule(self, self.path)
 
-        PORT = 7000
+    def on_any_event(self, event):
+        self.cache_context()
+        self.site.render_templates(self.site.templates)
 
-        Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-        httpd = SocketServer.TCPServer(("", PORT), Handler)
+    def cache_context(self):
+        self._cached_context = self.build_context()
 
-        print bcolors.BOLD + \
-              ("Starting HTTP server at port %d." % PORT) + \
-              bcolors.ENDC
-        httpd.serve_forever()
+    def build_context(self):
+        dic = {}
 
-    # We'd prefer to not have to change the directory of the current
-    # process, but SimpleHTTPServer makes this hard.
-    chdir(_OUTPUTPATH)
+        dic['events'] = load(open(_EVENTS))
+        dic['projects'] = load(open(_PROJECTS))
+        dic['team'] = load(open(_TEAM))
+        dic['funders'] = load(open(_FUNDERS))
+        dic['events_slider_counter'] = 0
+        dic['projects_slider_counter'] = 0
 
-    thread = threading.Thread(target=run_server)
-    thread.daemon = True
-    thread.start()
+        for x in dic['events']:
+            x['date'] = datetime.strptime(x['date'], '%m-%d-%Y').date()
+            x['has_passed'] = x['date'] < _TODAY
+            x['is_featured'] = str(x.get('is_featured', '')).lower()
 
+            if x['is_featured'] in ['1', 'true', 'yes', 'on']:
+                x['is_featured'] = True
 
-def start_sass():
-    src_path = path.join(_SASSPATH, 'styles.scss')
-    dest_path = path.join(_SEARCHPATH, 'static', 'styles', 'styles.css')
+                if x['date'] >= _TODAY:
+                    dic['events_slider_counter'] += 1
 
-    print bcolors.BOLD + "Starting SASS." + bcolors.ENDC
+            else:
+                x['is_featured'] = False
 
-    try:
-        process = subprocess.Popen([
-            'sass',
-            '--watch',
-            '%s:%s' % (src_path, dest_path)
-        ], shell=True)
-        atexit.register(process.kill)
-    except OSError, e:
-        print bcolors.FAIL
-        print "SASS failure: %s" % e
-        print "SASS files will not be built."
-        print bcolors.ENDC
+        for x in dic['projects']:
+            x['is_featured'] = str(x.get('is_featured', '')).lower()
 
+            if x['is_featured'] in ['1', 'true', 'yes', 'on']:
+                x['is_featured'] = True
+                dic['projects_slider_counter'] += 1
+
+            else:
+                x['is_featured'] = False
+
+        dic['events'].sort(key=lambda x: x['date'])
+
+        return dic
+
+def deploy():
+    '''
+    Deploy the site to production.
+    '''
+
+    subprocess.check_call(
+        'git subtree push --prefix site origin gh-pages',
+        shell=True
+    )
 
 if __name__ == '__main__':
-    auto = _AUTO_RELOAD
-    ctxt = context()
-    site = {}
+    context = ReloadingContext()
 
-    cleanup()
-    # create_custom_templates(ctxt['projects'])
+    site = staticjinja.make_site(
+        filters=filters(),
+        outpath=_OUTPUTPATH,
+        contexts=[
+            (r'.*.html', context.get),
+            (r'project-detail-pages.custom', context.get),
+        ],
+        rules=[
+            (r'project-detail-pages.custom', render_project_detail_pages)
+        ],
+        searchpath=_SEARCHPATH,
+        staticpaths=['static']
+    )
 
-    # Accept CLI parameter to turn the auto reloader on and off.
-    if len(argv) == 2:
-        arg = argv[1].lower()
+    manager = Manager(
+        sass_src_path=path.join(_SASSPATH, 'styles.scss'),
+        sass_dest_path=path.join(_SEARCHPATH, 'static', 'styles',
+                                 'styles.css'),
+        site=site,
+        site_name='www.thegovlab.org',
+    )
+    context.add_to(manager)
+    argh.add_commands(manager.parser, [deploy, clean])
 
-        if arg in ['0', 'false', 'off', 'no']:
-            auto = False
-
-        elif arg in ['1', 'true', 'on', 'yes']:
-            auto = True
-
-    site['filters'] = filters()
-    site['outpath'] = _OUTPUTPATH
-    site['contexts'] = [(r'.*.html', lambda: ctxt)]
-    site['searchpath'] = _SEARCHPATH
-    site['staticpaths'] = ['static']
-
-    # start_sass()
-    # start_web_server()
-    make_site(**site).render(use_reloader=auto)
+    manager.run()
