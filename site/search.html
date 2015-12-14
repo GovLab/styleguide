@@ -58,38 +58,104 @@
 
     
 <main role="main">
-    <div class="b-grid-container">
-        <div class="e-quarter">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
+    <header class="b-top-section m-purple">
+        <div class="b-wrap">
+            <h2>Search</h2>
         </div>
-        <div class="e-quarter">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-        <div class="e-half">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-    </div><!--/container-->
-    <div class="b-grid-container">
-        <div class="e-third">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-        <div class="e-third">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-        <div class="e-third">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-    </div>
-    <div class="b-grid-container">
-        <div class="e-half">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-        <div class="e-quarter">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-    </div>
-</main><!--@main-->
+    </header>
+    
 
+    <div class="b-page-section b-component-code">
+        <div class="b-wrap">
+            <form class="b-search " action="">
+        <input class="js-search-value" type="text">
+        <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+    </form>
+            <br>
+            <form class="b-search m-fixed" action="">
+        <input class="js-search-value" type="text">
+        <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+    </form>
+        </div>
+    </div>
+    <div class="b-page-section m-black">
+        <div class="b-wrap">
+            <form class="b-search m-negative" action="">
+        <input class="js-search-value" type="text">
+        <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+    </form>
+            <br>
+            <form class="b-search m-negative m-fixed" action="">
+        <input class="js-search-value" type="text">
+        <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+    </form>
+        </div>
+    </div>
+
+    <div class="b-page-section b-component-code">
+        <div class="b-wrap">
+
+            <h1>Usage</h1>
+            <p>In this case, we abstracted the code snipped into a macro, so we can reuse the code. The basic usage involves importing the macros file into your html file, and instancing that macro where you want. <strong>Usually, the import will already be in the _base.html</strong></p>
+
+<pre><code class="language-markup">
+&#123;&#37; &#39;import _macros.html&#39; as modules &#37;&#125;
+&#123;&#123; modules.search() &#125;&#125;
+</code></pre>
+
+            <h3>Modifiers</h3>
+
+<pre><code class="language-markup">
+&#123;&#123; modules.search(&#39;m-negative&#39;) &#125;&#125;
+&#123;&#123; modules.search(&#39;m-fixed&#39;) &#125;&#125;
+&#123;&#123; modules.search(&#39;m-negative m-fixed&#39;) &#125;&#125;
+</code></pre>
+
+        </div>
+    </div>
+
+    <div class="b-divider">
+        <h1>Under the hood</h1>
+    </div>
+
+    <div class="b-page-section">
+        <div class="b-wrap">
+            <p>This is the code snippet in <strong>_macros.html</strong></p>
+
+<pre><code class="language-markup">
+    &lt;form class=&quot;b-search &quot; action=&quot;&quot;&gt;
+        &lt;input class=&quot;js-search-value&quot; type=&quot;text&quot;&gt;
+        &lt;input class=&quot;js-search-submit js-search-trigger e-search-trigger material-icons&quot; type=&quot;submit&quot; value=&quot;search&quot;&gt;
+    &lt;/form&gt;    
+</code></pre>
+
+            <p>This goes in <strong>scripts.js</strong> to make the class switching. Generally speaking, if you have that file included in <strong>_base</strong>, or is using the <strong>_base.html</strong> provided in this styleguide, you will be good to go.</p>
+            <p>This component also makes use of an auxiliary html element named <strong>#overlay</strong>, to enable the "outside click" to hide the search field, also included in the <strong>_base.html</strong>.</p>
+
+<pre><code class="language-javascript">
+    var $overlay = $('#overlay');
+
+    // Search Field Logic
+    $('.js-search-trigger').click(function() {
+        $(this).parent().addClass('m-active');
+        $overlay.addClass('m-active');
+    });
+</code></pre>
+        </div>
+    </div>
+
+            
+            
+            
+            
+
+        </div>
+    </div>
+
+    
+
+    
+</main><!--@main-->
 
 
     

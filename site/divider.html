@@ -18,52 +18,43 @@
 <body id="styleguide">
     
 
-    
+    <header class="b-top-nav">
 
-<header class="b-top-nav">
-
-    <div class="e-nav-group m-left">
-        <span class="e-nav-item js-nav-trigger e-nav-trigger">
-            <i class="material-icons">menu</i>
-        </span>
-        <span class="e-nav-item m-container e-search-container">
-            <form class="b-search " action="">
+        <div class="e-nav-group m-left">
+            <span class="e-nav-item js-nav-trigger e-nav-trigger">
+                <i class="material-icons">menu</i>
+            </span>
+            <span class="e-nav-item m-container e-search-container">
+                <form class="b-search " action="">
         <input class="js-search-value" type="text">
         <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
     </form>
-        </span>
-    </div>
+            </span>
+        </div>
 
-    <div class="e-nav-group m-right e-social-media">
-        <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
-        <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
-    </div>
+        <div class="e-nav-group m-right e-social-media">
+            <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
+            <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
+        </div>
 
-    <a class="e-logo" href="./">
-        <img src="static/img/govlab-logo-white.png" alt="">
-    </a>
+        <a class="e-logo" href="./">
+            <img src="static/img/govlab-logo-white.png" alt="">
+        </a>
 
+    </header>
 
-
-</header>
-    
-
-<!-- Main Menu (Off Canvas) -->
-<nav class="b-main-menu">
-    <form class="b-search m-negative m-fixed" action="">
+    <!-- Main Menu (Off Canvas) -->
+    <nav class="b-main-menu">
+        <form class="b-search m-negative m-fixed" action="">
         <input class="js-search-value" type="text">
         <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
     </form>
-    
-    <a href="./">Home</a>
-    <a href="./about.html">About</a>
-    <a href="./projects.html">Projects</a>
-    <a href="http://thegovlab.org/category/ideas-lunch-page/" target="_blank">Events</a>
-    <!-- <a href="./events.html">Events</a> -->
-    <a href="./team.html">Team</a>
-    <a href="./our-transparency.html">Our Transparency</a>
-    <a href="http://thegovlab.org/contact-us/" target="_blank">Contact</a>
-</nav>
+        <a href="./">Home</a>
+<a href="./buttons.html">Buttons</a>
+<a href="./search.html">Search</a>
+<a href="./divider.html">Divider</a>
+<a href="./slide.html">Slide</a>
+    </nav>
 
     
 <main role="main">
@@ -77,30 +68,61 @@
         <h2>Smaller title with more characteres and working as a tagline</h2>
     </div>
 
-    <div class="b-wrap">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt itaque dolor ratione aspernatur nulla nemo, minima sit debitis at vel tenetur qui quod, aliquid suscipit atque, odit ipsam, commodi error!</p>    
+    <div class="b-page-section b-component-code">
+        <div class="b-wrap">
+            <h1>Usage</h1>
+            <p>This is the base divider, with <code>h1</code> and <code>h2</code> together, and center aligned.</p>
+<pre><code class="language-markup">
+&lt;div class=&quot;b-divider&quot;&gt;
+    &lt;h1&gt;This is a divider with a big text&lt;/h1&gt;
+    &lt;h2&gt;Smaller title with more characteres and working as a tagline&lt;/h2&gt;
+&lt;/div&gt;
+</code></pre>
+        </div>
     </div>
-    
     <div class="b-divider">
         <div class="b-wrap">
             <h2>This is a divider with a big text</h2>
         </div>
     </div>
 
-    <div class="b-wrap">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt itaque dolor ratione aspernatur nulla nemo, minima sit debitis at vel tenetur qui quod, aliquid suscipit atque, odit ipsam, commodi error!</p>    
-    </div>
+    <div class="b-page-section b-component-code">
+        <div class="b-wrap">
+            <h1>Usage</h1>
+            <p>This is the base divider, coupled with a <code>.b-wrap</code> for left aligned text. This can also be used with the grid system.</p>
 
+<pre><code class="language-markup">
+&lt;div class=&quot;b-divider&quot;&gt;
+    &lt;div class=&quot;b-wrap&quot;&gt;
+        &lt;h2&gt;This is a divider with a big text&lt;/h2&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+            <h3>Modifiers</h3>
+              
+            <p>These are the available modifiers</p>        
+
+<pre><code class="language-markup">
+.b-divider.m-blue
+.b-divider.m-purple
+.b-divider.m-teal
+.b-divider.m-orange
+</code></pre>
+
+                    <h3>More Examples</h3>
+
+                    <p>Below some other examples of the possible modifiers for background colors</p>
+                </div>
+            </div>
+        </div>
+
+
+    
     <div class="b-divider">
         <div class="b-wrap">
             <h3>This is a divider with a big text</h3>
         </div>
     </div>
-    
-    <div class="b-wrap">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt itaque dolor ratione aspernatur nulla nemo, minima sit debitis at vel tenetur qui quod, aliquid suscipit atque, odit ipsam, commodi error!</p>    
-    </div>
-
     <div class="b-divider m-blue">
         <div class="b-wrap">
             <p>This is a demonstration of the modifiers for background-color. You should use the <strong>.m-blue</strong> class to get this effect</p>
@@ -127,39 +149,23 @@
 
 
     
+<!--     <div class="b-build-team">
+        <div class="e-wrap">
+            <div class="e-social-media">
+                <a href="#" class="e-nav-item"><i class="e-social-media-item fa fa-lg fa-twitter"></i></a>
+                <a href="#" class="e-nav-item"><i class="e-social-media-item fa fa-lg fa-facebook"></i></a>
+                <a href="#" class="e-nav-item"><i class="e-social-media-item fa fa-lg fa-medium"></i></a>
+            </div>
+            <p>This website was created by these <a href="#">GovLabbers</a>.</p>
+        </div>
+    </div> -->
     
-    <footer class='b-footer'>
-    <div class="e-wrap">
-        <div class="e-content m-sections">
-            
-            <h4>Sections</h4>
-            <a href="./">Home</a>
-            <a href="./about.html">About</a>
-            <a href="./projects.html">Projects</a>
-            <a href="http://thegovlab.org/category/ideas-lunch-page/" target="_blank">Events</a>
-            <a href="./team.html">Team</a>
-            <a href="./our-transparency.html">Our Transparency</a>
-            <a href="http://thegovlab.org/contact-us/" target="_blank">Contact</a>
-        </div>
-        <div class="e-content">
-            <h4>Lead Supporters</h4>
-            <a class="e-partner-logo" href="https://www.macfound.org/" tagret="_blank"><img src="static/img/partners/macarthur-logo-white.png" alt="MacArthur Foundation"></a>
-            <a class="e-partner-logo" href="http://knightfoundation.org/" tagret="_blank"><img src="static/img/partners/knight-logo-white.png" alt="Knight Foundation"></a>
-            <a class="e-partner-logo m-google" href="http://google.org/" tagret="_blank"><img src="static/img/partners/google-org.png" alt="Google.org"></a>
-        </div>
-        <div class="e-content">
-            <h4>Based at</h4>
-            <a class="e-partner-logo" href="http://engineering.nyu.edu/tandon" tagret="_blank"><img src="static/img/partners/nyu.png" alt="NYU Tandon School of Engineering - New York University"></a>
-            <a class="e-partner-logo m-mit" href="https://www.media.mit.edu/" tagret="_blank"><img src="static/img/partners/mit-logo-white.png" alt="MIT Media Lab"></a>
-        </div>
-    </div>
-</footer>
     <div class="b-copyright">
-    <div class="e-wrap">
-        <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
-        This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
+        <div class="e-wrap">
+            <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+            This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
+        </div>
     </div>
-</div>
         
     <div id="overlay"></div>
 
