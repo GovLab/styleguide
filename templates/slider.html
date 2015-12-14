@@ -3,8 +3,8 @@
 
 {% block content %}
 <main role="main">
-<div class="b-slider">
-    <section id="slide-id" class="b-slide">
+<div class="b-slider slick">
+    <section id="slide-id" class="b-slide m-purple">
         <header>
             <h4>Featured Project</h4>
         </header>
@@ -32,7 +32,7 @@
         </div>
     </section>
 
-    <section id="slide-id" class="b-slide m-purple">
+    <section id="slide-id" class="b-slide">
         <header>
             <h4>Featured Project</h4>
         </header>
@@ -66,7 +66,7 @@
         </header>
         <div class="e-content">
             <div class="e-half">
-                <h2>Blocg title Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+                <h2>Bloc title Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
                 <h3><strong>By: </strong>Claudio Mendonca</h3>
             </div>
             <div class="e-half">
@@ -143,6 +143,56 @@
             </div>
         </div>
     </section>
+</div>
+<div class="b-page-section b-component-code">
+    <div class="b-wrap">
+        <h1>Usage</h1>
+        <p>Wrap <code>.b-slide</code> components inside a <code>.b-slider</code> and the framework will do the rest.</p>
+
+<pre><code class="language-markup">
+&lt;div class=&quot;b-slider&quot;&gt;
+    &lt;div class=&quot;b-slide&quot;&gt;
+        # Content
+    &lt;/div&gt;
+    &lt;div class=&quot;b-slide&quot;&gt;
+        # Content
+    &lt;/div&gt;
+    &lt;div class=&quot;b-slide&quot;&gt;
+        # Content
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+    </div>
+</div>
+<div class="b-divider">
+    <div class="b-wrap">
+        <h1>Under the Hood</h1>
+    </div>
+</div>
+<div class="b-page-section b-component-code">
+    <div class="b-wrap">
+        <p>We use Slick behind the scenes to make the slider work.</p>
+        <p><a href="http://kenwheeler.github.io/slick/" class="b-button" target="_blank">Go to Slick Docs</a></p>
+
+        <pre><code class="language-javascript">
+$('.b-slider').slick({
+    arrows: true,
+    draggable: false,
+    swipeToSlide: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+        {
+            breakpoint: 800,
+            settings: {
+                draggable: true,
+            }
+        }
+    ]
+});
+        </code></pre>
+    </div>
 </div>
 </main><!--@main-->
 
