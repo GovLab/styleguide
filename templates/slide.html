@@ -3,7 +3,11 @@
 
 {% block content %}
 <main role="main">
-
+    <header class="b-top-section m-purple">
+        <div class="b-wrap">
+            <h2>Slide</h2>
+        </div>
+    </header>
     <section id="slide-id" class="b-slide">
         <header>
             <h4>Featured Project</h4>
@@ -31,8 +35,54 @@
             </div>
         </div>
     </section>
+    <div class="b-page-section b-component-code">
+        <div class="b-wrap">
+            <h1>Usage</h1>
+            <p>This is the slide code snippet</p>
+<pre><code class="language-markup">
+&lt;section id=&quot;slide-id&quot; class=&quot;b-slide&quot;&gt;
+    &lt;header&gt;
+        &lt;h4&gt;Featured Project&lt;/h4&gt;
+    &lt;/header&gt;
+    &lt;div class=&quot;e-content&quot;&gt;
+        &lt;div class=&quot;e-half&quot;&gt;
+            &lt;h2 class=&quot;e-project-name&quot;&gt;Project Title&lt;/h2&gt;
+            &lt;h3 class=&quot;e-question&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, enim adipisci dicta.&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;e-half&quot;&gt;
+            &lt;p&gt;Project description Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint recusandae nostrum eos saepe officia vero illum fuga quae at, corporis unde quas sit adipisci neque doloremque fugiat possimus nisi minima.&lt;/p&gt;
+            &lt;p&gt;Project description Lorem ipsum dolor sit amet, &lt;a href=&quot;#&quot;&gt;consectetur&lt;/a&gt; adipisicing elit. Sint recusandae nostrum eos saepe officia vero illum fuga quae at, corporis unde quas sit adipisci neque doloremque fugiat possimus nisi minima.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;e-content&quot;&gt;
+        &lt;div class=&quot;e-half&quot;&gt;
+            &lt;div class=&quot;e-action&quot;&gt;
+                &lt;a class=&quot;b-button m-naked&quot; href=&quot;#&quot;&gt;All Projects&lt;i class=&quot;material-icons&quot;&gt;arrow_forward&lt;/i&gt;&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;e-half&quot;&gt;
+            &lt;div class=&quot;e-action&quot;&gt;
+                &lt;a class=&quot;b-button m-naked&quot; href=&quot;#&quot;&gt;Find out more&lt;i class=&quot;material-icons&quot;&gt;arrow_forward&lt;/i&gt;&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+            <h3>Modifiers</h3>
+            <p>These are the available modifiers</p>
+<pre><code class="language-markup">
+.b-slide.m-purple
+.b-slide.m-blue
+.b-slide.m-orange
+.b-slide.m-teal
+</code></pre>
+            
+            <h3>More Examples</h3>
+            <p>Below some other examples of the possible modifiers for background colors</p>
+        </div>
+    </div>
 
-    <section id="slide-id" class="b-slide m-purple">
+    <section id="slide-id" class="b-slide">
         <header>
             <h4>Featured Project</h4>
         </header>
@@ -143,26 +193,12 @@
             </div>
         </div>
     </section>
+
+    
 </main><!--@main-->
 
 {% endblock %}
 
 {% block script %}
-<script>
-// $('.b-slider').slick({
-//     arrows: true,
-//     draggable: false,
-//     swipeToSlide: true,
-//     autoplay: true,
-//     autoplaySpeed: 3000,
-//     responsive: [
-//         {
-//             breakpoint: 800,
-//             settings: {
-//                 draggable: true,
-//             }
-//         }
-//     ]
-// });
-</script>
+
 {% endblock %}
