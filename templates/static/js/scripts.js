@@ -17,10 +17,15 @@ $(document).ready(function($) {
         $overlay.addClass('m-active');
     });
 
-    // Modal Logic 
-    $(".js-modal-trigger").click(function() {
+    // Modal Logic
+    $(".js-open-modal").click(function() {
         $(".b-modal").addClass("m-active");
         $overlay.addClass('m-active');
+    });
+
+    $(".js-close-modal").click(function() {
+        $(".b-modal").removeClass("m-active");
+        $overlay.removeClass('m-active');
     });
 
     // Tooltip Logic
