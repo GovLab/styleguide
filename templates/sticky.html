@@ -3,34 +3,42 @@
 
 {% block content %}
 <main role="main">
-    <div class="b-grid-container m-wrap">
-        <div class="e-quarter">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-        <div class="e-quarter">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-        <div class="e-half">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus adipisci id suscipit! Quasi rerum accusamus dolor, ipsa! Alias reiciendis hic suscipit dolore sed, modi cupiditate sequi quos, vero officiis blanditiis.</p>
-        </div>
-    </div><!--/container-->
-    <div class="b-wrap">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt itaque dolor ratione aspernatur nulla nemo, minima sit debitis at vel tenetur qui quod, aliquid suscipit atque, odit ipsam, commodi error!</p>    
+    <div class="b-top-section">
+        <h2>Sticky Message</h2>
     </div>
-    <div class="b-divider m-teal">
+    <div class="b-page-section">
         <div class="b-wrap">
-            <h1>This is a divider with a big text</h1>
+            <h1>Usage</h1>
+
+<pre><code class="language-markup">
+&lt;div class=&quot;b-sticky m-purple&quot;&gt;
+    &lt;div class=&quot;e-wrap&quot;&gt;
+        &lt;i class=&quot;material-icons e-close js-close-sticky&quot;&gt;close&lt;/i&gt;
+        &lt;h3 class=&quot;e-title&quot;&gt;Sticky Message Title&lt;/h3&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, in, nobis. Repudiandae &lt;a href=&quot;#&quot;&gt;ipsum alias enim officiis&lt;/a&gt; et consectetur expedita commodi nobis suscipit deleniti. Recusandae architecto minima rerum modi suscipit doloremque!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;    
+</code></pre>
+        
+            <h2>Modifiers</h2>            
+<pre><code class="language-css">
+.b-sticky.m-error
+.b-sticky.m-red     
+.b-sticky.m-success
+.b-sticky.m-green   
+.b-sticky.m-alert
+.b-sticky.m-orange  
+.b-sticky.m-purple  
+.b-sticky.m-blue    
+.b-sticky.m-teal    
+</code></pre>
+            </div>
         </div>
-    </div>
-    <div class="b-wrap">
-        <h2>Title for this paragraphs</h2>
-        <h3>Title for this paragraphs</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt itaque dolor ratione aspernatur nulla nemo, minima sit debitis at vel tenetur qui quod, aliquid suscipit atque, odit ipsam, commodi error!</p>    
-    </div>
+    
 
     <div class="b-sticky m-purple">
         <div class="e-wrap">
-            <i class="material-icons e-close js-close">close</i>
+            <i class="material-icons e-close js-close-sticky">close</i>
             <h3 class="e-title">Something went wrong</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, in, nobis. Repudiandae <a href="#">ipsum alias enim officiis</a> et consectetur expedita commodi nobis suscipit deleniti. Recusandae architecto minima rerum modi suscipit doloremque!</p>
         </div>

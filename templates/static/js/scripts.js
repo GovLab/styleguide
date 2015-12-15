@@ -1,9 +1,18 @@
 $(document).ready(function($) {
     var $overlay = $('#overlay');
 
-    $('.js-close').click(function() {
+    // Modal Logic
+    $overlay.click(function() {
+        $('.m-active').removeClass('m-active');
+        $(this).removeClass('m-active');
+    });
+
+
+    // Logic for Sticky
+    $('.js-close-sticky').click(function() {
         $('.b-sticky').fadeOut('fast');
     });
+
 
     // Main nav logic
     $('.js-nav-trigger').click(function() {
@@ -11,11 +20,22 @@ $(document).ready(function($) {
         $overlay.addClass('m-active');
     });
 
-    // Search Field Logic
+
+    // Search Field Toggle Logic 
     $('.js-search-trigger').click(function() {
         $(this).parent().addClass('m-active');
         $overlay.addClass('m-active');
     });
+
+    // Search Field Functionality
+    $('.js-search-submit').click(function(event) {
+        var param = $('.js-search-value').val();
+        event.preventDefault();
+        if (param != '') {
+            window.location.href = "http://thegovlab.org/?s=" + param;    
+        }
+    });
+
 
     // Modal Logic
     $(".js-open-modal").click(function() {
@@ -28,25 +48,15 @@ $(document).ready(function($) {
         $overlay.removeClass('m-active');
     });
 
-    // Tooltip Logic
-    $('.js-tooltip-trigger').click(function() {
-        $(this).addClass('m-active');
-        $overlay.addClass('m-active');
-    });
 
-
-    $overlay.click(function() {
-        $('.m-active').removeClass('m-active');
-        $(this).removeClass('m-active');
-    });
-
+    // Slider Config (Sticky)
     $('.b-slider').slick({
-    arrows: true,
-    draggable: false,
-    swipeToSlide: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    responsive: [
+        arrows: true,
+        draggable: false,
+        swipeToSlide: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        responsive: [
             {
                 breakpoint: 800,
                 settings: {
@@ -72,24 +82,16 @@ $(document).ready(function($) {
 
 
 
-
-
-
-
-
+    // Tooltip Logic
+    $('.js-tooltip-trigger').click(function() {
+        $(this).addClass('m-active');
+        $overlay.addClass('m-active');
+    });
 
     $('.js-bio-toggle').click(function() {
         $(this).parent().toggleClass('m-active');
     })
 
-    // Search
-    $('.js-search-submit').click(function(event) {
-        var param = $('.js-search-value').val();
-        event.preventDefault();
-        if (param != '') {
-            window.location.href = "http://thegovlab.org/?s=" + param;    
-        }
-    });
 
     // Events Page
     $('.e-list-selector .e-show-passed').click(function() {
