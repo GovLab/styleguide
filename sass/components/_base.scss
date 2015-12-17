@@ -1,11 +1,7 @@
-
-
-input[type="text"] { 
+input[type="text"],
+input[type="email"],
+input[type="password"] { 
     border: 0;
-    color: $white;
-    background-color: $white-10;
-
-    &:focus { background-color: $white-30; }
 }
 
 input:focus,

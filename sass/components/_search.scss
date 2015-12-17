@@ -4,14 +4,17 @@
     position: relative;
 
     input {
-        border: 0;
         color: currentColor;
         vertical-align: bottom; 
         background-color: transparent;
-       @include transition;
+        @include transition;
+        border: 0;
     }
 
-    input:focus { outline: none; }
+    input:focus { 
+        outline: none; 
+        background-color: $white-30;
+    }
 
     input[type='text'] { 
         background-color: $gray-10;
@@ -24,7 +27,8 @@
 
     input[type='submit'] {
         padding: 8px;
-        line-height: .95; // Alignement Fix
+        background-color: transparent;
+        line-height: .95; // Alignment Fix
     }
 
     input[type='submit']:hover { opacity: 1; }
