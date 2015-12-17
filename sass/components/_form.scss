@@ -1,23 +1,23 @@
 .b-form {
     padding: 10px 0;
 
-    ::-webkit-input-placeholder { 
-        color: $black; 
+    ::-webkit-input-placeholder {
+        color: $black;
         text-align: left;
     }
-    :-moz-placeholder { 
+    :-moz-placeholder {
         color: $black;
         text-align: left;
     } /* Firefox 18- */
     ::-moz-placeholder {
-        color: $black; 
+        color: $black;
         text-align: left;
     } /* Firefox 19+ */
-    :-ms-input-placeholder { 
-        color: $black; 
+    :-ms-input-placeholder {
+        color: $black;
         text-align: left;
     }
-    
+
     input[type="text"],
     input[type="email"],
     input[type="password"],
@@ -46,7 +46,7 @@
     }
 
     textarea { resize: vertical; }
-    
+
     input[type="checkbox"],
     input[type="radio"] {
         display: none;
@@ -84,45 +84,16 @@
         content: 'radio_button_checked';
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    &.m-negative {
+        input { color: $white; }
+        input[type='text'], input[type='email'], input[type='submit'], textarea {
+            background-color: $white-10;
+            @include placeholder {
+                color: $white-30;
+            }
+        }
+        input[type="submit"]:hover {
+            background-color: $white-20;
+        }
+    }
 }

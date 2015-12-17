@@ -361,6 +361,20 @@ table {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     content: 'radio_button_checked'; }
+  .b-form.m-negative input {
+    color: white; }
+  .b-form.m-negative input[type='text'], .b-form.m-negative input[type='email'], .b-form.m-negative input[type='submit'], .b-form.m-negative textarea {
+    background-color: rgba(255, 255, 255, 0.1); }
+    .b-form.m-negative input[type='text']::-webkit-input-placeholder, .b-form.m-negative input[type='email']::-webkit-input-placeholder, .b-form.m-negative input[type='submit']::-webkit-input-placeholder, .b-form.m-negative textarea::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.3); }
+    .b-form.m-negative input[type='text']:-moz-placeholder, .b-form.m-negative input[type='email']:-moz-placeholder, .b-form.m-negative input[type='submit']:-moz-placeholder, .b-form.m-negative textarea:-moz-placeholder {
+      color: rgba(255, 255, 255, 0.3); }
+    .b-form.m-negative input[type='text']::-moz-placeholder, .b-form.m-negative input[type='email']::-moz-placeholder, .b-form.m-negative input[type='submit']::-moz-placeholder, .b-form.m-negative textarea::-moz-placeholder {
+      color: rgba(255, 255, 255, 0.3); }
+    .b-form.m-negative input[type='text']:-ms-input-placeholder, .b-form.m-negative input[type='email']:-ms-input-placeholder, .b-form.m-negative input[type='submit']:-ms-input-placeholder, .b-form.m-negative textarea:-ms-input-placeholder {
+      color: rgba(255, 255, 255, 0.3); }
+  .b-form.m-negative input[type="submit"]:hover {
+    background-color: rgba(255, 255, 255, 0.2); }
 
 .b-search {
   width: 100%;
