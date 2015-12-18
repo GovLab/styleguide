@@ -50,12 +50,12 @@
     input[type="checkbox"],
     input[type="radio"] {
         display: none;
-
     }
 
     .e-checkbox,
     .e-radio {
-        padding-bottom: 15px;
+        padding:7px 10px;
+        margin-bottom: 15px;
     }
 
     input[type="checkbox"] + label:before,
@@ -67,7 +67,6 @@
     input[type="checkbox"] + label:before {
         @include material-icons;
         content: 'check_box_outline_blank';
-
     }
 
     input[type="checkbox"]:checked + label:before {
@@ -82,6 +81,10 @@
     input[type="radio"]:checked + label:before {
         @include material-icons;
         content: 'radio_button_checked';
+    }
+
+    input:disabled + label {
+        opacity: .4;
     }
 
     .e-select {

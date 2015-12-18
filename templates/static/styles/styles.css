@@ -296,7 +296,8 @@ table {
     display: none; }
   .b-form .e-checkbox,
   .b-form .e-radio {
-    padding-bottom: 15px; }
+    padding: 7px 10px;
+    margin-bottom: 15px; }
   .b-form input[type="checkbox"] + label:before,
   .b-form input[type="radio"] + label:before {
     vertical-align: -6px;
@@ -361,6 +362,8 @@ table {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
     content: 'radio_button_checked'; }
+  .b-form input:disabled + label {
+    opacity: .4; }
   .b-form .e-select {
     background-color: rgba(0, 0, 0, 0.1);
     text-align: left;
