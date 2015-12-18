@@ -11,6 +11,7 @@ body {
 a {
     text-decoration: none;
     color: currentColor;
+    
 }
 
 a:hover { 
@@ -49,6 +50,15 @@ h3 {
 pre {
     background-color: $gray-10;
     padding: 10px 20px;   
+}
+
+p > a { 
+    text-decoration: underline; 
+}
+
+p > a:hover { 
+    text-decoration: none;
+
 }
 
 table {

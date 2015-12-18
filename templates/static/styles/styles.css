@@ -99,6 +99,12 @@ pre {
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px 20px; }
 
+p > a {
+  text-decoration: underline; }
+
+p > a:hover {
+  text-decoration: none; }
+
 table {
   margin-top: 20px;
   width: 100%; }
