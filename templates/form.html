@@ -6,47 +6,192 @@
     </div>
     <div class="b-page-section">
         <div class="b-wrap">
+            <h1>Guidelines</h1>
+            <p>Forms should be used to collect information from users.  See the <a href="./search.html">search</a> and <a href="./buttons.html">button</a> components for other uses.</p>
+            <h2>Do</h2>
+            <ul>
+                <li>Mark fields as required</li>
+                <li>Use the correct HTML5 input type for the purpose, not just <code>text</code></li>
+                <li>Add help text when needed, such as if purpose or required format of the input is non-obvious</li>
+            </ul>
+
+            <h1>Usage</h1>
+            <h2>Basic Example</h2>
+            <p>Forms use the class <code>.b-form</code>.</p>
             <form action="" class="b-form">
                 <input type="text" id="name" placeholder="Name"/>
                 <input type="email" id="mail" placeholder="Email"/>
                 <textarea id="msg" placeholder="Message"></textarea>
                 <input type="submit" value="Send">
             </form>
+            <pre><code class="language-markup">
+    &lt;form class=&quot;b-form&quot;&gt;
+        &lt;input type=&quot;text&quot; id=&quot;name&quot; placeholder=&quot;Name&quot;/&gt;
+        &lt;input type=&quot;email&quot; id=&quot;mail&quot; placeholder=&quot;Email&quot;/&gt;
+        &lt;textarea id=&quot;msg&quot; placeholder=&quot;Message&quot;&gt;&lt;/textarea&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Send&quot;&gt;
+    &lt;/form&gt;
+            </code></pre>
         </div>
     </div>
     <div class="b-page-section m-black">
         <div class="b-wrap">
+            <h2>Inverted</h2>
+            <p>Form styles can be inverted for use on dark backgrounds with the <code>.m-negative</code> modifier.</p>
             <form action="" class="b-form m-negative">
                 <input type="text" id="name" placeholder="Name"/>
                 <input type="email" id="mail" placeholder="Email"/>
                 <textarea id="msg" placeholder="Message"></textarea>
                 <input type="submit" value="Send">
             </form>
+            <pre><code class="language-markup">
+    &lt;form class=&quot;b-form m-negative&quot;&gt;
+        ...
+    &lt;/form&gt;
+            </code></pre>
         </div>
     </div>
-    <h1>Test title</h1>
-    <div class="b-grid-container m-wrap">
-        <div class="e-half">
-            <form action="" class="b-form">
-                <input type="text" id="name" placeholder="Name"/>
-                <input type="email" id="mail" placeholder="Email"/>
-                <input type="email" id="password" placeholder="Password"/>
-                <textarea id="msg" placeholder="Message"></textarea>
-                <input type="submit" value="Send">
-            </form>
+    <div class="b-page-section b-component-code">
+        <div class="b-wrap">
+            <h2>Multi-Column</h2>
+            <p>Forms can be wrapped in a <code>.b-grid-container</code> for half width or multi-column form layouts.
+            <div class="b-grid-container m-wrap">
+                <div class="e-half">
+                    <form action="" class="b-form">
+                        <input type="text" id="name" placeholder="Name"/>
+                        <input type="email" id="mail" placeholder="Email"/>
+                        <input type="email" id="password" placeholder="Password"/>
+                        <textarea id="msg" placeholder="Message"></textarea>
+                        <input type="submit" value="Send">
+                    </form>
+                </div>
+                <div class="e-half">
+                    <form action="" class="b-form">
+                        <div class="e-checkbox">
+                            <input type="checkbox" id="checkbox-1"><label for="checkbox-1">I agree with the terms of service</label>
+                        </div>
+                        <div class="e-checkbox">
+                            <input type="checkbox" id="checkbox-2"><label for="checkbox-2">Send me updates about open data</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <pre><code class="language-markup">
+    &lt;div class=&quot;b-grid-container m-wrap&quot;&gt;
+        &lt;div class=&quot;e-half&quot;&gt;
+            &lt;form action=&quot;&quot; class=&quot;b-form&quot;&gt;
+                &lt;input type=&quot;text&quot; id=&quot;name&quot; placeholder=&quot;Name&quot;/&gt;
+                &lt;input type=&quot;email&quot; id=&quot;mail&quot; placeholder=&quot;Email&quot;/&gt;
+                &lt;input type=&quot;email&quot; id=&quot;password&quot; placeholder=&quot;Password&quot;/&gt;
+                &lt;textarea id=&quot;msg&quot; placeholder=&quot;Message&quot;&gt;&lt;/textarea&gt;
+                &lt;input type=&quot;submit&quot; value=&quot;Send&quot;&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;e-half&quot;&gt;
+            &lt;form action=&quot;&quot; class=&quot;b-form&quot;&gt;
+                &lt;div class=&quot;e-checkbox&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; id=&quot;checkbox-1&quot;&gt;&lt;label for=&quot;checkbox-1&quot;&gt;I agree with the terms of service&lt;/label&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;e-checkbox&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; id=&quot;checkbox-2&quot;&gt;&lt;label for=&quot;checkbox-2&quot;&gt;Send me updates about open data&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+            </code></pre>
         </div>
-        <div class="e-half">
+    </div>
+    <div class="b-page-section b-component-code">
+        <div class="b-wrap">
+            <h2>Form Controls</h2>
+            <p>The following controls are supported:</p>
+
+            <h3>Input &amp; Textarea</h3>
+            <p>
+                <ul>
+                    <li>Supports HTML5 form types. (<code>text</code>, <code>email</code>, <code>password</code>, etc.)</li>
+                    <li>Field names should be included as <code>placeholder</code> attribute where possible</li>
+                    <li>Doesn't need a parent element, simply include in <code>.b-form</code></li>
+                </ul>
+            </p>
+            <form action="" class="b-form">
+                <input type="text" placeholder="Text Input" />
+                <textarea id="msg" placeholder="Message"></textarea>
+            </form>
+            <pre><code class="language-markup">
+    &lt;input type=&quot;text&quot; placeholder=&quot;Text Input&quot; /&gt;
+
+    &lt;textarea id=&quot;msg&quot; placeholder=&quot;Message&quot;&gt;&lt;/textarea&gt;
+            </code></pre>
+
+            <h3>Checkbox &amp; Radio</h3>
+            <p>Checkboxes should be wrapped in a <code>.e-checkbox</code> element,</p>
+
             <form action="" class="b-form">
                 <div class="e-checkbox">
-                    <input type="checkbox" id="checkbox-1"><label for="checkbox-1">I agree with the terms of service</label>
+                    <input type="checkbox" id="one-checkbox"><label for="one-checkbox">I'm a Checkbox</label>
                 </div>
-                <div class="e-radio"><input type="radio" id="radio-1" name="guide"><label for="radio-1">Radio Check</label></div>
-                <div class="e-radio"><input type="radio" id="radio-2" name="guide"><label for="radio-2">Radio Check</label></div>
-                <div class="e-radio"><input type="radio" id="radio-3" name="guide"><label for="radio-3">Radio Check</label></div>
+                <div class="e-checkbox">
+                    <input type="checkbox" id="another-checkbox" disabled><label for="another-checkbox">I'm Disabled</label>
+                </div>
             </form>
+            <pre><code class="language-markup">
+    &lt;div class=&quot;e-checkbox&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;one-checkbox&quot;&gt;&lt;label for=&quot;one-checkbox&quot;&gt;I'm a Checkbox&lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;e-checkbox&quot;&gt;
+        &lt;input type=&quot;checkbox&quot; id=&quot;another-checkbox&quot; disabled&gt;&lt;label for=&quot;another-checkbox&quot;&gt;I'm Disabled&lt;/label&gt;
+    &lt;/div&gt;
+            </code></pre>
+            <p>while radio buttons should be inside a <code>.e-radio</code> element.</p>
+            <form action="" class="b-form">
+                <div class="e-radio">
+                    <input type="radio" id="radio-1" name="guide"><label for="radio-1">I'm a Radio</label>
+                </div>
+                <div class="e-radio">
+                    <input type="radio" id="radio-2" name="guide"><label for="radio-2">Me Too</label>
+                </div>
+                <div class="e-radio">
+                    <input type="radio" id="radio-3" name="guide" disabled><label for="radio-3">Disabled</label>
+                </div>
+            </form>
+            <pre><code class="language-markup">
+    &lt;div class=&quot;e-radio&quot;&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;radio-1&quot; name=&quot;guide&quot;&gt;&lt;label for=&quot;radio-1&quot;&gt;I'm a Radio Button&lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;e-radio&quot;&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;radio-2&quot; name=&quot;guide&quot;&gt;&lt;label for=&quot;radio-2&quot;&gt;Me Too&lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;e-radio&quot;&gt;
+        &lt;input type=&quot;radio&quot; id=&quot;radio-3&quot; name=&quot;guide&quot; disabled&gt;&lt;label for=&quot;radio-3&quot;&gt;Disabled&lt;/label&gt;
+    &lt;/div&gt;
+            </code></pre>
+
+            <h3>Select</h3>
+            <p>Select controls should be wrapped in an <code>.e-select</code> parent element.</p>
+            <form action="" class="b-form">
+                <div class="e-select">
+                    <select>
+                        <option>One</option>
+                        <option>Two</option>
+                        <option>Three</option>
+                    </select>
+                </div>
+            </form>
+            <pre><code class="language-markup">
+    &lt;div class=&quot;e-select&quot;&gt;
+        &lt;select&gt;
+            &lt;option&gt;One&lt;/option&gt;
+            &lt;option&gt;Two&lt;/option&gt;
+            &lt;option&gt;Three&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+            </code></pre>
         </div>
     </div>
-</div>
 </main>
 {% endblock %}
 

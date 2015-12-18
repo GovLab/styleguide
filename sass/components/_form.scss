@@ -84,14 +84,59 @@
         content: 'radio_button_checked';
     }
 
+    .e-select {
+        background-color: $gray-10;
+        text-align: left;
+        padding: 0 15px;
+        margin-bottom: 15px;
+        position: relative;
+        @include transition;
+
+        &::before {
+            @include material-icons;
+            content: 'keyboard_arrow_down';
+            position: absolute;
+            right: 0;
+            padding-top: 10px;
+            margin: 0 auto 0 auto;
+            width: 42px;
+            height: 32px;
+            color: $black;
+            z-index: -1
+        }
+
+        select {
+            height: 42px;
+            border: 0;
+            border-radius: 0;
+            background-color: transparent;
+            width: 100%;
+            -webkit-appearance: none;
+
+            &:focus {
+            }
+        }
+
+        &:hover {
+            background-color: $gray-20;
+            @include transition;
+        }
+    }
+
     &.m-negative {
         input { color: $white; }
+
         input[type='text'], input[type='email'], input[type='submit'], textarea {
             background-color: $white-10;
             @include placeholder {
-                color: $white-30;
+                color: $white;
+            }
+            &:focus {
+                background-color: $white-20;
+                @include transition;
             }
         }
+
         input[type="submit"]:hover {
             background-color: $white-20;
         }
