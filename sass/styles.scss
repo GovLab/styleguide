@@ -1,6 +1,13 @@
-@import 'breakpoint';
+// Importing Assets
 
-// components
+/* Breakpoint */
+@import 'assets/breakpoint';
+
+/* Importing our custom foundation imports list */
+@import 'foundation-components';
+
+
+/* Our Custom Components */
 @import 'components/variables';
 @import 'components/resets';
 @import 'components/aux';
@@ -24,8 +31,6 @@
 @import 'components/progress';
 @import 'components/breadcrumbs';
 @import 'components/modal';
-
-
 
 
 body {
