@@ -1,6 +1,6 @@
 {
   "name": "foundation-sites",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "main": "dist/foundation.js",
   "description": "The most advanced responsive front-end framework in the world.",
   "author": {
@@ -57,7 +57,7 @@
     "require-dir": "^0.3.0",
     "rimraf": "^2.3.2",
     "run-sequence": "^1.1.4",
-    "supercollider": "^1.1.0",
+    "supercollider": "^1.2.0",
     "typeahead.js": "^0.11.1"
   },
   "repository": {
@@ -72,9 +72,9 @@
     "handlebars-helper-rel",
     "handlebars-helper-slugify"
   ],
-  "gitHead": "17b4e60bcfa52b1d4defbeb0327be82972701ff9",
-  "_id": "foundation-sites@6.1.0",
-  "_shasum": "ff9d521a1cdfd3f1d3245e97cc41e8837aec99aa",
+  "gitHead": "b19360be6b44857bb1ec93f96478fc3086c0b642",
+  "_id": "foundation-sites@6.1.1",
+  "_shasum": "dbe859d1ca8d13b06fa4d2c5ba42bffaf27f0e58",
   "_from": "foundation-sites@*",
   "_npmVersion": "2.8.4",
   "_nodeVersion": "0.10.38",
@@ -83,8 +83,8 @@
     "email": "geoff@zurb.com"
   },
   "dist": {
-    "shasum": "ff9d521a1cdfd3f1d3245e97cc41e8837aec99aa",
-    "tarball": "http://registry.npmjs.org/foundation-sites/-/foundation-sites-6.1.0.tgz"
+    "shasum": "dbe859d1ca8d13b06fa4d2c5ba42bffaf27f0e58",
+    "tarball": "http://registry.npmjs.org/foundation-sites/-/foundation-sites-6.1.1.tgz"
   },
   "maintainers": [
     {
@@ -101,5 +101,5 @@
     }
   ],
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/foundation-sites/-/foundation-sites-6.1.0.tgz"
+  "_resolved": "https://registry.npmjs.org/foundation-sites/-/foundation-sites-6.1.1.tgz"
 }
