@@ -4769,59 +4769,6 @@ table {
     margin: 0;
     line-height: 1.2; }
 
-.b-wrap, .b-grid-container.m-wrap, .b-sticky .e-wrap, .b-progress.m-wrap {
-  max-width: 1025px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px; }
-  @media screen and (min-width: 64.0625em) {
-    .b-wrap, .b-grid-container.m-wrap, .b-sticky .e-wrap, .b-progress.m-wrap {
-      padding-left: 0;
-      padding-right: 0; } }
-
-.b-grid-container {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-flex-direction: column;
-  flex-direction: column; }
-  .b-grid-container .e-column, .b-grid-container .e-half, .b-grid-container .e-third, .b-grid-container .e-quarter {
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-left: 15px;
-    padding-right: 15px; }
-    @media screen and (min-width: 64.0625em) {
-      .b-grid-container .e-column:first-of-type, .b-grid-container .e-half:first-of-type, .b-grid-container .e-third:first-of-type, .b-grid-container .e-quarter:first-of-type {
-        padding-left: 0; }
-      .b-grid-container .e-column:last-of-type, .b-grid-container .e-half:last-of-type, .b-grid-container .e-third:last-of-type, .b-grid-container .e-quarter:last-of-type {
-        padding-right: 0; } }
-  .b-grid-container.m-bare .e-column, .b-grid-container.m-bare .e-half, .b-grid-container.m-bare .e-third, .b-grid-container.m-bare .e-quarter {
-    padding-left: 0;
-    padding-right: 0; }
-  .b-grid-container .e-half {
-    flex-basis: 50%;
-    -webkit-flex-basis: 50%; }
-  .b-grid-container .e-third {
-    flex-basis: 33%;
-    -webkit-flex-basis: 33%; }
-  .b-grid-container .e-quarter {
-    flex-basis: 50%;
-    -webkit-flex-basis: 50%; }
-    @media screen and (min-width: 64.0625em) {
-      .b-grid-container .e-quarter {
-        flex-basis: 25%;
-        -webkit-flex-basis: 25%; } }
-
 .b-button, .b-form input[type="submit"] {
   display: inline-block;
   text-transform: uppercase;
