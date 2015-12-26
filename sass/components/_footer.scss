@@ -7,20 +7,9 @@
 
     @include breakpoint($desktop) {
         padding: 45px 0;
-
-        .e-wrap {
-            @include wrap;
-            display: -webkit-flex;
-            display: flex;
-        }
     }
-    .e-content {
-        -webkit-flex: 1;
-        flex: 1;
-        &:nth-child(3n) { margin-right: 0; }
 
-        @include breakpoint($desktop) { margin-right: 60px; }
-            
+    .e-content {
         @include breakpoint($mobile-only) { text-align: center; }
 
         h4 {
@@ -97,31 +86,27 @@
         padding: 20px 0;
     }
 
-    .e-wrap {
-        @include wrap;
+    .e-social-media {
+        text-align: center;
 
-        .e-social-media {
-            text-align: center;
-
-            @include breakpoint($desktop) { float: right; }
-
-            a {
-                padding: 10px 15px;
-                cursor: pointer;
-            }
-        }
+        @include breakpoint($desktop) { float: right; }
 
         a {
-            color: $white-70;
-            font-weight: 400;
-
-            &:hover { color: $white; }
+            padding: 10px 15px;
+            cursor: pointer;
         }
+    }
 
-        p {
-            margin: 0;
-            color: $white-60;
-        }
+    a {
+        color: $white-70;
+        font-weight: 400;
+
+        &:hover { color: $white; }
+    }
+
+    p {
+        margin: 0;
+        color: $white-60;
     }
 }
 
@@ -131,34 +116,29 @@
     background-color: $gray-90;
     text-align: center;
     padding: 20px;
+    color: $white-70;
+    font-size: 14px;
 
     @include breakpoint($desktop) {
         padding: 20px;
         text-align: left;
     }
 
-    .e-wrap {
-        @include wrap;
+    .e-cc-badge {
+        margin-right: 25px;
+        margin-top: 5px;
+        @include breakpoint($mobile-only) { display: block; }
+        @include breakpoint($desktop) { float: left; }
+    }
+
+    a {
+        margin: 0;
+        line-height: 1.2;
         color: $white-70;
-        font-size: 14px;
 
-        .e-cc-badge {
-            margin-right: 25px;
-            margin-top: 5px;
-            @include breakpoint($mobile-only) { display: block; }
-            @include breakpoint($desktop) { float: left; }
+        &:hover {
+            color: $white;
         }
-
-        a {
-            margin: 0;
-            line-height: 1.2;
-            color: $white-70;
-
-            &:hover {
-                color: $white;
-            }
-        }
-
     }
 }
 
