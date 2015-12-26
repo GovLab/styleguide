@@ -4,7 +4,7 @@
     padding: 20px 0;
 
     > header {
-        @extend .b-wrap;
+        padding: 20px 0;
         @include breakpoint($mobile-only) { text-align: center; }
     }
 
@@ -34,8 +34,7 @@
     }
 
     .e-content {
-        @extend .b-wrap;
-        @extend .b-grid-container;
+        padding: 20px 0;
         
         h2,
         h3 {
@@ -45,7 +44,7 @@
         }
 
         h2 { 
-            font-size: 40px;
+            font-size: 32px;
 
 
         }

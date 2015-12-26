@@ -1,23 +1,18 @@
 body {
     padding: 0;
     margin: 0;
-    font-family: 'proxima-nova', sans-serif;
-    color: #333;
-    font-size: 18px;
-    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
 a {
     text-decoration: none;
     color: currentColor;
-    
 }
 
 a:hover { 
     text-decoration: underline; 
     background-color: transparent;
-    color: $purple;
+    color: currentColor;
 }
 
 h1 {
@@ -45,7 +40,6 @@ h3 {
     font-weight: 400;
 
     @include breakpoint($tablet) { font-size: 22px; }
-    @include breakpoint($desktop) { font-size: 26px; }
 }
 
 pre {

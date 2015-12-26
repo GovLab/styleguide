@@ -3,8 +3,9 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     background-color: $gray-10;
-    cursor: pointer !important;
+    cursor: pointer;
     padding: 15px 20px;
+    text-decoration: none;
 
     @include transition;
 
@@ -16,7 +17,7 @@
     }
 
     @include breakpoint($mobile-only) { 
-        display: block;
+        // display: block;
         text-align: center;
 
         & ~ .b-button {
