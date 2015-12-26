@@ -27,12 +27,13 @@
             margin: 40px 0 0;
             font-weight: 600;
             text-transform: uppercase;
-            color: $white
+            color: $white;
+            text-align: left;
         }
 
         .e-partner-logo {
             display: block;
-
+            text-align: left;
 
             > img { 
                 max-width: 90%; 
@@ -68,6 +69,7 @@
         margin-left: -10px;
         margin-right: 10px;
         @include transition;
+        text-align: left;
         
 
         @include breakpoint($desktop) { 

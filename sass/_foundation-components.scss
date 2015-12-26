@@ -1,58 +1,56 @@
-// @import 'settings';
-// @import 'foundation';
+// Importing Assets
 
-// Our custom path to the @imports
+/* Breakpoint */
+@import 'assets/breakpoint';
 
-@import 'assets/foundation-sites/scss/settings';
+/* Importing our custom foundation imports list */
+// @import 'foundation-components';
 
+/* importing directly from foundation folder */
+// @import 'assets/foundation-sites/scss/settings';
+// @import 'assets/foundation-sites/scss/foundation';
+
+@charset 'utf-8';
+
+@import 'foundation-settings';
 @import 'assets/foundation-sites/scss/foundation';
+// @import 'assets/foundation-sites/scss/foundation/motion-ui';
 
+// @include foundation-global-styles;
+@include foundation-grid;
+// @include foundation-typography;
+// @include foundation-button;
+@include foundation-forms;
+// @include foundation-visibility-classes;
+// @include foundation-float-classes;
+// @include foundation-accordion;
+// @include foundation-accordion-menu;
+// @include foundation-badge;
+// @include foundation-breadcrumbs;
+// @include foundation-button-group;
+// @include foundation-callout;
+// @include foundation-close-button;
+// @include foundation-drilldown-menu;
+// @include foundation-dropdown;
+// @include foundation-dropdown-menu;
+// @include foundation-flex-video;
+// @include foundation-label;
+// @include foundation-media-object;
+// @include foundation-menu;
+// @include foundation-off-canvas;
+// @include foundation-orbit;
+// @include foundation-pagination;
+// @include foundation-progress-bar;
+// @include foundation-slider;
+// @include foundation-sticky;
+@include foundation-reveal;
+// @include foundation-switch;
+// @include foundation-table;
+// @include foundation-tabs;
+// @include foundation-thumbnail;
+// @include foundation-title-bar;
+// @include foundation-tooltip;
+// @include foundation-top-bar;
 
-/**
- * Foundation for Sites by ZURB
- * Version 6.1.0
- * foundation.zurb.com
- * Licensed under MIT Open Source
- */
-
-// Sass utilities
-// @import 'assets/foundation-sites/scss/util/util';
-
-// // // Global variables and styles
-// @import 'assets/foundation-sites/scss/global';
-
-// // // Components
-// @import 'assets/foundation-sites/scss/grid/grid';
-// @import 'assets/foundation-sites/scss/typography/typography';
-// @import 'assets/foundation-sites/scss/forms/forms';
-// @import 'assets/foundation-sites/scss/components/visibility';
-// @import 'assets/foundation-sites/scss/components/float';
-// @import 'assets/foundation-sites/scss/components/button';
-// @import 'assets/foundation-sites/scss/components/button-group';
-// @import 'assets/foundation-sites/scss/components/accordion-menu';
-// @import 'assets/foundation-sites/scss/components/accordion';
-// @import 'assets/foundation-sites/scss/components/badge';
-// @import 'assets/foundation-sites/scss/components/breadcrumbs';
-// @import 'assets/foundation-sites/scss/components/callout';
-// @import 'assets/foundation-sites/scss/components/close-button';
-// @import 'assets/foundation-sites/scss/components/drilldown';
-// @import 'assets/foundation-sites/scss/components/dropdown-menu';
-// @import 'assets/foundation-sites/scss/components/dropdown';
-// @import 'assets/foundation-sites/scss/components/flex-video';
-// @import 'assets/foundation-sites/scss/components/label';
-// @import 'assets/foundation-sites/scss/components/media-object';
-// @import 'assets/foundation-sites/scss/components/menu';
-// @import 'assets/foundation-sites/scss/components/off-canvas';
-// @import 'assets/foundation-sites/scss/components/orbit';
-// @import 'assets/foundation-sites/scss/components/pagination';
-// @import 'assets/foundation-sites/scss/components/progress-bar';
-// @import 'assets/foundation-sites/scss/components/reveal';
-// @import 'assets/foundation-sites/scss/components/slider';
-// @import 'assets/foundation-sites/scss/components/sticky';
-// @import 'assets/foundation-sites/scss/components/switch';
-// @import 'assets/foundation-sites/scss/components/table';
-// @import 'assets/foundation-sites/scss/components/tabs';
-// @import 'assets/foundation-sites/scss/components/title-bar';
-// @import 'assets/foundation-sites/scss/components/top-bar';
-// @import 'assets/foundation-sites/scss/components/thumbnail';
-// @import 'assets/foundation-sites/scss/components/tooltip';
+// @include motion-ui-transitions;
+// @include motion-ui-animations;
