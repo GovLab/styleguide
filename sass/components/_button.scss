@@ -77,7 +77,8 @@
     color: $white;
 
     @include breakpoint($desktop) { margin-left: -10px; }
-    @include breakpoint($mobile-only) { background-color: $gray-20; }
+    // ToDo: understand why this style is not working
+    // @include breakpoint($mobile-only) { background-color: $gray-20; }
 
     &:hover {
         background-color: $gray-20;

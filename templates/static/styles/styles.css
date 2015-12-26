@@ -4879,8 +4879,7 @@ table {
 
 .b-button.m-naked, .b-form input.m-naked[type="submit"] {
   background-color: transparent;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.2); }
+  color: white; }
   @media screen and (min-width: 64.0625em) {
     .b-button.m-naked, .b-form input.m-naked[type="submit"] {
       margin-left: -10px; } }
