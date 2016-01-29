@@ -1,16 +1,15 @@
 {
   "//": "The source and destination paths are relative to this file.",
   "source": [
-    "sass",
-    // "bower_components"
+    "sass"
   ],
   "destination":  "guide/",
 
   "//": "The css and js paths are URLs relative to the generated style guide.",
   "css": [
-    "static/styles/styles.css"
+    "../site/static/styles/styles.css"
   ],
   "js": [
-    "static/js/scripts.js"
+    "../site/static/js/scripts.js"
   ]
 }

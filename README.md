@@ -22,8 +22,13 @@ npm install
 
 After you have made some changes, and made sure to update the KSS comments for your change, run:
 ```
-npm-exec kss-node --config kss-config.json
+./node_modules/.bin/kss-node --config kss-config.json
 ```
+to update the living documentation.
+
+Finally, submit a pull request with your changes.
+
+*NOTE: This process should get way easier in the future, hang tight :3*
 
 For more info on how to work with kss / kss-node, check out the [docs](https://github.com/kss-node/kss-node).
 
