@@ -1,3 +1,53 @@
+// b-button
+//
+// A very clean looking standard <button> class
+//
+// :hover       - Dims slightly when highlighted
+// .m-purple    - Uses $purple background
+// .m-teal      - Uses $teal background
+// .m-orange    - Uses $orange background
+// .m-blue      - Uses $blue background
+// .m-black     - Uses $black background
+// .m-icon-only - For buttons without any text, can be used with any color modifier
+// .m-naked     - Transparent style, will blend in with background of parent element
+//
+// Markup:
+// The buttons have out of the box support any of the icons from the <a href="https://www.google.com/design/icons/" target="_blank">Material Icons Library</a>
+//     <div class="b-page-section">
+//         <div class="row">
+//             <a href="#" class="b-button">Text</a>
+//             <a href="#" class="b-button m-purple">Text <i class="material-icons">arrow_forward</i></a>
+//             <a href="#" class="b-button m-teal">Learn More<i class="material-icons">add</i></a>
+//             <a href="#" class="b-button m-orange">Send<i class="material-icons">send</i></a>
+//             <a href="#" class="b-button m-blue">Confirm<i class="material-icons">check</i></a>
+//             <a href="#" class="b-button m-black">Delete<i class="material-icons">close</i></a>
+//             <a href="#" class="b-button m-icon-only m-black"><i class="material-icons">close</i></a>
+//         </div>
+//     </div>
+//     <div class="b-page-section m-black">
+//         <div class="row">
+//             <a href="#" class="b-button">Text</a>
+//             <a href="#" class="b-button m-purple">Text <i class="material-icons">arrow_forward</i></a>
+//             <a href="#" class="b-button m-teal">Learn More<i class="material-icons">add</i></a>
+//             <a href="#" class="b-button m-orange">Send<i class="material-icons">send</i></a>
+//             <a href="#" class="b-button m-blue">Confirm<i class="material-icons">check</i></a>
+//             <a href="#" class="b-button m-black">Delete<i class="material-icons">close</i></a>
+//             <a href="#" class="b-button m-icon-only m-black"><i class="material-icons">close</i></a>
+//         </div>
+//     </div>
+//     <div class="b-divider m-purple">
+//         <div class="row">
+//             <a href="#" class="b-button m-naked">Naked button <i class="material-icons">arrow_forward</i></a>
+//         </div>
+//     </div>
+//     <div class="b-divider">
+//         <div class="row">
+//             <a href="#" class="b-button m-naked">Naked button <i class="material-icons">arrow_forward</i></a>
+//         </div>
+//     </div>
+//
+// Styleguide 1.1
+
 .b-button {
     display: inline-block;
     text-transform: uppercase;
@@ -9,14 +59,14 @@
 
     @include transition;
 
-    
-    &:hover { 
+
+    &:hover {
         text-decoration: none;
         @include transition;
         background-color: $gray-20;
     }
 
-    @include breakpoint($mobile-only) { 
+    @include breakpoint($mobile-only) {
         // display: block;
         text-align: center;
 
@@ -32,40 +82,40 @@
     }
 }
 
-.b-button.m-icon-only i { 
+.b-button.m-icon-only i {
     margin-left: 0;
-    float: none; 
+    float: none;
 }
 
-.b-button.m-purple { 
+.b-button.m-purple {
     background-color: $purple;
     color: $white;
 
     &:hover { background-color: $purple-40k; }
 }
 
-.b-button.m-teal { 
+.b-button.m-teal {
     background-color: $teal;
     color: $white;
 
     &:hover { background-color: $teal-20k; }
 }
 
-.b-button.m-orange { 
+.b-button.m-orange {
     background-color: $orange;
     color: $white;
 
     &:hover { background-color: $orange-20k; }
 }
 
-.b-button.m-blue { 
+.b-button.m-blue {
     background-color: $blue;
     color: $white;
 
     &:hover { background-color: $blue-20k; }
 }
 
-.b-button.m-black { 
+.b-button.m-black {
     background-color: $black;
     color: $white;
 
@@ -83,5 +133,5 @@
     &:hover {
         background-color: $gray-20;
         @include transition;
-    }    
+    }
 }
