@@ -16,7 +16,7 @@
   {{{styles}}}
 </head>
 <body id="kss-node">
-
+<!--
  <nav class="kss-nav">
   <ul class="kss-nav__menu">
     <li class="kss-nav__menu-item">
@@ -48,17 +48,19 @@
           </li>
           {{/eachRoot}}
         </ul>
-      </nav>
+      </nav> -->
 
       <!-- begin main section -->
       <main role="main">
 
         <div class="b-top-section m-purple">
           <h1>{{options.title}}</h1>
-          <h3>{{options.title.sub}}</h3>
+          <h3>{{options.subtitle}}</h3>
         </div>
 
 
+                length {{countRoots}}
+                grid {{gridValue}}
         <div class="b-page-section">
           <div class="row">
 
@@ -67,25 +69,29 @@
               {{{homepage}}}
             </div>
 
-            <!-- homepage nav -->
-            <div class="large-10 large-centered columns">
-              <div class="row">
+          </div>
+          <div class="row">
+            {{#eachRow}}
+            ROW
+            {{/eachRow}}
+
+            <!-- homepage nav grid -->
                 {{#eachRoot}}
-                <div class="large-4 columns">
+                <div class="large-{{gridValue}} columns"  style="border: solid 2px green">
                   <a href="section-{{referenceURI}}.html">
                       <h3><span class="">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> {{header}}</h3>
                     </a>
                       {{#eachSection reference}}
                       {{#ifDepth 2 ../../../options.[nav-depth]}}
-                        <p><a class="b-button">href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
+                        <p><a class="b-button" href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
                           <span class="">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> <span class="">{{header}}</span>
                         </a></p>
                       {{/ifDepth}}
                       {{/eachSection}}
-                  {{/eachRoot}}
                 </div>
-              </nav>
-            </div>
+                  {{/eachRoot}}
+
+            <!-- child pages -->
             {{else}}
 
             {{!

@@ -24,17 +24,20 @@ gulp.task('sass', function() {
   return gulp.src('sass/styles.scss')
     .pipe(sass())
     .pipe(gulp.dest('guide/styles'))  // DIST folder for sass - I think this is wrong for kss
-    .pipe(browserSync.reload({
-      stream: true
-    }))
+    .pipe(browserSync.stream())
 });
 
 // Run shell command
 gulp.task('kss', shell.task([
   './node_modules/.bin/kss-node --config kss-config.json'  // runs the shell command
-]));
+  ])
+);
+
+gulp.task('reload', function() {
+  browserSync.reload();
+});
 
 
 gulp.task('watch', ['browserSync', 'sass', 'kss'], function (){
-  gulp.watch(['sass/**/*.scss', 'kss-template/*'], ['sass', 'kss']);
+  gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*'], ['sass', 'kss']);  // this could be split up and improved
 });

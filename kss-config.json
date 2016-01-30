@@ -12,5 +12,8 @@
   ],
   "js": [
     "js/scripts.js"
+  ],
+  "helpers": [
+    "helpers"
   ]
 }

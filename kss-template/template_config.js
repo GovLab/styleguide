@@ -33,8 +33,14 @@ kssHandlebarsTemplate.options = {
     string: true,
     multiple: false,
     describe: 'Title of the style guide',
-    sub: 'A living styleguide for the visual components of The GovLab web products'
     default: 'GovLab Styleguide'
+  },
+  'subtitle': {
+    group: 'Style guide:',
+    string: true,
+    multiple: false,
+    describe: 'A subtitle for the style guide',
+    default: 'A living styleguide for the visual components of The GovLab web products'
   }
 };
 
