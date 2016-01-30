@@ -1,5 +1,7 @@
 module.exports.register = function (handlebars, options)  {
 
+var row = 0;
+
 // Count the number of roots in the styleguide
   handlebars.registerHelper('countRoots', function(options) {
     var buffer = '',
@@ -7,6 +9,11 @@ module.exports.register = function (handlebars, options)  {
       l;
       l = sections.length;
       return l;
+  });
+
+// Increment the current row we are on
+  handlebars.registerHelper('incrementRow', function(options) {
+    row++;
   });
 
 // Provides a block helper to generate the correct number of rows
@@ -22,6 +29,31 @@ module.exports.register = function (handlebars, options)  {
             buffer += options.fn(sections[i]);
         }
     }
+    return buffer;
+  });
+
+// Works like eachRoot, but provides a limit (in bootstrap/foundation columns) of to how many to display
+// and offsets based on current row
+  handlebars.registerHelper('eachRootLimit', function(limit, options) {
+    console.log(row);
+    var buffer = '',
+      sections = options.data.root.styleguide.section('x'),
+      i, l;
+
+    if (!sections) {
+      return '';
+    }
+
+    // Calculate how many sections we should display on this row
+    var offset = row*limit/2;
+    l = sections.length - offset;
+    l = l > limit/2 ? limit/2 : l;
+
+    // Add them to buffer to display
+    for (i = offset; i < offset+l; i += 1) {
+      buffer += options.fn(sections[i].data);
+    }
+
     return buffer;
   });
 
