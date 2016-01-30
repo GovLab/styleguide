@@ -4,28 +4,34 @@
 {% block content %}
 <main role="main">
     <header class="b-top-section m-purple">
-        <div class="b-wrap">
-            <h2>Modal Window</h2>
-            <h3>Click on the button bellow.</h3>
+        <div class="row">
+            <div class="column small-12">
+                <h2>Modal Window</h2>
+                <h3>Click on the button bellow.</h3>
+            </div>
         </div>
     </header>
 
     <div class="b-page-section">
-        <div class="b-wrap">
-            <a class="b-button js-open-modal" href="#">Open Modal</a>
+        <div class="row">
+            <div class="column small-12">
+                <a class="b-button js-open-modal" href="#">Open Modal</a>
+            </div>
         </div>
     </div>
 
     <div class="b-page-section b-component-code">
-        <div class="b-wrap">
-            <h1>Usage</h1>
-<pre><code class="language-css">
+        <div class="row">
+            <div class="column small-12">
+                <h1>Usage</h1>
+
+                <pre><code class="language-css">
 
 .js-open-modal  /* Add this class to the trigger element to open the modal */
 .js-close-modal /* Add this class to the trigger element to close the modal */
 
 </code></pre>
-            <p>This is the code for the modal itself</p>
+<p>This is the code for the modal itself</p>
 <pre><code class="language-markup">
 &lt;div class=&quot;b-modal&quot;&gt;
     &lt;div class=&quot;e-content&quot;&gt;
@@ -39,15 +45,17 @@
     &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-        </div>
-    </div>
-    <div class="b-divider">
-        <h1>Under the hood</h1>
-    </div>
-    <div class="b-page-section">
-        <div class="b-wrap">
-        <p>These are the functions to open and close the modal.</p>
-<pre><code class="language-javascript">
+</div>
+</div>
+</div>
+<div class="b-divider">
+    <h1>Under the hood</h1>
+</div>
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+            <p>These are the functions to open and close the modal.</p>
+            <pre><code class="language-javascript">
 // Modal Logic
 $(".js-open-modal").click(function() {
     $(".b-modal").addClass("m-active");
