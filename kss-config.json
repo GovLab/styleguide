@@ -8,9 +8,9 @@
 
   "//": "The css and js paths are URLs relative to the generated style guide.",
   "css": [
-    "../site/static/styles/styles.css"
+    "styles/styles.css"
   ],
   "js": [
-    "../site/static/js/scripts.js"
+    "js/scripts.js"
   ]
 }
