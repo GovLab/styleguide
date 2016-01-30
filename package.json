@@ -1,0 +1,31 @@
+{
+  "name": "govlab-styleguide",
+  "version": "1.0.0",
+  "description": "A styleguide / lightweight frontend framework for GovLab websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GovLab/styleguide.git"
+  },
+  "keywords": [
+    "styeguide",
+    "kss",
+    "kss-node"
+  ],
+  "author": "@mocxd, @claudioccm, @toolness",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GovLab/styleguide/issues"
+  },
+  "homepage": "https://github.com/GovLab/styleguide",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.1.1",
+    "gulp-shell": "^0.5.2",
+    "kss": "^2.4.0"
+  }
+}
