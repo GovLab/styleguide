@@ -4,6 +4,7 @@
     "sass"
   ],
   "destination":  "guide/",
+  "template": "kss-template",
 
   "//": "The css and js paths are URLs relative to the generated style guide.",
   "css": [
