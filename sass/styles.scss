@@ -39,6 +39,18 @@ body {
     // background-color: $purple;
 }
 
+.sandbox {
+    min-height: 400px;
+}
 
+@media (max-width: 600px) {
+  .sandbox { background-color: red; }
+}
 
+@media (min-width: 601px) {
+ .sandbox { background-color: green; }
+}
 
+@media (min-width: 1021px) {
+  .sandbox { background-color: blue; }
+}
