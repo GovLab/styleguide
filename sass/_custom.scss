@@ -4,7 +4,7 @@
     }
 }
 
-.kss-title__ref {
+.kss-title__ref, .kss-nav__ref {
     color: $gray-20;
 }
 
@@ -24,6 +24,7 @@
 
 .modifiers {
     display: none;
+    margin: 20px 0;
     .modifier-row {
         .kss-modifier__description {
             color: $gray-50;
@@ -39,51 +40,77 @@
     }
 }
 
+.kss-bottom-nav {
+    text-align: left;
+    ul.kss-nav__menu {
+        margin-left: 0;
+        list-style: none;
+        li.kss-nav__menu-item {
+            a {
+                width: auto;
+            }
+            .kss-nav__ref {
+                color: $white-20;
+            }
+        }
+        ul {
+            list-style: none;
+        }
+    }
+}
+
 .kss-nav {
-    background-color: $white-90;
-    box-shadow: 0 0 3px transparent;
+    background-color: transparent;
     padding: 20px;
     z-index: 2;
     position: absolute;
     width: 250px;
     right: -190px;
     @include transition;
+    &::before {
+        opacity: 1;
+        display: block;
+        padding: 20px;
+        background-color: $white-50;
+        color: $gray-20;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        content: "\00a7";
+    }
     ul {
+        opacity: 0;
         margin-left: 0;
         list-style: none;
+        @include transition;
         ul {
-            margin-left: 0;
-            @include transition;
+            margin-left: 15px;
         }
-    }
-    .kss-nav__ref {
-        color: $black;
-        @include transition;
-    }
-    .kss-nav__name {
-        opacity: 0;
-        @include transition;
     }
     &.m-fixed {
         position: fixed;
         top: 20px;
     }
     &:hover {
+        background-color: $white;
         box-shadow: 0 0 3px $gray-20;
         right: 0;
         overflow: hidden;
-        .kss-nav__name {
+        @include transition;
+        &::before {
+            padding-left: 0;
+            content: "Sections";
+        }
+        ul {
             opacity: 1;
             @include transition;
         }
-        .kss-nav__ref {
-            color: $gray-20;
-            @include transition;
-        }
-        ul ul {
-            margin-left: 15px;
-            @include transition;
-        }
-        @include transition;
     }
+}
+
+.example {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 20px;
+    color: $gray-50;
 }
