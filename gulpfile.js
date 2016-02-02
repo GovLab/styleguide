@@ -9,6 +9,7 @@ gulp.task('browserSync', function() {
     server: {
       baseDir: 'guide' // This is the DIST folder browsersync will serve
     },
+    open: false
   })
 })
 

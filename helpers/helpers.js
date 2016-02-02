@@ -1,7 +1,8 @@
 module.exports.register = function (handlebars, options)  {
 
-var row = 0;
-var minSize = 2; // minimum column size value we want for our columns
+    var row = 0;
+    var section = 0;
+    var minSize = 2; // minimum column size value we want for our columns
 
 // Count the number of roots in the styleguide
 handlebars.registerHelper('countRoots', function(options) {
@@ -16,6 +17,18 @@ handlebars.registerHelper('incrementRow', function(options) {
     row++;
 });
 
+handlebars.registerHelper('incrementCol', function(options) {
+    section++;
+});
+
+// Ends if this is the last column
+handlebars.registerHelper('endLastCol', function(options) {
+    var sections = options.data.root.styleguide.section('x'),
+    l;
+    l = sections.length;
+    return section === l-1 ? ' end' : '';
+});
+
 // Provides a block helper to generate the correct number of rows
 // should always be used as {{#eachRow}} or dark and terrible things will happen
 handlebars.registerHelper('eachRow', function(options) {
@@ -25,10 +38,8 @@ handlebars.registerHelper('eachRow', function(options) {
 
     l = sections.length;
 
-    if (l*minSize > 12) {
-        for (var i = l*minSize; i > 0; i -= 12) {
-            buffer += options.fn(sections[i]);
-        }
+    for (var i = l*minSize; i >= 0; i -= 12) {
+        buffer += options.fn(sections[i]);
     }
     return buffer;
 });
