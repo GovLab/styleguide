@@ -1,15 +1,18 @@
 $(document).ready(function($) {
 
-    var nav = $('.kss-nav');
-    var pos = nav.offset().top;
 
-    $(window).scroll(function () {
-        if (window.scrollY > pos) {
-            nav.addClass('m-fixed');
-        } else {
-            nav.removeClass('m-fixed');
-        }
-    });
+    if ($('.kss-nav').length) {
+        var nav = $('.kss-nav');
+        var pos = nav.offset().top;
+
+        $(window).scroll(function () {
+            if (window.scrollY > pos) {
+                nav.addClass('m-fixed');
+            } else {
+                nav.removeClass('m-fixed');
+            }
+        });
+    }
 
     $('.js-modifier-button').click(function (e) {
         e.preventDefault();

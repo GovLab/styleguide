@@ -13,226 +13,429 @@
   <meta name="viewport" content="width=device-width">
 
   <!-- <link rel="stylesheet" href="public/kss.css"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="//use.typekit.net/zez3buj.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css"/>
+
+
   <link rel="stylesheet" href="styles/styles.css">
 
 </head>
 <body id="kss-node">
-<!--
- <nav class="kss-nav">
-  <ul class="kss-nav__menu">
-    <li class="kss-nav__menu-item">
-      <a href="./">
-        <span class="kss-nav__ref">0</span
-          ><span class="kss-nav__name">Overview</span>
-        </a>
-      </li>
+
+  <header class="b-top-nav">
+
+    <div class="e-nav-group m-left">
+      <span class="e-nav-item js-nav-trigger e-nav-trigger">
+        <i class="material-icons">menu</i>
+      </span>
+      <span class="e-nav-item m-container e-search-container">
+      </span>
+    </div>
+
+    <div class="e-nav-group m-right e-social-media">
+      <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
+      <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
+    </div>
+
+    <a class="e-logo" href="./">
+      <img src="img/govlab-logo-white.png" alt="">
+    </a>
+
+  </header>
+
+
+  <main role="main">
+
+
+    <div class="b-top-section m-purple">
+      <h1>GovLab Styleguide</h1>
+      <h3>A living styleguide for the visual components of The GovLab web products</h3>
+    </div>
+
+
+    <!-- child pages -->
+
+  </div>
+  <!-- side navigation -->
+  <nav class="kss-nav">
+    <ul class="kss-nav__menu">
       <li class="kss-nav__menu-item">
-        <a href="section-1.html">
-          <span class="kss-nav__ref">1</span
-            ><span class="kss-nav__name">Layout</span>
+        <a href="./">
+          <span class="kss-nav__ref">0</span
+            > <span class="kss-nav__name">Overview</span>
           </a>
-          </li>
-      <li class="kss-nav__menu-item">
-        <a href="section-2.html">
-          <span class="kss-nav__ref">2</span
-            ><span class="kss-nav__name">Typography</span>
-          </a>
-          </li>
-      <li class="kss-nav__menu-item">
-        <a href="section-3.html">
-          <span class="kss-nav__ref">3</span
-            ><span class="kss-nav__name">UI Components</span>
-          </a>
-          <ul class="kss-nav__menu-child">
-            <li class="kss-nav__menu-item">
-              <a href="section-3.html#kssref-3-1">
-                <span class="kss-nav__ref ">3.1</span
-                  ><span class="kss-nav__name">b-button</span>
+        </li>
+        <li class="kss-nav__menu-item">
+          <a href="section-1.html">
+            <span class="kss-nav__ref">1</span
+              > <span class="kss-nav__name">Layout</span>
+            </a>
+            </li>
+        <li class="kss-nav__menu-item">
+          <a href="section-2.html">
+            <span class="kss-nav__ref">2</span
+              > <span class="kss-nav__name">Typography</span>
+            </a>
+            </li>
+        <li class="kss-nav__menu-item">
+          <a href="section-3.html">
+            <span class="kss-nav__ref">3</span
+              > <span class="kss-nav__name">UI Components</span>
+            </a>
+            <ul class="kss-nav__menu-child">
+              <li class="kss-nav__menu-item">
+                <a href="section-3.html#kssref-3-1">
+                  <span class="kss-nav__ref ">3.1</span
+                    > <span class="kss-nav__name">b-button</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+        <li class="kss-nav__menu-item">
+          <a href="section-4.html">
+            <span class="kss-nav__ref">4</span
+              > <span class="kss-nav__name">Forms</span>
+            </a>
+            </li>
+        <li class="kss-nav__menu-item">
+          <a href="section-5.html">
+            <span class="kss-nav__ref">5</span
+              > <span class="kss-nav__name">Page Modules</span>
+            </a>
+            </li>
+        <li class="kss-nav__menu-item">
+          <a href="section-6.html">
+            <span class="kss-nav__ref">6</span
+              > <span class="kss-nav__name">Specialized Components</span>
+            </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- sections -->
+        <!-- begin main section -->
+
+      <div     id="kssref-3" class="kss-section kss-section--depth-1">
+
+          <div class="b-page-section">
+            <div class="row">
+
+              <div class="kss-style">
+                <h1 class="kss-title kss-title--level-1">
+                <a class="kss-title__permalink" href="#kssref-3">
+                  <span class="kss-title__ref">
+                    3
+                  </span>
+                  UI Components
+
+                  <span class="permalink">
+                    <i class="material-icons">link</i>
+                  </span>
                 </a>
-              </li>
-            </ul>
-          </li>
-      <li class="kss-nav__menu-item">
-        <a href="section-4.html">
-          <span class="kss-nav__ref">4</span
-            ><span class="kss-nav__name">Forms</span>
-          </a>
-          </li>
-      <li class="kss-nav__menu-item">
-        <a href="section-5.html">
-          <span class="kss-nav__ref">5</span
-            ><span class="kss-nav__name">Page Modules</span>
-          </a>
-          </li>
-      <li class="kss-nav__menu-item">
-        <a href="section-6.html">
-          <span class="kss-nav__ref">6</span
-            ><span class="kss-nav__name">Template Modules</span>
-          </a>
-          </li>
-      <li class="kss-nav__menu-item">
-        <a href="section-7.html">
-          <span class="kss-nav__ref">7</span
-            ><span class="kss-nav__name">Specialized Components</span>
-          </a>
-          </li>
-        </ul>
-      </nav> -->
+              </h1>
 
-      <!-- begin main section -->
-      <main role="main">
 
-        <div class="b-top-section m-purple">
-          <h1>GovLab Styleguide</h1>
-          <h3>A living styleguide for the visual components of The GovLab web products</h3>
+            </div>
+
+          </div>
         </div>
 
 
-        length 7
-        grid 2
+      </div>
+        <section id="kssref-3-1" class="kss-section kss-section--depth-2">
+
+          <div class="b-page-section">
+            <div class="row">
+
+              <div class="kss-style">
+                <h2 class="kss-title kss-title--level-2">
+                <a class="kss-title__permalink" href="#kssref-3-1">
+                  <span class="kss-title__ref">
+                    3.1
+                  </span>
+                  b-button
+
+                  <span class="permalink">
+                    <i class="material-icons">link</i>
+                  </span>
+                </a>
+              </h2>
+
+
+              <div class="kss-description">
+                <p>A very clean looking standard button class.</p>
+<p>The buttons have out of the box support any of the icons from the <a href="https://www.google.com/design/icons/" target="_blank">Material Icons Library</a></p>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="kss-modifier__wrapper">
+          <div class="b-page-section">
+            <div class="row">
+              <div class="kss-modifier__heading kss-style example">
+                Examples
+              </div>
+            </div>
+          </div>
+          <div class="kss-modifier__example">
+            <div class="b-page-section">
+    <div class="row">
+        <a href="#" class="b-button">Text</a>
+        <a href="#" class="b-button m-purple">Text <i class="material-icons">arrow_forward</i></a>
+        <a href="#" class="b-button m-teal">Learn More<i class="material-icons">add</i></a>
+        <a href="#" class="b-button m-orange">Send<i class="material-icons">send</i></a>
+        <a href="#" class="b-button m-blue">Confirm<i class="material-icons">check</i></a>
+        <a href="#" class="b-button m-black">Delete<i class="material-icons">close</i></a>
+        <a href="#" class="b-button m-icon-only m-black"><i class="material-icons">close</i></a>
+    </div>
+</div>
+<div class="b-page-section m-black">
+    <div class="row">
+        <a href="#" class="b-button">Text</a>
+        <a href="#" class="b-button m-purple">Text <i class="material-icons">arrow_forward</i></a>
+        <a href="#" class="b-button m-teal">Learn More<i class="material-icons">add</i></a>
+        <a href="#" class="b-button m-orange">Send<i class="material-icons">send</i></a>
+        <a href="#" class="b-button m-blue">Confirm<i class="material-icons">check</i></a>
+        <a href="#" class="b-button m-black">Delete<i class="material-icons">close</i></a>
+        <a href="#" class="b-button m-icon-only m-black"><i class="material-icons">close</i></a>
+    </div>
+</div>
+<div class="b-divider m-purple">
+    <div class="row">
+        <a href="#" class="b-button m-naked">Naked button <i class="material-icons">arrow_forward</i></a>
+    </div>
+</div>
+          </div>
+          <div class="b-page-section">
+            <div class="row">
+              <div class="kss-markup kss-style">
+                <pre><code class="language-markup">&lt;div class=&quot;b-page-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button&quot;&gt;Text&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-purple&quot;&gt;Text &lt;i class=&quot;material-icons&quot;&gt;arrow_forward&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-teal&quot;&gt;Learn More&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-orange&quot;&gt;Send&lt;i class=&quot;material-icons&quot;&gt;send&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-blue&quot;&gt;Confirm&lt;i class=&quot;material-icons&quot;&gt;check&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-black&quot;&gt;Delete&lt;i class=&quot;material-icons&quot;&gt;close&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-icon-only m-black&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;close&lt;/i&gt;&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;b-page-section m-black&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button&quot;&gt;Text&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-purple&quot;&gt;Text &lt;i class=&quot;material-icons&quot;&gt;arrow_forward&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-teal&quot;&gt;Learn More&lt;i class=&quot;material-icons&quot;&gt;add&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-orange&quot;&gt;Send&lt;i class=&quot;material-icons&quot;&gt;send&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-blue&quot;&gt;Confirm&lt;i class=&quot;material-icons&quot;&gt;check&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-black&quot;&gt;Delete&lt;i class=&quot;material-icons&quot;&gt;close&lt;/i&gt;&lt;/a&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-icon-only m-black&quot;&gt;&lt;i class=&quot;material-icons&quot;&gt;close&lt;/i&gt;&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;b-divider m-purple&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;a href=&quot;#&quot; class=&quot;b-button m-naked&quot;&gt;Naked button &lt;i class=&quot;material-icons&quot;&gt;arrow_forward&lt;/i&gt;&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="b-page-section">
           <div class="row">
 
+            <a href="#" class="b-button js-modifier-button" for="modifiers-3.1">Show All Modifiers</a>
 
-        <div     id="kssref-3" class="kss-section kss-section--depth-1">
-
-            <div class="kss-style">
-              <h1 class="kss-title kss-title--level-1">
-              <a class="kss-title__permalink" href="#kssref-3">
-                <span class="kss-title__ref">
-                  3
-                  <span class="kss-title__permalink-hash">
-                    #permalink
-                  </span>
+            <div class="modifiers" id="modifiers-3.1">
+              <div class="modifier-row">
+                <span class="kss-modifier__name kss-style">
+                  .m-purple
                 </span>
-                UI Components
-              </a>
-            </h1>
-
+                &mdash;
+                <span class="kss-modifier__description kss-style">
+                  Uses $purple background
+                </span>
+              </div>
+              <div class="modifier-row">
+                <span class="kss-modifier__name kss-style">
+                  .m-teal
+                </span>
+                &mdash;
+                <span class="kss-modifier__description kss-style">
+                  Uses $teal background
+                </span>
+              </div>
+              <div class="modifier-row">
+                <span class="kss-modifier__name kss-style">
+                  .m-orange
+                </span>
+                &mdash;
+                <span class="kss-modifier__description kss-style">
+                  Uses $orange background
+                </span>
+              </div>
+              <div class="modifier-row">
+                <span class="kss-modifier__name kss-style">
+                  .m-blue
+                </span>
+                &mdash;
+                <span class="kss-modifier__description kss-style">
+                  Uses $blue background
+                </span>
+              </div>
+              <div class="modifier-row">
+                <span class="kss-modifier__name kss-style">
+                  .m-black
+                </span>
+                &mdash;
+                <span class="kss-modifier__description kss-style">
+                  Uses $black background
+                </span>
+              </div>
+              <div class="modifier-row">
+                <span class="kss-modifier__name kss-style">
+                  .m-icon-only
+                </span>
+                &mdash;
+                <span class="kss-modifier__description kss-style">
+                  For buttons without any text, can be used with any color modifier
+                </span>
+              </div>
+              <div class="modifier-row">
+                <span class="kss-modifier__name kss-style">
+                  .m-naked
+                </span>
+                &mdash;
+                <span class="kss-modifier__description kss-style">
+                  Transparent style, will blend in with background of parent element
+                </span>
+              </div>
+            </div>
 
           </div>
-
-
         </div>
-          <section id="kssref-3-1" class="kss-section kss-section--depth-2">
 
-            <div class="kss-style">
-              <h2 class="kss-title kss-title--level-2">
-              <a class="kss-title__permalink" href="#kssref-3-1">
-                <span class="kss-title__ref">
-                  3.1
-                  <span class="kss-title__permalink-hash">
-                    #permalink
-                  </span>
-                </span>
-                b-button
-              </a>
-            </h2>
+    </section>
 
+  </main>
 
-            <div class="kss-description">
-              <p>A very clean looking standard button class.</p>
-<p>The buttons have out of the box support any of the icons from the <a href="https://www.google.com/design/icons/" target="_blank">Material Icons Library</a></p>
+  <footer class='b-footer'>
+    <div class="row">
+      <div class="large-10 large-centered columns">
+        <div class="row">
+          <div class="e-content m-sections medium-4 column">
+            <h4>Sections</h4>
 
+            <nav class="kss-bottom-nav">
+              <ul class="kss-nav__menu">
+                <li class="kss-nav__menu-item">
+                  <a href="./">
+                    <span class="kss-nav__ref">0</span
+                      > <span class="kss-nav__name">Overview</span>
+                    </a>
+                  </li>
+                  <li class="kss-nav__menu-item">
+                    <a href="section-1.html">
+                      <span class="kss-nav__ref">1</span
+                        > <span class="kss-nav__name">Layout</span>
+                      </a>
+                      </li>
+                  <li class="kss-nav__menu-item">
+                    <a href="section-2.html">
+                      <span class="kss-nav__ref">2</span
+                        > <span class="kss-nav__name">Typography</span>
+                      </a>
+                      </li>
+                  <li class="kss-nav__menu-item">
+                    <a href="section-3.html">
+                      <span class="kss-nav__ref">3</span
+                        > <span class="kss-nav__name">UI Components</span>
+                      </a>
+                      <ul class="kss-nav__menu-child">
+                        <li class="kss-nav__menu-item">
+                          <a href="section-3.html#kssref-3-1">
+                            <span class="kss-nav__ref ">3.1</span
+                              > <span class="kss-nav__name">b-button</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                  <li class="kss-nav__menu-item">
+                    <a href="section-4.html">
+                      <span class="kss-nav__ref">4</span
+                        > <span class="kss-nav__name">Forms</span>
+                      </a>
+                      </li>
+                  <li class="kss-nav__menu-item">
+                    <a href="section-5.html">
+                      <span class="kss-nav__ref">5</span
+                        > <span class="kss-nav__name">Page Modules</span>
+                      </a>
+                      </li>
+                  <li class="kss-nav__menu-item">
+                    <a href="section-6.html">
+                      <span class="kss-nav__ref">6</span
+                        > <span class="kss-nav__name">Specialized Components</span>
+                      </a>
+                      </li>
+                    </ul>
+                  </nav>
+
+                </div>
+                <div class="e-content medium-4 column">
+                  <h4>Lead Supporters</h4>
+                  <a class="e-partner-logo" href="https://www.macfound.org/" tagret="_blank"><img src="img/partners/macarthur-logo-white.png" alt="MacArthur Foundation"></a>
+                  <a class="e-partner-logo" href="http://knightfoundation.org/" tagret="_blank"><img src="img/partners/knight-logo-white.png" alt="Knight Foundation"></a>
+                  <a class="e-partner-logo m-google" href="http://google.org/" tagret="_blank"><img src="img/partners/google-org.png" alt="Google.org"></a>
+                </div>
+                <div class="e-content medium-4 column">
+                  <h4>Based at</h4>
+                  <a class="e-partner-logo" href="http://engineering.nyu.edu/tandon" tagret="_blank"><img src="img/partners/nyu.png" alt="NYU Tandon School of Engineering - New York University"></a>
+                  <a class="e-partner-logo m-mit" href="https://www.media.mit.edu/" tagret="_blank"><img src="img/partners/mit-logo-white.png" alt="MIT Media Lab"></a>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="kss-modifier__wrapper">
-            <div class="kss-modifier__heading kss-style">
-              Examples
-            </div>
-            <div class="kss-modifier__default-name kss-style">
-              Default styling
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button [modifier class]">Text <i class="material-icons">arrow_forward</i></a>
-            </div>
-            <div class="kss-modifier__name kss-style">
-              .m-purple
-            </div>
-            <div class="kss-modifier__description kss-style">
-              Uses $purple background
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button m-purple">Text <i class="material-icons">arrow_forward</i></a>
-            </div>
-            <div class="kss-modifier__name kss-style">
-              .m-teal
-            </div>
-            <div class="kss-modifier__description kss-style">
-              Uses $teal background
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button m-teal">Text <i class="material-icons">arrow_forward</i></a>
-            </div>
-            <div class="kss-modifier__name kss-style">
-              .m-orange
-            </div>
-            <div class="kss-modifier__description kss-style">
-              Uses $orange background
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button m-orange">Text <i class="material-icons">arrow_forward</i></a>
-            </div>
-            <div class="kss-modifier__name kss-style">
-              .m-blue
-            </div>
-            <div class="kss-modifier__description kss-style">
-              Uses $blue background
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button m-blue">Text <i class="material-icons">arrow_forward</i></a>
-            </div>
-            <div class="kss-modifier__name kss-style">
-              .m-black
-            </div>
-            <div class="kss-modifier__description kss-style">
-              Uses $black background
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button m-black">Text <i class="material-icons">arrow_forward</i></a>
-            </div>
-            <div class="kss-modifier__name kss-style">
-              .m-icon-only
-            </div>
-            <div class="kss-modifier__description kss-style">
-              For buttons without any text, can be used with any color modifier
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button m-icon-only">Text <i class="material-icons">arrow_forward</i></a>
-            </div>
-            <div class="kss-modifier__name kss-style">
-              .m-naked
-            </div>
-            <div class="kss-modifier__description kss-style">
-              Transparent style, will blend in with background of parent element
-            </div>
-            <div class="kss-modifier__example">
-              <a href="#" class="b-button m-naked">Text <i class="material-icons">arrow_forward</i></a>
+        </footer>
+        <div class="b-copyright">
+          <div class="row">
+            <div class="large-10 large-centered columns">
+              <a class="e-cc-badge" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+              This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> <br> <a href="#">Copyright Infringement Information</a>.
             </div>
           </div>
+        </div>
 
-          <div class="kss-markup kss-style">
-            <pre class="prettyprint linenums lang-html"><code data-language="html">&lt;a href=&quot;#&quot; class=&quot;b-button [modifier class]&quot;&gt;Text &lt;i class=&quot;material-icons&quot;&gt;arrow_forward&lt;/i&gt;&lt;/a&gt;</code></pre>
-          </div>
+        <div id="overlay"></div>
 
-      </section>
-
-    </div>
-  </div>
-
-</main>
-
-<!-- SCRIPTS -->
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script src="public/kss.js"></script>
-<script src="public/prettify.js"></script>
-<script>
-prettyPrint();
-</script>
-<script src="js/scripts.js"></script>
+        <!-- SCRIPTS -->
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
 
 
-<!-- Automatically generated using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
-</body>
-</html>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.js"></script>
+        <script src="js/scripts.js"></script>
+
+
+
+        <script src="public/kss.js"></script>
+        <script src="public/prettify.js"></script>
+        <script>
+        prettyPrint();
+      </script>
+      <script src="js/kss-scripts.js"></script>
+
+
+      <!-- Automatically generated using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+    </body>
+    </html>

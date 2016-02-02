@@ -5337,6 +5337,91 @@ table {
   /* Clickable */
   pointer-events: auto; }
 
+.kss-title:hover, .kss-title *:hover {
+  text-decoration: none; }
+
+.kss-title__ref, .kss-nav__ref {
+  color: rgba(0, 0, 0, 0.2); }
+
+.kss-title__permalink .permalink i.material-icons {
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 0.62em;
+  visibility: hidden; }
+
+.kss-title__permalink:hover i.material-icons {
+  visibility: visible; }
+
+.modifiers {
+  display: none;
+  margin: 20px 0; }
+  .modifiers .modifier-row .kss-modifier__description {
+    color: rgba(0, 0, 0, 0.5);
+    transition: all .4s ease; }
+  .modifiers .modifier-row:hover .kss-modifier__description {
+    color: #333;
+    transition: all .4s ease; }
+  .modifiers.m-visible {
+    display: block; }
+
+.kss-bottom-nav {
+  text-align: left; }
+  .kss-bottom-nav ul.kss-nav__menu {
+    margin-left: 0;
+    list-style: none; }
+    .kss-bottom-nav ul.kss-nav__menu li.kss-nav__menu-item a {
+      width: auto; }
+    .kss-bottom-nav ul.kss-nav__menu li.kss-nav__menu-item .kss-nav__ref {
+      color: rgba(255, 255, 255, 0.2); }
+    .kss-bottom-nav ul.kss-nav__menu ul {
+      list-style: none; }
+
+.kss-nav {
+  background-color: transparent;
+  padding: 20px;
+  z-index: 2;
+  position: absolute;
+  width: 250px;
+  right: -190px;
+  transition: all .4s ease; }
+  .kss-nav::before {
+    opacity: 1;
+    display: block;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    content: "\00a7"; }
+  .kss-nav ul {
+    opacity: 0;
+    margin-left: 0;
+    list-style: none;
+    transition: all .4s ease; }
+    .kss-nav ul ul {
+      margin-left: 15px; }
+  .kss-nav.m-fixed {
+    position: fixed;
+    top: 20px; }
+  .kss-nav:hover {
+    background-color: white;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    right: 0;
+    overflow: hidden;
+    transition: all .4s ease; }
+    .kss-nav:hover::before {
+      padding-left: 0;
+      content: "Sections"; }
+    .kss-nav:hover ul {
+      opacity: 1;
+      transition: all .4s ease; }
+
+.example {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.5); }
+
 .sandbox {
   min-height: 400px; }
 
