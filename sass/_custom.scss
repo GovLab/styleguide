@@ -61,7 +61,6 @@
 
 .kss-nav {
     background-color: transparent;
-    padding: 20px;
     z-index: 2;
     position: absolute;
     width: 250px;
@@ -79,11 +78,13 @@
         content: "\00a7";
     }
     ul {
+        padding: 0 20px 20px 20px;
         opacity: 0;
         margin-left: 0;
         list-style: none;
         @include transition;
         ul {
+            padding: 0;
             margin-left: 15px;
         }
     }
@@ -98,7 +99,6 @@
         overflow: hidden;
         @include transition;
         &::before {
-            padding-left: 0;
             content: "Sections";
         }
         ul {
