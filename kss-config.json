@@ -11,7 +11,7 @@
     "styles/styles.css"
   ],
   "js": [
-    "js/scripts.js"
+    "js/kss-scripts.js"
   ],
   "helpers": [
     "helpers"

@@ -1,0 +1,89 @@
+.kss-title, .kss-title * {
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.kss-title__ref {
+    color: $gray-20;
+}
+
+.kss-title__permalink {
+    .permalink {
+        i.material-icons {
+            color: $gray-10;
+            font-size: 0.62em;
+            visibility: hidden;
+        }
+    }
+
+    &:hover i.material-icons {
+        visibility: visible;
+    }
+}
+
+.modifiers {
+    display: none;
+    .modifier-row {
+        .kss-modifier__description {
+            color: $gray-50;
+            @include transition;
+        }
+        &:hover .kss-modifier__description {
+            color: $black;
+            @include transition;
+        }
+    }
+    &.m-visible {
+        display: block;
+    }
+}
+
+.kss-nav {
+    background-color: $white-90;
+    box-shadow: 0 0 3px transparent;
+    padding: 20px;
+    z-index: 2;
+    position: absolute;
+    width: 250px;
+    right: -190px;
+    @include transition;
+    ul {
+        margin-left: 0;
+        list-style: none;
+        ul {
+            margin-left: 0;
+            @include transition;
+        }
+    }
+    .kss-nav__ref {
+        color: $black;
+        @include transition;
+    }
+    .kss-nav__name {
+        opacity: 0;
+        @include transition;
+    }
+    &.m-fixed {
+        position: fixed;
+        top: 20px;
+    }
+    &:hover {
+        box-shadow: 0 0 3px $gray-20;
+        right: 0;
+        overflow: hidden;
+        .kss-nav__name {
+            opacity: 1;
+            @include transition;
+        }
+        .kss-nav__ref {
+            color: $gray-20;
+            @include transition;
+        }
+        ul ul {
+            margin-left: 15px;
+            @include transition;
+        }
+        @include transition;
+    }
+}

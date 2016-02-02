@@ -13,87 +13,121 @@
   <meta name="viewport" content="width=device-width">
 
   <!-- <link rel="stylesheet" href="public/kss.css"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="//use.typekit.net/zez3buj.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css"/>
+
+
   {{{styles}}}
 </head>
 <body id="kss-node">
-<!--
- <nav class="kss-nav">
-  <ul class="kss-nav__menu">
-    <li class="kss-nav__menu-item">
-      <a href="./">
-        <span class="kss-nav__ref">0</span
-          ><span class="kss-nav__name">Overview</span>
-        </a>
-      </li>
-      {{#eachRoot}}
-      <li class="kss-nav__menu-item">
-        <a href="section-{{referenceURI}}.html">
-          <span class="kss-nav__ref">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span
-            ><span class="kss-nav__name">{{header}}</span>
-          </a>
-          {{#ifReference ../rootName}}
-          <ul class="kss-nav__menu-child">
-            {{#eachSection reference}}
-            {{#ifDepth 2 ../../../options.[nav-depth]}}
-            <li class="kss-nav__menu-item">
-              <a href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
-                <span class="kss-nav__ref {{#ifDepth 3 100}}kss-nav__ref-child{{/ifDepth}}">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span
-                  ><span class="kss-nav__name">{{header}}</span>
-                </a>
-              </li>
-              {{/ifDepth}}
-              {{/eachSection}}
-            </ul>
-            {{/ifReference}}
-          </li>
-          {{/eachRoot}}
-        </ul>
-      </nav> -->
 
-      <!-- begin main section -->
-      <main role="main">
+  <header class="b-top-nav">
 
-        <div class="b-top-section m-purple">
-          <h1>{{options.title}}</h1>
-          <h3>{{options.subtitle}}</h3>
+    <div class="e-nav-group m-left">
+      <span class="e-nav-item js-nav-trigger e-nav-trigger">
+        <i class="material-icons">menu</i>
+      </span>
+      <span class="e-nav-item m-container e-search-container">
+      </span>
+    </div>
+
+    <div class="e-nav-group m-right e-social-media">
+      <a href="https://twitter.com/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-twitter"></i></a>
+      <a href="https://www.youtube.com/user/TheGovLab" class="e-nav-item" target="_blank"><i class="e-social-media-item fa fa-youtube-play"></i></a>
+    </div>
+
+    <a class="e-logo" href="./">
+      <img src="static/img/govlab-logo-white.png" alt="">
+    </a>
+
+  </header>
+
+
+  <main role="main">
+
+
+    <div class="b-top-section m-purple">
+      <h1>{{options.title}}</h1>
+      <h3>{{options.subtitle}}</h3>
+    </div>
+
+
+    <div class="b-page-section">
+
+      <div class="row">
+        {{#if homepage}}
+        <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
+          {{{homepage}}}
         </div>
+      </div>
 
 
-        length {{countRoots}}
-        grid {{gridValue}}
-        <div class="b-page-section">
-          <div class="row">
+      <!-- homepage nav grid -->
+      {{#eachRow}}
+      <div class="row">
+        {{#eachRootLimit 12}}
+        <div class="large-{{gridValue}} columns"  style="">
+          <a href="section-{{referenceURI}}.html">
+            <h3><span class="">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> {{header}}</h3>
+          </a>
+          {{#eachSection reference}}
+          {{#ifDepth 2 ../../../options.[nav-depth]}}
+          <p><a class="b-button" href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
+            <span class="">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> <span class="">{{header}}</span>
+          </a></p>
+          {{/ifDepth}}
+          {{/eachSection}}
+        </div>
+        {{/eachRootLimit}}
+        {{incrementRow}}
+      </div>
+      {{/eachRow}}
 
-            {{#if homepage}}
-            <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
-              {{{homepage}}}
-            </div>
+      {{else}}
+      <!-- child pages -->
 
-          </div>
-
-          <!-- homepage nav grid -->
-          {{#eachRow}}
-          <div class="row">
-            {{#eachRootLimit 12}}
-            <div class="large-{{gridValue}} columns"  style="border: solid 2px green">
-              <a href="section-{{referenceURI}}.html">
-                <h3><span class="">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> {{header}}</h3>
+    </div>
+    <!-- side navigation -->
+    <nav class="kss-nav">
+      <ul class="kss-nav__menu">
+        <li class="kss-nav__menu-item">
+          <a href="./">
+            <span class="kss-nav__ref">0</span
+              > <span class="kss-nav__name">Overview</span>
+            </a>
+          </li>
+          {{#eachRoot}}
+          <li class="kss-nav__menu-item">
+            <a href="section-{{referenceURI}}.html">
+              <span class="kss-nav__ref">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span
+                > <span class="kss-nav__name">{{header}}</span>
               </a>
-              {{#eachSection reference}}
-              {{#ifDepth 2 ../../../options.[nav-depth]}}
-              <p><a class="b-button" href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
-                <span class="">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> <span class="">{{header}}</span>
-              </a></p>
-              {{/ifDepth}}
-              {{/eachSection}}
-            </div>
-            {{/eachRootLimit}}
-            {{incrementRow}}
-          </div>
-          {{/eachRow}}
+              {{#ifReference ../rootName}}
+              <ul class="kss-nav__menu-child">
+                {{#eachSection reference}}
+                {{#ifDepth 2 ../../../options.[nav-depth]}}
+                <li class="kss-nav__menu-item">
+                  <a href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
+                    <span class="kss-nav__ref {{#ifDepth 3 100}}kss-nav__ref-child{{/ifDepth}}">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span
+                      > <span class="kss-nav__name">{{header}}</span>
+                    </a>
+                  </li>
+                  {{/ifDepth}}
+                  {{/eachSection}}
+                </ul>
+                {{/ifReference}}
+              </li>
+              {{/eachRoot}}
+            </ul>
+          </nav>
 
-          <!-- child pages -->
-          {{else}}
+          <!-- sections -->
+          <!-- begin main section -->
 
           {{!
           Display each section, in order.
@@ -108,73 +142,93 @@
           <section id="kssref-{{referenceURI}}" class="kss-section kss-section--depth-{{depth}}">
             {{/ifDepth}}
 
-            <div class="kss-style">
-              <h{{depth}} class="kss-title kss-title--level-{{depth}}">
-              <a class="kss-title__permalink" href="#kssref-{{referenceURI}}">
-                <span class="kss-title__ref">
-                  {{#ifNumeric reference}}
-                  {{reference}}
-                  {{else}}
-                  {{autoincrement}}
-                  {{/ifNumeric}}
-                  <span class="kss-title__permalink-hash">
-                    {{#ifNumeric reference}}
-                    #permalink
-                    {{else}}
-                    #{{reference}}
-                    {{/ifNumeric}}
-                  </span>
-                </span>
-                {{header}}
-              </a>
-            </h{{depth}}>
+            <div class="b-page-section">
+              <div class="row">
 
-            {{#if parameters}}
-            <ul class="kss-parameters">
-              {{#eachParameter}}
-              <li class="kss-parameters__item">
-                <code class="kss-parameters__name">{{name}}</code>
-                <div class="kss-parameters__description">{{{description}}}</div>
-              </li>
-              {{/eachParameter}}
-            </ul>
-            {{/if}}
+                <div class="kss-style">
+                  <h{{depth}} class="kss-title kss-title--level-{{depth}}">
+                  <a class="kss-title__permalink" href="#kssref-{{referenceURI}}">
+                    <span class="kss-title__ref">
+                      {{#ifNumeric reference}}
+                      {{reference}}
+                      {{else}}
+                      {{autoincrement}}
+                      {{/ifNumeric}}
+                    </span>
+                    {{header}}
 
-            {{#if description}}
-            <div class="kss-description">
-              {{{description}}}
+                    <span class="permalink">
+                      {{#ifNumeric reference}}
+                      <i class="material-icons">link</i>
+                      {{else}}
+                      #{{reference}}
+                      {{/ifNumeric}}
+                    </span>
+                  </a>
+                </h{{depth}}>
+
+                {{#if parameters}}
+                <ul class="kss-parameters">
+                  {{#eachParameter}}
+                  <li class="kss-parameters__item">
+                    <code class="kss-parameters__name">{{name}}</code>
+                    <div class="kss-parameters__description">{{{description}}}</div>
+                  </li>
+                  {{/eachParameter}}
+                </ul>
+                {{/if}}
+
+                {{#if description}}
+                <div class="kss-description">
+                  {{{description}}}
+                </div>
+                {{/if}}
+              </div>
+
             </div>
-            {{/if}}
           </div>
 
           {{#if markup}}
           <div class="kss-modifier__wrapper">
-            <div class="kss-modifier__heading kss-style">
-              Example{{#if modifiers}}s{{/if}}
-            </div>
-            {{#if modifiers}}
-            <div class="kss-modifier__default-name kss-style">
-              Default styling
-            </div>
-            {{/if}}
-            <div class="kss-modifier__example">
-              {{{markup}}}
-            </div>
-            {{#eachModifier}}
-            <div class="kss-modifier__name kss-style">
-              {{name}}
-            </div>
-            <div class="kss-modifier__description kss-style">
-              {{{description}}}
+            <div class="b-page-section">
+              <div class="row">
+                <div class="kss-modifier__heading kss-style">
+                  Example
+                </div>
+              </div>
             </div>
             <div class="kss-modifier__example">
               {{{markup}}}
             </div>
-            {{/eachModifier}}
+            <div class="b-page-section">
+              <div class="row">
+                <div class="kss-markup kss-style">
+                  <pre><code class="language-markup">{{markup}}</code></pre>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="kss-markup kss-style">
-            <pre class="prettyprint linenums lang-html"><code data-language="html">{{markup}}</code></pre>
+          <div class="b-page-section">
+            <div class="row">
+
+              <a href="#" class="b-button js-modifier-button" for="modifiers-{{reference}}">Show All Modifiers</a>
+
+              <div class="modifiers" id="modifiers-{{reference}}">
+                {{#eachModifier}}
+                <div class="modifier-row">
+                  <span class="kss-modifier__name kss-style">
+                    {{name}}
+                  </span>
+                  &mdash;
+                  <span class="kss-modifier__description kss-style">
+                    {{{description}}}
+                  </span>
+                </div>
+                {{/eachModifier}}
+              </div>
+
+            </div>
           </div>
           {{/if}}
 
@@ -186,20 +240,26 @@
       {{/eachSection}}
       {{/if}}
 
-    </div>
-  </div>
+    </main>
 
-</main>
+    <!-- SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script>
 
-<!-- SCRIPTS -->
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script src="public/kss.js"></script>
-<script src="public/prettify.js"></script>
-<script>
-prettyPrint();
-</script>
-{{{scripts}}}
 
-<!-- Automatically generated using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.js"></script>
+    <script src="js/scripts.js"></script>
+
+
+
+    <script src="public/kss.js"></script>
+    <script src="public/prettify.js"></script>
+    <script>
+    prettyPrint();
+  </script>
+  {{{scripts}}}
+
+  <!-- Automatically generated using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
 </body>
 </html>
