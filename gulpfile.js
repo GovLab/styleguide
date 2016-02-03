@@ -1,7 +1,8 @@
 var browserSync     = require('browser-sync'),
     gulp            = require('gulp'),
     sass            = require('gulp-sass'),
-    shell           = require('gulp-shell')
+    shell           = require('gulp-shell'),
+    plumber         = require('gulp-plumber');
 
 // Browser Sync
 gulp.task('browserSync', function() {
@@ -23,6 +24,7 @@ gulp.task('browserSync', function() {
 gulp.task('sass', function() {
   // return gulp.src('sass/*.scss')
   return gulp.src('sass/styles.scss')
+    .pipe(plumber())
     .pipe(sass())
     .pipe(gulp.dest('guide/styles'))  // DIST folder for sass - I think this is wrong for kss
     .pipe(browserSync.stream())
