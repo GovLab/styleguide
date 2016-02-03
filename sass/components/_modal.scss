@@ -1,3 +1,8 @@
+/*
+Modal
+
+Styleguide 3.2
+*/
 .b-modal {
     background: $white;
     position: fixed;
@@ -31,7 +36,7 @@
 }
 
 .b-modal.m-active {
-  
+
   /* Regular size and visible */
   transform: scale(1); /* prefix me */
   opacity: 1;
