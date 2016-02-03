@@ -4,12 +4,33 @@ $(document).ready(function($) {
     if ($('.kss-nav').length) {
         var nav = $('.kss-nav');
         var pos = nav.offset().top;
+        var navHeight = nav.height();
+        var pageHeight = $(document).height();
+        var windowHeight = $(window).height();
+        var windowScroll = 0;
+        var navHeightMaxed = (navHeight >= 0.9*windowHeight); // Note, this is based on element max-height of 90vh in the css
+
+        nav.hover(function(){
+            nav.addClass('js-hover');
+            nav.scrollTop((windowScroll/pageHeight)*navHeight);
+        }, function(){
+            nav.removeClass('js-hover');
+            nav.scrollTop(0);
+        });
 
         $(window).scroll(function () {
-            if (window.scrollY > pos) {
+            windowScroll = window.scrollY;
+            windowHeight = $(window).height(); // grab the window height again in case it was changed
+            if (windowScroll > pos) {
                 nav.addClass('m-fixed');
             } else {
                 nav.removeClass('m-fixed');
+            }
+
+            // scroll the nav element by a normalized value of the window scroll position
+            // this is in the case the nav is longer than the height of the screen
+            if (navHeightMaxed && nav.hasClass('js-hover')) {
+                nav.scrollTop((windowScroll/pageHeight)*navHeight);
             }
         });
     }
