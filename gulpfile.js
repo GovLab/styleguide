@@ -54,7 +54,8 @@ gulp.task('pushver', shell.task([
   'git add guide/index.html sass/styleguide.md',
   'git commit -m "auto version (gulp)"',
   'git push'
-]);
+  ])
+);
 
 gulp.task('deploy', ['ver', 'sass', 'js', 'kss', 'assets', 'pushver'], shell.task([
   'git subtree push --prefix guide origin gh-pages'
