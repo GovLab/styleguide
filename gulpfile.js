@@ -33,7 +33,7 @@ gulp.task('assets', function() {
   return gulp.src('img/*')
   .pipe(plumber())
   .pipe(gulp.dest('guide/img'))
-  .pip(browserSync.stream())
+  .pipe(browserSync.stream())
 });
 
 gulp.task('kss', shell.task([
@@ -50,8 +50,9 @@ gulp.task('reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['browserSync', 'sass', 'js', 'kss'], function (){
+gulp.task('default', ['browserSync', 'sass', 'js', 'kss', 'assets'], function (){
   gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);  // this could be split up and improved
   gulp.watch('kss-template/*').on('change', browserSync.reload);
   gulp.watch('js/*').on('change', browserSync.reload);
+  gulp.watch('img/*', ['assets', 'reload']);
 });
