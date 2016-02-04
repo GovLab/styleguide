@@ -68,7 +68,7 @@
     <div class="row">
       <div class="large-10 large-centered columns">
         {{#eachRow}}
-        <div class="row">
+        <div class="row m-spacing">
           {{#eachRootLimit 12}}
           <div class="large-{{gridValue}} columns{{endLastCol}}"  style="">
             <a href="section-{{referenceURI}}.html">
@@ -77,7 +77,7 @@
             {{#eachSection reference}}
             {{#ifDepth 2}} <!-- only descend into the first level of sections -->
             <p><a class="b-button" href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
-              <span class="kss-nav__ref">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> <span class="">{{header}}</span>
+              <span class="">{{header}}</span>
             </a></p>
             {{/ifDepth}}
             {{/eachSection}}
@@ -94,8 +94,12 @@
   <!-- homepage text -->
   <div class="b-page-section m-teal">
     <div class="row">
-      <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
-        {{{homepage}}}
+      <div class="large-10 large-centered columns">
+        <div class="row">
+          <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
+            {{{homepage}}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -172,90 +176,114 @@
 
           <div class="b-page-section">
             <div class="row">
+              <div class="large-10 large-centered columns">
+                <div class="row">
 
-              <div class="kss-style">
-                {{#ifDepth 2 100}}
-                <h{{depth}} class="kss-title kss-title--level-{{depth}}">
-                <a class="kss-title__permalink" href="#kssref-{{referenceURI}}">
-                  <span class="kss-title__ref">
-                    {{#ifNumeric reference}}
-                    {{reference}}
-                    {{else}}
-                    {{autoincrement}}
-                    {{/ifNumeric}}
-                  </span>
-                  {{header}}
+                  <div class="kss-style">
+                    {{#ifDepth 2 100}}
+                    <h{{depth}} class="kss-title kss-title--level-{{depth}}">
+                    <a class="kss-title__permalink" href="#kssref-{{referenceURI}}">
+                      <span class="kss-title__ref">
+                        {{#ifNumeric reference}}
+                        {{reference}}
+                        {{else}}
+                        {{autoincrement}}
+                        {{/ifNumeric}}
+                      </span>
+                      {{header}}
 
-                  <span class="permalink">
-                    {{#ifNumeric reference}}
-                    <i class="material-icons">link</i>
-                    {{else}}
-                    #{{reference}}
-                    {{/ifNumeric}}
-                  </span>
-                </a>
-              </h{{depth}}>
-              {{/ifDepth}}
+                      <span class="permalink">
+                        {{#ifNumeric reference}}
+                        <i class="material-icons">link</i>
+                        {{else}}
+                        #{{reference}}
+                        {{/ifNumeric}}
+                      </span>
+                    </a>
+                  </h{{depth}}>
+                  {{/ifDepth}}
 
-              {{#if parameters}}
-              <ul class="kss-parameters">
-                {{#eachParameter}}
-                <li class="kss-parameters__item">
-                  <code class="kss-parameters__name">{{name}}</code>
-                  <div class="kss-parameters__description">{{{description}}}</div>
-                </li>
-                {{/eachParameter}}
-              </ul>
-              {{/if}}
+                  {{#if parameters}}
+                  <ul class="kss-parameters">
+                    {{#eachParameter}}
+                    <li class="kss-parameters__item">
+                      <code class="kss-parameters__name">{{name}}</code>
+                      <div class="kss-parameters__description">{{{description}}}</div>
+                    </li>
+                    {{/eachParameter}}
+                  </ul>
+                  {{/if}}
 
-              {{#if description}}
-              <div class="kss-description">
-                {{{description}}}
-              </div>
-              {{/if}}
-            </div>
+                  {{#if description}}
+                  <div class="kss-description">
+                    {{{description}}}
+                  </div>
+                  {{/if}}
+                </div>
 
-          </div>
-
-          {{#if markup}}
-          <div class="kss-modifier__wrapper">
-            <div class="row">
-              <div class="kss-modifier__heading kss-style example">
-                Usage
-              </div>
-              <div class="kss-modifier__example">
-                {{{markup}}}
-              </div>
-            </div>
-            <div class="row">
-              <div class="kss-markup kss-style">
-                <pre><code class="language-markup">{{markup}}</code></pre>
               </div>
             </div>
           </div>
+        </div>
 
+        {{#if markup}}
+        <div class="b-page-section">
           <div class="row">
-
-            {{#if modifiers}}
-            <a href="#" class="b-button js-modifier-button" for="modifiers-{{reference}}">Show All Modifiers</a>
-
-            <div class="modifiers" id="modifiers-{{reference}}">
-              {{#eachModifier}}
-              <div class="modifier-row">
-                <span class="kss-modifier__name kss-style">
-                  {{name}}
-                </span>
-                &mdash;
-                <span class="kss-modifier__description kss-style">
-                  {{{description}}}
-                </span>
+            <div class="large-10 large-centered columns">
+              <div class="row">
+                <div class="kss-modifier__heading kss-style example">
+                  Usage
+                </div>
               </div>
-              {{/eachModifier}}
             </div>
-            {{/if}}
+          </div>
+        </div>
+        <div class="kss-modifier__wrapper">
+          <div class="kss-modifier__example">
+            {{{markup}}}
+          </div>
+        </div>
+        <div class="b-page-section">
+          <div class="row">
+            <div class="large-10 large-centered columns">
+              <div class="row">
+                <div class="kss-markup kss-style">
+                  <pre><code class="language-markup">{{markup}}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+
+        {{#if modifiers}}
+        <div class="b-page-section">
+          <div class="row">
+            <div class="large-10 large-centered columns">
+              <div class="row">
+
+                <a href="#" class="b-button js-modifier-button" for="modifiers-{{reference}}">Show All Modifiers</a>
+
+                <div class="modifiers" id="modifiers-{{reference}}">
+                  {{#eachModifier}}
+                  <div class="modifier-row">
+                    <span class="kss-modifier__name kss-style">
+                      {{name}}
+                    </span>
+                    &mdash;
+                    <span class="kss-modifier__description kss-style">
+                      {{{description}}}
+                    </span>
+                  </div>
+                  {{/eachModifier}}
+                </div>
+
+              </div>
+            </div>
           </div>
         </div> <!-- /b-page-section -->
+        {{/if}}
+
         {{/if}}
 
         {{#ifDepth 1}}
