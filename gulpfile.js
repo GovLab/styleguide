@@ -1,8 +1,8 @@
 var browserSync     = require('browser-sync'),
-    gulp            = require('gulp'),
-    sass            = require('gulp-sass'),
-    shell           = require('gulp-shell'),
-    plumber         = require('gulp-plumber');
+gulp            = require('gulp'),
+sass            = require('gulp-sass'),
+shell           = require('gulp-shell'),
+plumber         = require('gulp-plumber');
 
 // Browser Sync
 gulp.task('browserSync', function() {
@@ -24,11 +24,11 @@ gulp.task('browserSync', function() {
 gulp.task('sass', function() {
   // return gulp.src('sass/*.scss')
   return gulp.src('sass/styles.scss')
-    .pipe(plumber())
-    .pipe(sass())
+  .pipe(plumber())
+  .pipe(sass())
     .pipe(gulp.dest('guide/styles'))  // DIST folder for sass - I think this is wrong for kss
     .pipe(browserSync.stream())
-});
+  });
 
 // Run shell command
 gulp.task('kss', shell.task([
@@ -36,10 +36,14 @@ gulp.task('kss', shell.task([
   ])
 );
 
+gulp.task('deploy', shell.task([
+  'git subtree push --prefix guide origin gh-pages'
+  ])
+);
+
 gulp.task('reload', function() {
   browserSync.reload();
 });
-
 
 gulp.task('watch', ['browserSync', 'sass', 'kss'], function (){
   gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*'], ['sass', 'kss']);  // this could be split up and improved
