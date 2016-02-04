@@ -7,8 +7,9 @@ $(document).ready(function($) {
         var navHeight = nav.height();
         var pageHeight = $(document).height();
         var windowHeight = $(window).height();
-        var windowScroll = 0;
-        var navHeightMaxed = (navHeight >= 0.9*windowHeight); // Note, this is based on element max-height of 90vh in the css
+        var windowScroll;
+        var vh = 0.9; // set this to whatever the max height is of the navbar in css / 100
+        var navHeightMaxed = (navHeight >= vh*windowHeight);
 
         nav.hover(function(){
             nav.addClass('js-hover');
