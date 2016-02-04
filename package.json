@@ -1,9 +1,13 @@
 {
   "name": "govlab-styleguide",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A styleguide / lightweight frontend framework for GovLab websites",
   "main": "index.js",
-  "files": ["sass", "js", "img"],
+  "files": [
+    "sass",
+    "js",
+    "img"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
