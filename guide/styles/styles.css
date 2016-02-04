@@ -6779,8 +6779,12 @@ h1 .kss-title__ref, h1 .kss-nav__ref {
 
 .row.m-spacing {
   margin-top: 20px;
-  margin-bottom: 20px;
-  margin-bottom: 40px; }
+  margin-bottom: 20px; }
+  .row.m-spacing:first-child {
+    margin-top: 0; }
+
+code.m-negative {
+  color: white; }
 
 .sandbox {
   min-height: 400px; }
