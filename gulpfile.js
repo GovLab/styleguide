@@ -30,7 +30,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('assets', function() {
-  return gulp.src('img/*')
+  return gulp.src('img/**/*')
   .pipe(plumber())
   .pipe(gulp.dest('guide/img'))
   .pipe(browserSync.stream())
