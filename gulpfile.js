@@ -50,7 +50,7 @@ gulp.task('kss', shell.task([
   ])
 );
 
-gulp.task('deploy', shell.task([
+gulp.task('deploy', ['sass', 'js', 'kss', 'assets', 'ver'], shell.task([
   'git subtree push --prefix guide origin gh-pages'
   ])
 );
