@@ -22,10 +22,10 @@
   ],
   "contributors": [
     "Mark Adkins-Hastings <mark@thegovlab.org> (https://github.com/mocxd)",
-    "Claudio Mendonca  <claudio@thegovlab.org> (https://github.com/claudioccm)",
+    "Claudio Mendonca <claudio@thegovlab.org> (https://github.com/claudioccm)",
     "Atul Varma <atul@thegovlab.org> (https://github.com/toolness)"
   ],
-  "license": "ISC",
+  "license": "CC-BY-SA-4.0",
   "bugs": {
     "url": "https://github.com/GovLab/styleguide/issues"
   },
