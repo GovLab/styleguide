@@ -1,6 +1,6 @@
 {
   "name": "govlab-styleguide",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A styleguide / lightweight frontend framework for GovLab websites",
   "main": "index.js",
   "files": [
