@@ -22,10 +22,15 @@
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.css"/>
 
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+<!--[if lt IE 9]>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+  <![endif]-->
 
   {{{styles}}}
 </head>
 <body id="kss-node">
+
 
   <header class="b-top-nav">
 
@@ -56,6 +61,12 @@
 
     {{#if homepage}}
 
+    <div class="github-fork-ribbon-wrapper right">
+      <div class="github-fork-ribbon">
+        <a href="https://github.com/GovLab/styleguide">Fork me on GitHub</a>
+      </div>
+    </div>
+
     <div class="b-top-section m-purple">
       <h1>{{options.title}}</h1>
       <h3>{{options.subtitle}}</h3>
@@ -65,9 +76,7 @@
       <div class="row">
         <div class="large-10 large-centered columns">
           <h1>Get Started</h1>
-          <pre><code class="m-negative">
-npm install govlab-styleguide
-          </code></pre>
+          <pre><code class="m-negative">npm install govlab-styleguide</code></pre>
         </div>
       </div>
     </div>
