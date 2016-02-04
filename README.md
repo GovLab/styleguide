@@ -24,8 +24,6 @@ To deploy the living styleguide site to github pages run the following command:
 gulp deploy
 ```
 
-Finally, submit a pull request with your changes.
-
 For more info on how to work with kss / kss-node, check out the [docs](https://github.com/kss-node/kss-node).
 
 ## Documentation <a name="docs"></a>
