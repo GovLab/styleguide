@@ -16,11 +16,15 @@
     "url": "https://github.com/GovLab/styleguide.git"
   },
   "keywords": [
-    "styeguide",
+    "styleguide",
     "kss",
     "kss-node"
   ],
-  "author": "@mocxd, @claudioccm, @toolness",
+  "contributors": [
+    "Mark Adkins-Hastings <mark@thegovlab.org> (https://github.com/mocxd)",
+    "Claudio Mendonca  <claudio@thegovlab.org> (https://github.com/claudioccm)",
+    "Atul Varma <atul@thegovlab.org> (https://github.com/toolness)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/GovLab/styleguide/issues"
