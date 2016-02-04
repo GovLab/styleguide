@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A styleguide / lightweight frontend framework for GovLab websites",
   "main": "index.js",
+  "files": ["sass", "js"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

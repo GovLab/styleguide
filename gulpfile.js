@@ -14,25 +14,23 @@ gulp.task('browserSync', function() {
   })
 })
 
-// Sass
-// Files the sass task can reach.
-// Right now it is getting only the first descendant
-// of the sass folder. This is to avoid getting foundation junk
-// that was generating errors. If you want to get all the files
-// in the sass folder replace 'sass/*.scss' by 'sass/**/*.scss'
-
 gulp.task('sass', function() {
-  // return gulp.src('sass/*.scss')
   return gulp.src('sass/styles.scss')
   .pipe(plumber())
   .pipe(sass())
-    .pipe(gulp.dest('guide/styles'))  // DIST folder for sass - I think this is wrong for kss
-    .pipe(browserSync.stream())
-  });
+  .pipe(gulp.dest('guide/styles'))
+  .pipe(browserSync.stream())
+});
 
-// Run shell command
+gulp.task('js', function() {
+  return gulp.src('js/*')
+  .pipe(plumber())
+  .pipe(gulp.dest('guide/js'))
+  .pipe(browserSync.stream())
+});
+
 gulp.task('kss', shell.task([
-  './node_modules/.bin/kss-node --config kss-config.json'  // runs the shell command
+  './node_modules/.bin/kss-node --config kss-config.json'
   ])
 );
 
@@ -45,6 +43,8 @@ gulp.task('reload', function() {
   browserSync.reload();
 });
 
-gulp.task('watch', ['browserSync', 'sass', 'kss'], function (){
-  gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*'], ['sass', 'kss']);  // this could be split up and improved
+gulp.task('default', ['browserSync', 'sass', 'js', 'kss'], function (){
+  gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);  // this could be split up and improved
+  gulp.watch('kss-template/*').on('change', browserSync.reload);
+  gulp.watch('js/*').on('change', browserSync.reload);
 });

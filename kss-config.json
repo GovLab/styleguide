@@ -10,9 +10,6 @@
   "css": [
     "styles/styles.css"
   ],
-  "js": [
-    "js/kss-scripts.js"
-  ],
   "helpers": [
     "helpers"
   ]
