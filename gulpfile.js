@@ -50,7 +50,7 @@ gulp.task('kss', shell.task([
   ])
 );
 
-gulp.task('deploy', ['sass', 'js', 'kss', 'assets', 'ver'], shell.task([
+gulp.task('deploy', ['ver', 'sass', 'js', 'kss', 'assets'], shell.task([
   'git subtree push --prefix guide origin gh-pages'
   ])
 );
@@ -59,7 +59,7 @@ gulp.task('reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['browserSync', 'sass', 'js', 'kss', 'assets', 'ver'], function (){
+gulp.task('default', ['browserSync', 'ver', 'sass', 'js', 'kss', 'assets'], function (){
   gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);
   gulp.watch('kss-template/*').on('change', browserSync.reload);
   gulp.watch('js/*').on('change', browserSync.reload);
