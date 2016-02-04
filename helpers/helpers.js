@@ -2,7 +2,7 @@ module.exports.register = function (handlebars, options)  {
 
     var row = 0;
     var section = 0;
-    var minSize = 4; // minimum column size value we want for our columns
+    var minSize = 3; // minimum column size value we want for our columns
 
 // Count the number of roots in the styleguide
 handlebars.registerHelper('countRoots', function(options) {
