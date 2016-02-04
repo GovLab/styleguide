@@ -1,3 +1,32 @@
+/*
+Sticky
+
+A sticky can be used to convey an error or some information when the page
+first loads.
+
+Markup:
+<div class="b-sticky m-purple">
+    <div class="row">
+        <div class="column small-12">
+            <i class="material-icons e-close js-close-sticky">close</i>
+            <h3 class="e-title">Something went wrong</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, in, nobis. Repudiandae <a href="#">ipsum alias enim officiis</a> et consectetur expedita commodi nobis suscipit deleniti. Recusandae architecto minima rerum modi suscipit doloremque!</p>
+        </div>
+    </div>
+</div>
+
+.m-error - error style
+.m-red - red style
+.m-success - success style
+.m-green - green style
+.m-alert - alert style
+.m-orange - orange style
+.m-purple - purple style
+.m-blue - blue style
+.m-teal - teal style
+
+Styleguide 6.1
+*/
 .b-sticky {
     background-color: #333;
     padding: 25px 0;
@@ -20,7 +49,7 @@
 
             @include breakpoint($mobile-only) { font-size: 16px; }
         }
-        
+
         p { margin: 10px 0; }
 
         p a { color: $white-90; }
@@ -32,7 +61,7 @@
             opacity: .6;
             cursor: pointer;
 
-            &:hover { opacity: 1; }   
+            &:hover { opacity: 1; }
         }
     }
 }

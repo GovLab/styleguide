@@ -28,12 +28,25 @@ h1 {
     }
 }
 
+.kss-modifier__heading {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 20px;
+    color: $gray-50;
+}
+
 .kss-modifier__wrapper {
     background-color: $gray-025;
-    padding: 20px 0;
-    // & > .row {
-    //     padding: 0 20px;
-    // }
+    padding: 30px;
+    .b-page-section, .b-divider, .b-slide, .b-slider, .b-top-section, .b-footer, .b-copyright {
+        margin: 0 -30px;
+    }
+    .b-slider .b-slide {
+        margin: initial;
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .modifiers {
@@ -125,9 +138,10 @@ h1 {
     }
 }
 
-.example {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 20px;
-    color: $gray-50;
+.row {
+    &.m-spacing {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-bottom: 40px;
+    }
 }

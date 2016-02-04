@@ -1,3 +1,26 @@
+/*
+Page Top Section
+
+A modified page section made specifically for the top section of a page.  Has a number of color and style
+options.
+
+Markup:
+<header class="b-top-section m-purple">
+    <div class="row">
+        <div class="column small-12">
+            <h2>Page Top Section</h2>
+            <h3>This is the top section of a page. Generally speaking, each page should start with this section.</h3>
+        </div>
+    </div>
+</header>
+
+.m-purple
+.m-teal
+.m-orange
+.m-blue
+
+Styleguide 5.2
+*/
 .b-top-section {
     background-color: $black;
     color: $white-80;

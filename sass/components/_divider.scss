@@ -1,3 +1,57 @@
+/*
+Divider
+
+Dividers can be used to separate page sections and other page-level content.
+Supports multiple colors.
+
+Markup:
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+            <p>Section of the page with info about cool things.</p>
+        </div>
+    </div>
+</div>
+<div class="b-divider">
+    <h1>This is a divider with a big text</h1>
+    <h2>Smaller title with more characteres and working as a tagline</h2>
+</div>
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+            <p>This is the base divider, with <code>h1</code> and <code>h2</code> together, and center aligned.</p>
+        </div>
+    </div>
+</div>
+<div class="b-divider">
+    <div class="row">
+        <div class="column small-12">
+            <h2>This is a divider with a big text</h2>
+        </div>
+    </div>
+</div>
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt itaque dolor ratione aspernatur nulla nemo, minima sit debitis at vel tenetur qui quod, aliquid suscipit atque, odit ipsam, commodi error!</p>
+        </div>
+    </div>
+</div>
+<div class="b-divider m-blue">
+    <div class="row">
+        <div class="column small-12">
+            <p>This is a demonstration of the modifiers for background-color. You should use the <strong>.m-blue</strong> class to get this effect</p>
+        </div>
+    </div>
+</div>
+
+.m-blue - $blue background
+.m-purple - $purple background
+.m-teal - $teal background
+.m-orange - $orange background
+
+Styleguide 3.4
+*/
 .b-divider {
     background-color: $black;
     padding-top: 20px;
@@ -7,7 +61,7 @@
 
     :first-child { margin-top: 0; }
     :last-child { margin-bottom: 0; }
-    
+
     h1 {
         text-transform: none;
         margin-bottom: 0;

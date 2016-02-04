@@ -1,3 +1,20 @@
+/*
+Search
+
+Search component.  Has js associated with it that allow it to search a site, or WP
+for example.  Also makes use of the overlay element.
+
+Markup:
+<form class="b-search" action="">
+    <input class="js-search-value" type="text">
+    <input class="js-search-submit js-search-trigger e-search-trigger material-icons" type="submit" value="search">
+</form>
+
+.m-negative - negative color scheme for dark backgrounds
+.m-fixed - fixed position
+
+Styleguide 3.3
+*/
 .b-search {
     width: 100%;
     padding: 0;
@@ -5,7 +22,7 @@
 
     input {
         color: currentColor;
-        vertical-align: bottom; 
+        vertical-align: bottom;
         background-color: transparent;
         @include transition;
         border: 0;
@@ -13,13 +30,13 @@
         margin-bottom: 0;
     }
 
-    input:focus { 
-        outline: none; 
+    input:focus {
+        outline: none;
         background-color: $white-30;
-        
+
     }
 
-    input[type='text'] { 
+    input[type='text'] {
         background-color: $gray-10;
         padding: 8px 0;
         max-width: 0;

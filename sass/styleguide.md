@@ -1,3 +1,3 @@
-Here you will find the documentation for the visual components of the govlab web products.
+govlab-styleguide v.1.0
 
 [Check out the code on GitHub](https://github.com/GovLab/styleguide)

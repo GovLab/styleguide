@@ -1,3 +1,157 @@
+/*
+Form
+
+Forms should be used to collect information from users.
+See the <a href="./search.html">search</a> and <a href="./buttons.html">button</a>
+components for other uses.
+
+Guidelines:
+<ul>
+<li>Mark fields as required</li>
+<li>Use the correct HTML5 input type for the purpose, not just <code>text</code></li>
+<li>Add help text when needed, such as if purpose or required format of the input is non-obvious
+</ul>
+
+Markup:
+<div class="b-page-section">
+    <div class="row">
+        <div class="column small-12">
+            <form action="" class="b-form">
+                <input type="text" id="name" placeholder="Name" />
+                <input type="email" id="mail" placeholder="Email"/>
+                <textarea id="msg" placeholder="Message"></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+</div>
+<!-- inverted -->
+<div class="b-page-section m-black">
+    <div class="row">
+        <div class="column small-12">
+            <form action="" class="b-form m-negative">
+                <input type="text" id="name" placeholder="Name"/>
+                <input type="email" id="mail" placeholder="Email"/>
+                <textarea id="msg" placeholder="Message"></textarea>
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+</div>
+
+.m-negative - inverted color scheme for dark backgrounds
+
+Styleguide 4.1
+*/
+
+/*
+Multi-Column
+
+Forms can be used in conjunction with the <code>.b-grid-container</code>
+component for multi-column form layouts.
+
+Markup:
+<form action="" class="b-form">
+    <div class="row">
+        <div class="large-6 columns">
+            <input type="text" id="name" placeholder="Name"/>
+            <input type="email" id="mail" placeholder="Email"/>
+            <input type="email" id="password" placeholder="Password"/>
+            <textarea id="msg" placeholder="Message"></textarea>
+            <input type="submit" value="Send">
+        </div>
+        <div class="large-6 columns">
+            <div class="e-select">
+                <select>
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+            <div class="e-checkbox">
+                <input type="checkbox" id="checkbox-1"><label for="checkbox-1">I agree with the terms of service</label>
+            </div>
+            <div class="e-checkbox">
+                <input type="checkbox" id="checkbox-2"><label for="checkbox-2">Send me updates about open data</label>
+            </div>
+        </div>
+    </div>
+</form>
+
+Styleguide 4.2
+*/
+
+/*
+Input / Textarea
+
+Supports HTML5 form types. (<code>text</code>, <code>email</code>, <code>password</code>, etc.)
+Field names should be included as <code>placeholder</code> attribute where possible
+Doesn't need a parent element, simply include in <code>.b-form</code>
+
+Markup:
+<form action="" class="b-form">
+    <input type="text" placeholder="Text Input" />
+    <textarea id="msg" placeholder="Message"></textarea>
+</form>
+
+Styleguide 4.3
+*/
+
+/*
+Checkbox
+
+Markup:
+<form action="" class="b-form">
+    <div class="e-checkbox">
+        <input type="checkbox" id="one-checkbox"><label for="one-checkbox">I'm a Checkbox</label>
+    </div>
+    <div class="e-checkbox">
+        <input type="checkbox" id="another-checkbox" disabled><label for="another-checkbox">I'm Disabled</label>
+    </div>
+</form>
+
+Styleguide 4.4
+*/
+
+/*
+Radio
+
+Radio buttons should be inside a <code>.e-radio</code> element.
+
+Markup:
+<form action="" class="b-form">
+    <div class="e-radio">
+        <input type="radio" id="radio-1" name="guide"><label for="radio-1">I'm a Radio</label>
+    </div>
+    <div class="e-radio">
+        <input type="radio" id="radio-2" name="guide"><label for="radio-2">Me Too</label>
+    </div>
+    <div class="e-radio">
+        <input type="radio" id="radio-3" name="guide" disabled><label for="radio-3">Disabled</label>
+    </div>
+</form>
+
+Styleguide 4.5
+*/
+
+/*
+Select
+
+Select controls should be wrapped in an <code>.e-select</code> parent element.
+
+Markup:
+<form action="" class="b-form">
+    <div class="e-select">
+        <select>
+            <option>One</option>
+            <option>Two</option>
+            <option>Three</option>
+        </select>
+    </div>
+</form>
+
+Styleguide 4.6
+*/
 .b-form {
     padding: 10px 0;
 
