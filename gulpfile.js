@@ -2,6 +2,8 @@ var browserSync     = require('browser-sync'),
 gulp            = require('gulp'),
 sass            = require('gulp-sass'),
 shell           = require('gulp-shell'),
+packagejson     = require('./package.json'),
+file            = require('gulp-file'),
 plumber         = require('gulp-plumber');
 
 // Browser Sync
@@ -36,6 +38,13 @@ gulp.task('assets', function() {
   .pipe(browserSync.stream())
 });
 
+gulp.task('ver', function() {
+  return gulp.src('')
+  .pipe(plumber())
+  .pipe(file('styleguide.md', packagejson.name + ' - ' + packagejson.version))
+  .pipe(gulp.dest('sass/'))
+});
+
 gulp.task('kss', shell.task([
   './node_modules/.bin/kss-node --config kss-config.json'
   ])
@@ -50,8 +59,8 @@ gulp.task('reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['browserSync', 'sass', 'js', 'kss', 'assets'], function (){
-  gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);  // this could be split up and improved
+gulp.task('default', ['browserSync', 'sass', 'js', 'kss', 'assets', 'ver'], function (){
+  gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);
   gulp.watch('kss-template/*').on('change', browserSync.reload);
   gulp.watch('js/*').on('change', browserSync.reload);
   gulp.watch('img/*', ['assets', 'reload']);
