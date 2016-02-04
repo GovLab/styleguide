@@ -50,7 +50,7 @@ gulp.task('kss', shell.task([
   ])
 );
 
-gulp.task('pushver' shell.task([
+gulp.task('pushver', shell.task([
   'git add guide/index.html sass/styleguide.md ; git commit -m "auto version (gulp)" ; git push'
 );
 
