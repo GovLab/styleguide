@@ -29,6 +29,13 @@ gulp.task('js', function() {
   .pipe(browserSync.stream())
 });
 
+gulp.task('assets', function() {
+  return gulp.src('img/*')
+  .pipe(plumber())
+  .pipe(gulp.dest('guide/img'))
+  .pip(browserSync.stream())
+});
+
 gulp.task('kss', shell.task([
   './node_modules/.bin/kss-node --config kss-config.json'
   ])
