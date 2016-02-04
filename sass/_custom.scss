@@ -35,6 +35,13 @@ h1 {
     color: $gray-50;
 }
 
+.kss-modifier__example {
+    margin-bottom: 30px;
+    .b-page-section & {
+        margin-bottom: 0;
+    }
+}
+
 .kss-modifier__wrapper {
     background-color: $gray-025;
     padding: 30px;
@@ -100,7 +107,7 @@ h1 {
         opacity: 1;
         display: block;
         padding: 20px;
-        background-color: $white-50;
+        background-color: $white-90;
         color: $gray-20;
         font-size: 20px;
         font-weight: 600;
