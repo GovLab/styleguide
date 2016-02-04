@@ -275,11 +275,11 @@ var render = function(posts) {
     });
 };
 
-window.Feed({
-    url: 'http://thegovlab.org/category/featured-website/feed/',
-    number: 3,
-    callback: render
-});
+// window.Feed({
+//     url: 'http://thegovlab.org/category/featured-website/feed/',
+//     number: 3,
+//     callback: render
+// });
 
 // functions for the effect on the homepage main banner
 
