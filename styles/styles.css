@@ -5214,6 +5214,7 @@ Buttons
 The buttons support automagic styling of icons from the <a href="https://www.google.com/design/icons/" target="_blank">Material Icons Library</a>.
 
 Markup:
+<!-- #fullwidth -->
 <div class="b-page-section">
     <div class="row">
         <a href="#" class="b-button">Text</a>
@@ -5332,6 +5333,7 @@ Guidelines:
 </ul>
 
 Markup:
+<!-- #fullwidth -->
 <div class="b-page-section">
     <div class="row">
         <div class="column small-12">
@@ -5780,6 +5782,7 @@ Standard footer for govlab pages.  Usually contains some generated information o
 the sections of the page as well as affiliate information.
 
 Markup:
+<!-- #fullwidth -->
 <footer class='b-footer'>
     <div class="row">
         <div class="large-10 large-centered columns">
@@ -5922,6 +5925,7 @@ Dividers can be used to separate page sections and other page-level content.
 Supports multiple colors.
 
 Markup:
+<!-- #fullwidth -->
 <div class="b-page-section">
     <div class="row">
         <div class="column small-12">
@@ -6013,6 +6017,7 @@ Slides can be used to display information about a specific topic; for example, a
 article.
 
 Markup:
+<!-- #fullwidth -->
 <section id="slide-id" class="b-slide">
     <header>
         <h4>Featured Project</h4>
@@ -6129,6 +6134,7 @@ $('.b-slider').slick({
 </code></pre>
 
 Markup:
+<!-- #fullwidth -->
 <div class="b-slider slick">
     <section id="slide-id" class="b-slide m-purple">
         <header>
@@ -6319,6 +6325,8 @@ A sticky can be used to convey an error or some information when the page
 first loads.
 
 Markup:
+<!-- #fullwidth -->
+<p>Check out the purple sticky at the bottom of the window <i class="material-icons">arrow_downward</i></p>
 <div class="b-sticky m-purple">
     <div class="row">
         <div class="column small-12">
@@ -6351,26 +6359,26 @@ Styleguide 6.1
   left: 0;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1; }
-  .b-sticky .e-wrap {
+  .b-sticky .row {
     color: rgba(255, 255, 255, 0.6); }
-    .b-sticky .e-wrap .e-title {
+    .b-sticky .row .e-title {
       margin: 0;
       padding: 0;
       font-weight: 600;
       font-size: 20px;
       font-size: 16px; }
-    .b-sticky .e-wrap p {
+    .b-sticky .row p {
       margin: 10px 0; }
-    .b-sticky .e-wrap p a {
+    .b-sticky .row p a {
       color: rgba(255, 255, 255, 0.9); }
-    .b-sticky .e-wrap p a:hover {
+    .b-sticky .row p a:hover {
       text-decoration: underline; }
-    .b-sticky .e-wrap .e-close {
+    .b-sticky .row .e-close {
       float: right;
       margin-right: 10px;
       opacity: .6;
       cursor: pointer; }
-      .b-sticky .e-wrap .e-close:hover {
+      .b-sticky .row .e-close:hover {
         opacity: 1; }
 
 .b-sticky.m-error,
@@ -6401,6 +6409,7 @@ A modified page section made specifically for the top section of a page.  Has a 
 options.
 
 Markup:
+<!-- #fullwidth -->
 <header class="b-top-section m-purple">
     <div class="row">
         <div class="column small-12">
@@ -6456,6 +6465,7 @@ Most page content should be included in a page module element such as page secti
 Foundation grid components can and should be used within these top level elements.
 
 Markup:
+<!-- #fullwidth -->
 <div class="b-page-section">
     <div class="row">
         <div class="column small-12">
@@ -6699,6 +6709,11 @@ h1 .kss-title__ref, h1 .kss-nav__ref {
   font-size: 20px;
   color: rgba(0, 0, 0, 0.5); }
 
+.kss-modifier__example {
+  margin-bottom: 30px; }
+  .b-page-section .kss-modifier__example {
+    margin-bottom: 0; }
+
 .kss-modifier__wrapper {
   background-color: rgba(0, 0, 0, 0.025);
   padding: 30px; }
@@ -6747,7 +6762,7 @@ h1 .kss-title__ref, h1 .kss-nav__ref {
     opacity: 1;
     display: block;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.9);
     color: rgba(0, 0, 0, 0.2);
     font-size: 20px;
     font-weight: 600;
