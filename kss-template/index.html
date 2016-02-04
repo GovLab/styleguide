@@ -246,22 +246,37 @@
         </div>
 
         {{#if markup}}
-        <div class="b-page-section">
-          <div class="row">
-            <div class="large-10 large-centered columns">
-              <div class="row">
-                <div class="kss-modifier__heading kss-style example">
-                  Usage
+
+        <div class="kss-modifier__wrapper">
+          <div class="b-page-section">
+            <div class="row">
+              <div class="large-10 large-centered columns">
+                <div class="row">
+                  <div class="kss-modifier__heading kss-style example">
+                    <h3>Usage</h3>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="kss-modifier__wrapper">
-          <div class="kss-modifier__example">
-            {{{markup}}}
+          {{#unlessFullWidth}}
+          <div class="b-page-section">
+            <div class="row">
+              <div class="large-10 large-centered columns">
+                <div class="row">
+                  {{/unlessFullWidth}}
+                  <div class="kss-modifier__example">
+                    {{{markup}}}
+                  </div>
+                  {{#unlessFullWidth}}
+                </div>
+              </div>
+            </div>
           </div>
+          {{/unlessFullWidth}}
         </div>
+
+
         <div class="b-page-section">
           <div class="row">
             <div class="large-10 large-centered columns">
