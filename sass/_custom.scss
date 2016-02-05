@@ -45,11 +45,8 @@ h1 {
 .kss-modifier__wrapper {
     background-color: $gray-025;
     padding: 30px;
-    .b-page-section, .b-divider, .b-slide, .b-slider, .b-top-section, .b-footer, .b-copyright {
+    & > * {
         margin: 0 -30px;
-    }
-    .b-slider .b-slide {
-        margin: initial;
     }
     p:last-child {
         margin-bottom: 0;
