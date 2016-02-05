@@ -45,17 +45,21 @@ gulp.task('ver', function() {
   .pipe(gulp.dest('sass/'))
 });
 
-gulp.task('kss', shell.task([
+gulp.task('build', ['sass', 'js', 'assets', 'kss'], function () {
+  console.log('building styleguide');
+})
+
+gulp.task('kss', ['ver'], shell.task([
   './node_modules/.bin/kss-node --config kss-config.json'
   ])
 );
 
-gulp.task('pushver', shell.task([
+gulp.task('autover', ['build'], shell.task([
   './updateversion.sh'
   ])
 );
 
-gulp.task('deploy', ['ver', 'sass', 'js', 'kss', 'assets', 'pushver'], shell.task([
+gulp.task('deploy', ['autover'], shell.task([
   'git subtree push --prefix guide origin gh-pages'
   ])
 );
@@ -64,7 +68,7 @@ gulp.task('reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['browserSync', 'ver', 'sass', 'js', 'kss', 'assets'], function (){
+gulp.task('default', ['browserSync', 'build'], function (){
   gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);
   gulp.watch('kss-template/*').on('change', browserSync.reload);
   gulp.watch('js/*').on('change', browserSync.reload);
