@@ -1,7 +1,8 @@
 #!/bin/bash
 
+echo 'Auto committing version changes...'
 git add guide/index.html sass/styleguide.md
-git diff --staged | grep 'govlab-styleguide'
+git diff --staged | grep -q 'govlab-styleguide'
 if [ $? -eq 0 ] ; then
     git commit -m "(gulp) auto commit"
     git push
