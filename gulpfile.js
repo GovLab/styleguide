@@ -21,32 +21,33 @@ gulp.task('sass', function() {
   .pipe(plumber())
   .pipe(sass())
   .pipe(gulp.dest('guide/styles'))
-  .pipe(browserSync.stream())
+  .pipe(browserSync.stream());
 });
 
 gulp.task('js', function() {
   return gulp.src('js/*')
   .pipe(plumber())
   .pipe(gulp.dest('guide/js'))
-  .pipe(browserSync.stream())
+  .pipe(browserSync.stream());
 });
 
 gulp.task('assets', function() {
   return gulp.src('img/**/*')
   .pipe(plumber())
   .pipe(gulp.dest('guide/img'))
-  .pipe(browserSync.stream())
+  .pipe(browserSync.stream());
 });
 
 gulp.task('ver', function() {
+  console.log('Using version ' + packagejson.name + ' - ' + packagejson.version);
   return gulp.src('')
   .pipe(plumber())
   .pipe(file('styleguide.md', packagejson.name + ' - ' + packagejson.version))
-  .pipe(gulp.dest('sass/'))
+  .pipe(gulp.dest('sass/'));
 });
 
 gulp.task('build', ['sass', 'js', 'assets', 'kss'], function () {
-  console.log('building styleguide');
+  console.log('Finished building site');
 })
 
 gulp.task('kss', ['ver'], shell.task([
@@ -69,7 +70,7 @@ gulp.task('reload', function() {
 });
 
 gulp.task('default', ['browserSync', 'build'], function (){
-  gulp.watch(['sass/**/*.scss', 'sass/*.md', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);
+  gulp.watch(['sass/**/*.scss', 'kss-template/*', 'js/*'], ['sass', 'js', 'kss']);
   gulp.watch('kss-template/*').on('change', browserSync.reload);
   gulp.watch('js/*').on('change', browserSync.reload);
   gulp.watch('img/*', ['assets', 'reload']);
