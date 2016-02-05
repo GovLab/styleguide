@@ -51,9 +51,7 @@ gulp.task('kss', shell.task([
 );
 
 gulp.task('pushver', shell.task([
-  'git add guide/index.html sass/styleguide.md',
-  'git commit -m "(gulp) auto commit"',
-  'git push'
+  './updateversion.sh'
   ])
 );
 
