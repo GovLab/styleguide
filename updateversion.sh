@@ -8,5 +8,5 @@ if [ $? -eq 0 ] ; then
     git push
 else
     echo '(WARN) Not auto committing anything. This is probably because the version number has not changed and can be safely ignored.'
-    exit 1
+    exit 0
 fi
