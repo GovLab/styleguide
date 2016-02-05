@@ -6805,7 +6805,8 @@ code.m-negative {
   text-align: center;
   color: white; }
   .b-grid-example .row {
-    margin: 10px 0; }
+    margin-top: 10px;
+    margin-bottom: 10px; }
   .b-grid-example .columns {
     background-color: rgba(0, 0, 0, 0.3);
     min-height: 50px;
