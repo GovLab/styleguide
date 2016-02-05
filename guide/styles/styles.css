@@ -4437,7 +4437,7 @@ Markup:
   <div class="green">$green</div>
 </div>
 
-Styleguide 1.1
+Styleguide 1.2
 */
 .b-palette div {
   display: inline-block;
@@ -6719,10 +6719,8 @@ h1 .kss-title__ref, h1 .kss-nav__ref {
 .kss-modifier__wrapper {
   background-color: rgba(0, 0, 0, 0.025);
   padding: 30px; }
-  .kss-modifier__wrapper .b-page-section, .kss-modifier__wrapper .b-divider, .kss-modifier__wrapper .b-slide, .kss-modifier__wrapper .b-slider, .kss-modifier__wrapper .b-top-section, .kss-modifier__wrapper .b-footer, .kss-modifier__wrapper .b-copyright {
+  .kss-modifier__wrapper > * {
     margin: 0 -30px; }
-  .kss-modifier__wrapper .b-slider .b-slide {
-    margin: initial; }
   .kss-modifier__wrapper p:last-child {
     margin-bottom: 0; }
 
