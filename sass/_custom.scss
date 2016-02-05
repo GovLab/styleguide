@@ -157,3 +157,23 @@ code {
         color: $white;
     }
 }
+
+.b-grid-example {
+    text-align: center;
+    color: $white;
+    .row {
+        margin: 10px 0;
+    }
+    .columns {
+        background-color: $gray-30;
+        min-height: 50px;
+        border-left: solid 5px $gray-10;
+        border-right: solid 5px $gray-10;
+        &:first-child {
+            border-left: 0;
+        }
+        &:last-child {
+            border-right: 0;
+        }
+    }
+}
