@@ -1,4 +1,4 @@
-var browserSync     = require('browser-sync'),
+var browserSync = require('browser-sync'),
 gulp            = require('gulp'),
 sass            = require('gulp-sass'),
 shell           = require('gulp-shell'),
