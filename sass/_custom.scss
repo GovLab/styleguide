@@ -162,7 +162,8 @@ code {
     text-align: center;
     color: $white;
     .row {
-        margin: 10px 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
     .columns {
         background-color: $gray-30;
