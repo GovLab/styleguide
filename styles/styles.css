@@ -4453,103 +4453,103 @@ Styleguide 1.2
 .b-palette.m-black {
   background-color: #333; }
 
-.b-palette .gray-025 {
+.gray-025 {
   background-color: rgba(0, 0, 0, 0.025); }
 
-.b-palette .gray-05 {
+.gray-05 {
   background-color: rgba(0, 0, 0, 0.05); }
 
-.b-palette .gray-10 {
+.gray-10 {
   background-color: rgba(0, 0, 0, 0.1); }
 
-.b-palette .gray-15 {
+.gray-15 {
   background-color: rgba(0, 0, 0, 0.15); }
 
-.b-palette .gray-20 {
+.gray-20 {
   background-color: rgba(0, 0, 0, 0.2); }
 
-.b-palette .gray-30 {
+.gray-30 {
   background-color: rgba(0, 0, 0, 0.3); }
 
-.b-palette .gray-40 {
+.gray-40 {
   background-color: rgba(0, 0, 0, 0.4); }
 
-.b-palette .gray-50 {
+.gray-50 {
   background-color: rgba(0, 0, 0, 0.5); }
 
-.b-palette .gray-60 {
+.gray-60 {
   background-color: rgba(0, 0, 0, 0.6); }
 
-.b-palette .gray-70 {
+.gray-70 {
   background-color: rgba(0, 0, 0, 0.7); }
 
-.b-palette .gray-80 {
+.gray-80 {
   background-color: rgba(0, 0, 0, 0.8); }
 
-.b-palette .gray-90 {
+.gray-90 {
   background-color: rgba(0, 0, 0, 0.9); }
 
-.b-palette .black {
+.black {
   background-color: #333; }
 
-.b-palette .white-10 {
+.white-10 {
   background-color: rgba(255, 255, 255, 0.1); }
 
-.b-palette .white-20 {
+.white-20 {
   background-color: rgba(255, 255, 255, 0.2); }
 
-.b-palette .white-30 {
+.white-30 {
   background-color: rgba(255, 255, 255, 0.3); }
 
-.b-palette .white-40 {
+.white-40 {
   background-color: rgba(255, 255, 255, 0.4); }
 
-.b-palette .white-50 {
+.white-50 {
   background-color: rgba(255, 255, 255, 0.5); }
 
-.b-palette .white-60 {
+.white-60 {
   background-color: rgba(255, 255, 255, 0.6); }
 
-.b-palette .white-70 {
+.white-70 {
   background-color: rgba(255, 255, 255, 0.7); }
 
-.b-palette .white-80 {
+.white-80 {
   background-color: rgba(255, 255, 255, 0.8); }
 
-.b-palette .white-90 {
+.white-90 {
   background-color: rgba(255, 255, 255, 0.9); }
 
-.b-palette .purple {
+.purple {
   background-color: #523080; }
 
-.b-palette .purple-20k {
+.purple-20k {
   background-color: #47266f; }
 
-.b-palette .purple-40k {
+.purple-40k {
   background-color: #381759; }
 
-.b-palette .orange {
+.orange {
   background-color: #ee5b43; }
 
-.b-palette .orange-20k {
+.orange-20k {
   background-color: #be4936; }
 
-.b-palette .teal {
+.teal {
   background-color: #008895; }
 
-.b-palette .teal-20k {
+.teal-20k {
   background-color: #00616b; }
 
-.b-palette .blue {
+.blue {
   background-color: #008ab3; }
 
-.b-palette .blue-20k {
+.blue-20k {
   background-color: #006e8f; }
 
-.b-palette .green {
+.green {
   background-color: #197d32; }
 
-.b-palette .red {
+.red {
   background-color: #c30014; }
 
 * {
@@ -6800,6 +6800,21 @@ h1 .kss-title__ref, h1 .kss-nav__ref {
 
 code.m-negative {
   color: white; }
+
+.b-grid-example {
+  text-align: center;
+  color: white; }
+  .b-grid-example .row {
+    margin: 10px 0; }
+  .b-grid-example .columns {
+    background-color: rgba(0, 0, 0, 0.3);
+    min-height: 50px;
+    border-left: solid 5px rgba(0, 0, 0, 0.1);
+    border-right: solid 5px rgba(0, 0, 0, 0.1); }
+    .b-grid-example .columns:first-child {
+      border-left: 0; }
+    .b-grid-example .columns:last-child {
+      border-right: 0; }
 
 .sandbox {
   min-height: 400px; }
