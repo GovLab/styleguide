@@ -6688,6 +6688,79 @@ Styleguide 3.2
   /* Clickable */
   pointer-events: auto; }
 
+/*
+Cards
+
+Card component for organizing data.  Works well with articles / documents, etc.
+
+Markup:
+<div class="b-page-section">
+    <div class="row">
+        <div class="e-card m-blue">
+            <a href="#">
+                <div class="e-card-inner">
+                    <!-- uncomment to add a background image to the card -->
+                    <!-- <div class="e-card-image" style="background-image: url('')"></div> -->
+                    <p class="e-card-name">Project Name</p>
+                    <p class="e-card-description">Project Description</p>
+                </div>
+            </a>
+        </div>
+        <div class="e-card m-orange">
+            <a href="#">
+                <div class="e-card-inner">
+                    <p class="e-card-name">Project Name</p>
+                    <p class="e-card-description">Project Description</p>
+                </div>
+            </a>
+        </div>
+        <div class="e-card m-unreleased">
+            <div class="e-card-inner">
+                <p class="e-card-name">Unreleased Project</p>
+                <p class="e-card-description">Project Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+Styleguide 3.7
+*/
+.e-card {
+  display: inline-block; }
+  .e-card .e-card-inner {
+    position: relative;
+    vertical-align: top;
+    color: white;
+    width: 300px;
+    height: 300px;
+    margin: 15px; }
+    .e-card .e-card-inner p {
+      padding: 20px; }
+      .e-card .e-card-inner p.e-card-name {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase; }
+      .e-card .e-card-inner p.e-card-description {
+        position: absolute;
+        bottom: 0; }
+    .e-card .e-card-inner .e-card-image {
+      height: 150px;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat; }
+    .e-card .e-card-inner:hover {
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.3); }
+  .e-card.m-orange .e-card-inner {
+    background-color: #ee5b43; }
+  .e-card.m-blue .e-card-inner {
+    background-color: #008ab3; }
+  .e-card.m-unreleased .e-card-inner {
+    background-color: rgba(0, 0, 0, 0.3); }
+    .e-card.m-unreleased .e-card-inner:hover {
+      box-shadow: none; }
+  .e-card a:hover {
+    text-decoration: none; }
+
 .kss-title:hover, .kss-title *:hover {
   text-decoration: none; }
 
