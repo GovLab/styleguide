@@ -42,21 +42,47 @@ var g = svg.append("g")
 //       .attr("d", path);
 // });
 
-d3.json("/js/world.json", function(error, world) {
+queue()
+    .defer(d3.json, "/js/world.json")
+    .defer(d3.tsv, "/js/world-country-names.tsv")
+    .await(ready);
+
+function ready(error, world, names) {
   if (error) throw error;
 
+  var countries = topojson.feature(world, world.objects.countries).features;
+  countries = countries.filter(function(d) {
+    return names.some(function(n) {
+      if (d.id == n.id) return d.name = n.name;
+    });
+  }).sort(function(a, b) {
+    return a.name.localeCompare(b.name);
+  });
+
   g.selectAll("path")
-      .data(topojson.feature(world, world.objects.countries).features)
-    .enter().append("path")
+      .data(countries)
+      .enter().append("path")
       .attr("d", path)
       .attr("class", "feature")
+      .attr("id", function(d, i) { return countries[i].name; })
       .on("click", clicked);
 
   g.append("path")
       .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
       .attr("class", "mesh")
       .attr("d", path);
-});
+
+
+
+  // console.log(countries);
+
+  // g.selectAll("path")
+  //     .attr("id", function(d, i) {
+  //       return countries[i % countries.length].name;
+  //     })
+
+  g.select("#Antarctica").remove();
+}
 
 // var color = d3.scale.category10();
 
