@@ -23,6 +23,12 @@ Markup:
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+.node, .remove {
+    opacity: .8;
+}
+.node text, .remove text {
+    fill: #fff;
+}
 </style>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>

@@ -6,7 +6,11 @@ first loads.
 
 Markup:
 <!-- #fullwidth -->
-<p>Check out the purple sticky at the bottom of the window <i class="material-icons">arrow_downward</i></p>
+<div class="b-page-section">
+    <div class="row">
+        <p>This produces the sticky at the bottom of the window <i class="material-icons">arrow_downward</i></p>
+    </div>
+</div>
 <div class="b-sticky m-purple">
     <div class="row">
         <div class="column small-12">
