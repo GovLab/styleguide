@@ -1,0 +1,10 @@
+{
+    "studies" : [
+    {
+        "title" : "case study 1",
+        "location" : "Canada",
+        "sector" : "public",
+        "impact" : "government"
+    }
+    ]
+}

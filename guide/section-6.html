@@ -217,7 +217,11 @@ first loads.</p>
           </div>
                   <div class="kss-modifier__example">
                     <!-- #fullwidth -->
-<p>Check out the purple sticky at the bottom of the window <i class="material-icons">arrow_downward</i></p>
+<div class="b-page-section">
+    <div class="row">
+        <p>This produces the sticky at the bottom of the window <i class="material-icons">arrow_downward</i></p>
+    </div>
+</div>
 <div class="b-sticky m-purple">
     <div class="row">
         <div class="column small-12">
@@ -237,7 +241,11 @@ first loads.</p>
               <div class="row">
                 <div class="kss-markup kss-style">
                   <pre><code class="language-markup">&lt;!-- #fullwidth --&gt;
-&lt;p&gt;Check out the purple sticky at the bottom of the window &lt;i class=&quot;material-icons&quot;&gt;arrow_downward&lt;/i&gt;&lt;/p&gt;
+&lt;div class=&quot;b-page-section&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;p&gt;This produces the sticky at the bottom of the window &lt;i class=&quot;material-icons&quot;&gt;arrow_downward&lt;/i&gt;&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 &lt;div class=&quot;b-sticky m-purple&quot;&gt;
     &lt;div class=&quot;row&quot;&gt;
         &lt;div class=&quot;column small-12&quot;&gt;
@@ -459,6 +467,12 @@ first loads.</p>
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+.node, .remove {
+    opacity: .8;
+}
+.node text, .remove text {
+    fill: #fff;
+}
 </style>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
@@ -496,6 +510,12 @@ first loads.</p>
   stroke: #fff;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+.node, .remove {
+    opacity: .8;
+}
+.node text, .remove text {
+    fill: #fff;
 }
 &lt;/style&gt;
 &lt;script src=&quot;//d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
