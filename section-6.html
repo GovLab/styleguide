@@ -420,7 +420,7 @@ first loads.</p>
 
 
                   <div class="kss-description">
-                    <p>USA map via D3 <a href="http://bl.ocks.org/mbostock/4699541">http://bl.ocks.org/mbostock/4699541</a></p>
+                    <p>Data driven map via D3, loosely based on several examples from Mike Bostock <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a></p>
 
                   </div>
                 </div>
@@ -461,24 +461,63 @@ first loads.</p>
 .feature.active {
   fill: orange;
 }
-.mesh {
+.country {
   fill: none;
   stroke: #fff;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.node, .remove {
+.node circle {
     opacity: .8;
 }
-.node text, .remove text {
-    fill: #fff;
+.node circle.active {
+    opacity: 1;
+    stroke: #fff;
+    transition: opacity 0.1s;
 }
-</style>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
-<script src="//d3js.org/queue.v1.min.js"></script>
-<script src="js/map.js"></script>
+.node text {
+    fill: #fff;
+    cursor: pointer;
+}
+.region {
+    fill: #ddd;
+    cursor: pointer;
+    transition: fill 0.1s;
+}
+.region.active {
+    fill: #bbb;
+    transition: fill 0.1s;
+}
+/*.region#northAmerica {
+    fill: #f00;
+}
+.region#eastAsia {
+    fill: #0f0;
+}
+.region#euCentralAsia {
+    fill: #00f;
+}
+.region#latinAmerica {
+    fill: #f0f;
+}
+.region#midEastNorthAfrica {
+    fill: #ff0;
+}
+.region#southAsia {
+    fill: #0ff;
+}
+.region#subSaharanAfrica {
+    fill: #f99;
+}
+.region#westEurope {
+    fill: #99f;
+    }
+    </style>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
+    <script src="//d3js.org/queue.v1.min.js"></script>
+    <script src="js/map2.js"></script>
                   </div>
                 </div>
               </div>
@@ -505,24 +544,63 @@ first loads.</p>
 .feature.active {
   fill: orange;
 }
-.mesh {
+.country {
   fill: none;
   stroke: #fff;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.node, .remove {
+.node circle {
     opacity: .8;
 }
-.node text, .remove text {
-    fill: #fff;
+.node circle.active {
+    opacity: 1;
+    stroke: #fff;
+    transition: opacity 0.1s;
 }
-&lt;/style&gt;
-&lt;script src=&quot;//d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;//d3js.org/topojson.v1.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;//d3js.org/d3.geo.projection.v0.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;//d3js.org/queue.v1.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;js/map.js&quot;&gt;&lt;/script&gt;</code></pre>
+.node text {
+    fill: #fff;
+    cursor: pointer;
+}
+.region {
+    fill: #ddd;
+    cursor: pointer;
+    transition: fill 0.1s;
+}
+.region.active {
+    fill: #bbb;
+    transition: fill 0.1s;
+}
+/*.region#northAmerica {
+    fill: #f00;
+}
+.region#eastAsia {
+    fill: #0f0;
+}
+.region#euCentralAsia {
+    fill: #00f;
+}
+.region#latinAmerica {
+    fill: #f0f;
+}
+.region#midEastNorthAfrica {
+    fill: #ff0;
+}
+.region#southAsia {
+    fill: #0ff;
+}
+.region#subSaharanAfrica {
+    fill: #f99;
+}
+.region#westEurope {
+    fill: #99f;
+    }
+    &lt;/style&gt;
+    &lt;script src=&quot;//d3js.org/d3.v3.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//d3js.org/topojson.v1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//d3js.org/d3.geo.projection.v0.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;//d3js.org/queue.v1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/map2.js&quot;&gt;&lt;/script&gt;</code></pre>
                 </div>
               </div>
             </div>
