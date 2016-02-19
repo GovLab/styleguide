@@ -25,10 +25,16 @@ Markup:
 }
 .node circle {
     opacity: .8;
+    cursor: pointer;
+    transition: opacity 0.5s;
+}
+.node.fade circle {
+    opacity: .15;
+    transition: opacity 0.5s;
 }
 .node circle.active {
     opacity: 1;
-    stroke: #fff;
+    fill: rgb(0, 138, 179) !important;
     transition: opacity 0.1s;
 }
 .node text {

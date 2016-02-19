@@ -259,7 +259,6 @@ function ready(error, world, studies, names) {
     return d.size/2; // ie size is a diameter for layout purposes
   })
   .style('fill', function(d) {
-
     // strip out just the count numbers and put into a flat array, then find the max
     var countsarr = [];
     for (var i in counts) { countsarr.push(counts[i].count); }
@@ -299,37 +298,32 @@ function ready(error, world, studies, names) {
   g.select('#Antarctica').remove();
 }
 
-var zid = -1;
 function highlight(d) {
   var region = '#' + this.id.replace(/_bubble_|_text_/, '');
   var bubble = '#' + this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+  d3.selectAll('.node').classed('fade', true);
   d3.select(region).classed('active', true);
   d3.select(bubble).classed('active', true);
-  zid = zoomBubble(bubble, 1.5);
+  zoomBubble(bubble, 1.4);
   // console.log('in', this.id); // debug
 }
 
 function deHighlight(d) {
   var region = '#' + this.id.replace(/_bubble_|_text_/, '');
   var bubble = '#' + this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+  d3.selectAll('.node').classed('fade', false);
   d3.select(region).classed('active', false);
-  d3.select(bubble).classed('active', false)
-  // .attr('r', function(d) { return d.size/2; })
-  ;
-  // console.log ( d3.select(bubble).datum().size );
-  zid = zoomBubble(bubble, -1);
-  // if (zid > 0) {
-  //   clearInterval(zid);
-  // }
+  d3.select(bubble).classed('active', false);
+  zoomBubble(bubble, -1);
   // console.log('out', this.id); // debug
 }
 
 var intervals = {};
 function zoomBubble(elem, zoom) {
   var
-  frames = 60,
+  frames = 100,
   e = d3.select(elem),
-  r = e.attr('r'),
+  r = Number(e.attr('r')),
   eid = e.attr('id'),
   x = 0
   ;
@@ -338,16 +332,16 @@ function zoomBubble(elem, zoom) {
 
   function frame() {
     if (zoom > 0) {
-      x++;
       // e.attr('r', defaultSize*(1+(x/frames)*(zoom-1)));
-      e.attr('r', Number(r)+(zoom*defaultSize-r)*(x/frames));
+      e.attr('r', r+(zoom*defaultSize-r)*(x/frames));
+      x++;
 
       if (x >= frames) {
         clearInterval(id);
       }
     } else { // reset to original size
-      x++;
       e.attr('r', r-(r-defaultSize)*(x/frames));
+      x++;
 
       if (x >= frames) {
         clearInterval(id);
