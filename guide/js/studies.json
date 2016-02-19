@@ -3,168 +3,168 @@
     "children" : [
     {
         "title" : "case study 1",
-        "location" : "Canada",
+        "location" : "westEurope",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 2",
-        "location" : "Germany",
+        "location" : "subSaharanAfrica",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 3",
-        "location" : "Japan",
+        "location" : "subSaharanAfrica",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 4",
-        "location" : "Australia",
+        "location" : "westEurope",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United States",
+        "location" : "westEurope",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United States",
+        "location" : "westEurope",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United States",
+        "location" : "latinAmerica",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United States",
+        "location" : "eastAsia",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "Canada",
+        "location" : "eastAsia",
         "sector" : "public",
         "impact" : "citizens"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United States",
+        "location" : "eastAsia",
         "sector" : "public",
         "impact" : "citizens"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United States",
+        "location" : "midEastNorthAfrica",
         "sector" : "public",
         "impact" : "problems"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United States",
+        "location" : "midEastNorthAfrica",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "Brazil",
+        "location" : "midEastNorthAfrica",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "Italy",
+        "location" : "northAmerica",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "Italy",
+        "location" : "northAmerica",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "India",
+        "location" : "northAmerica",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "China",
+        "location" : "southAsia",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "China",
+        "location" : "southAsia",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "China",
+        "location" : "southAsia",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "China",
+        "location" : "southAsia",
         "sector" : "public",
         "impact" : "opportunity"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United Kingdom",
+        "location" : "southAsia",
         "sector" : "public",
         "impact" : "problems"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United Kingdom",
+        "location" : "euCentralAsia",
         "sector" : "public",
         "impact" : "problems"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United Kingdom",
+        "location" : "euCentralAsia",
         "sector" : "public",
         "impact" : "government"
     }
     ,
     {
         "title" : "case study 5",
-        "location" : "United Kingdom",
+        "location" : "euCentralAsia",
         "sector" : "public",
         "impact" : "citizens"
     }
