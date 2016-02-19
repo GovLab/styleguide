@@ -24,7 +24,7 @@ Markup:
   stroke-linejoin: round;
 }
 .node circle {
-    opacity: .8;
+    opacity: .75;
     cursor: pointer;
     transition: opacity 0.5s;
 }
@@ -33,7 +33,7 @@ Markup:
     transition: opacity 0.5s;
 }
 .node circle.active {
-    opacity: 1;
+    opacity: .9;
     fill: rgb(0, 138, 179) !important;
     transition: opacity 0.1s;
 }
