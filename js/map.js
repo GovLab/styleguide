@@ -1,3 +1,4 @@
+// Map I : World map with color coded bubbles based on categories
 
 var width = 960,
 height = 500,
@@ -187,17 +188,6 @@ function ready(error, world, studies, names) {
   .text(function(d) { return counts[d.impact][d.location.replace(' ', '-')]['count']; });
 
 
-  // console.log(countries);
-
-  // g.selectAll('path')
-  //     .attr('id', function(d, i) {
-  //       return countries[i % countries.length].name;
-  //     })
-
-  // note: for some reason can't remove top level g element?
-  // node.selectAll('.duplicates:not(:first-child) circle').remove(); // this is because there is no good way to conditionally .append
-  // node.selectAll('.remove circle, .remove text, .remove title').remove();
-
   g.select('#Antarctica').remove();
 }
 
@@ -215,9 +205,9 @@ function clicked(d) {
   translate = [width / 2 - scale * x, height / 2 - scale * y];
 
   // g.transition()
-      // .duration(750)
-      // .style('stroke-width', 1.5 / scale + 'px');
-      // .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
+  //     .duration(750)
+  //     .style('stroke-width', 1.5 / scale + 'px');
+  //     .attr('transform', 'translate(' + translate + ')scale(' + scale + ')');
     }
 
     function reset() {
