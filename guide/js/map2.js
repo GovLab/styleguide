@@ -249,6 +249,9 @@ function ready(error, world, studies, names) {
     } else if (d.location === 'subSaharanAfrica') {
       x *= 1.05;
       y *= .9;
+    } else if (d.location === 'midEastNorthAfrica') {
+      x *= 1.05;
+      y *= .9;
     }
 
     return 'translate(' + x + ',' + y + ')';
