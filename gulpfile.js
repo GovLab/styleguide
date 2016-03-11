@@ -4,6 +4,7 @@ sass            = require('gulp-sass'),
 shell           = require('gulp-shell'),
 packagejson     = require('./package.json'),
 file            = require('gulp-file'),
+rename          = require('gulp-rename'),
 plumber         = require('gulp-plumber');
 
 // Browser Sync
@@ -22,6 +23,14 @@ gulp.task('sass', function() {
   .pipe(sass())
   .pipe(gulp.dest('guide/styles'))
   .pipe(browserSync.stream());
+});
+
+gulp.task('distSass', function () {
+  return gulp.src('sass/styles.scss')
+  .pipe(plumber())
+  .pipe(sass())
+  .pipe(rename('govlab-styleguide.css'))
+  .pipe(gulp.dest('dist/css'))
 });
 
 gulp.task('js', function() {
@@ -46,7 +55,7 @@ gulp.task('ver', function() {
   .pipe(gulp.dest('sass/'));
 });
 
-gulp.task('build', ['sass', 'js', 'assets', 'kss'], function () {
+gulp.task('build', ['sass', 'js', 'assets', 'kss', 'distSass'], function () {
   console.log('Finished building site');
 })
 
