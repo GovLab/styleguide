@@ -76,9 +76,9 @@ var westEurope = d3.set([
 
 // this allows us to process multiple data sources in a single function using d3, e.g. instead of just d3.json()
 queue()
-.defer(d3.json, '/js/world.json')
-.defer(d3.json, '/js/studies.json')
-.defer(d3.tsv, '/js/world-country-names.tsv')
+.defer(d3.json, 'world.json')
+.defer(d3.json, 'studies.json')
+.defer(d3.tsv, 'world-country-names.tsv')
 .await(ready);
 function ready(error, world, studies, names) {
   if (error) throw error;
