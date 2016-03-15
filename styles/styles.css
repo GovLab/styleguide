@@ -6772,6 +6772,121 @@ Coming Soon
 
 Styleguide 6.2
 */
+/*
+Data Visualization
+
+Styleguide 6.3
+*/
+/*
+Bubble map
+
+Data driven bubble map via D3, loosely based on several examples from Mike Bostock <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a>
+
+Markup:
+<div class="b-map"></div>
+<!-- ----------------------------------------- -->
+<!-- ignore, just used to link to example page -->
+<a class="b-button" href="map1.html">Map I</a>
+<!-- ----------------------------------------- -->
+
+Styleguide 6.3.1
+*/
+.b-map .background {
+  fill: none;
+  pointer-events: all; }
+
+.b-map .feature {
+  fill: #ccc;
+  cursor: pointer; }
+  .b-map .feature.active {
+    fill: orange; }
+
+.b-map .country {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
+
+.b-map .node.fade circle {
+  opacity: .15;
+  transition: opacity 0.5s; }
+
+.b-map .node circle {
+  opacity: .75;
+  cursor: pointer;
+  transition: opacity 0.5s; }
+  .b-map .node circle.active {
+    opacity: .9;
+    fill: #008ab3 !important;
+    transition: opacity 0.1s; }
+
+.b-map .node text {
+  fill: #fff;
+  cursor: pointer; }
+
+.b-map .region {
+  fill: #ddd;
+  cursor: pointer;
+  transition: fill 0.1s; }
+  .b-map .region.active {
+    fill: #bbb;
+    transition: fill 0.1s; }
+
+/*
+Packlayout map
+
+D3 based bubble map that uses packlayout to nest collections of bubbles into region bounding boxes.
+
+Markup:
+<div class="b-pack-map"></div>
+<!-- ----------------------------------------- -->
+<!-- ignore, just used to link to example page -->
+<a class="b-button" href="map2.html">Map II</a>
+<!-- ----------------------------------------- -->
+
+Styleguide 6.3.2
+*/
+.b-pack-map .background {
+  fill: none;
+  pointer-events: all; }
+
+.b-pack-map .feature {
+  fill: #ccc;
+  cursor: pointer; }
+  .b-pack-map .feature.active {
+    fill: orange; }
+
+.b-pack-map .country {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
+
+.b-pack-map .node.fade circle {
+  opacity: .15;
+  transition: opacity 0.5s; }
+
+.b-pack-map .node circle {
+  opacity: .75;
+  cursor: pointer;
+  transition: opacity 0.5s; }
+  .b-pack-map .node circle.active {
+    opacity: .9;
+    fill: #008ab3 !important;
+    transition: opacity 0.1s; }
+
+.b-pack-map .node text {
+  fill: #fff;
+  cursor: pointer; }
+
+.b-pack-map .region {
+  fill: #ddd;
+  cursor: pointer;
+  transition: fill 0.1s; }
+  .b-pack-map .region.active {
+    fill: #bbb;
+    transition: fill 0.1s; }
+
 .kss-title:hover, .kss-title *:hover {
   text-decoration: none; }
 

@@ -1,55 +1,13 @@
 <!DOCTYPE html>
-<html><body>
-<div class="map"></div>
-<style>
-.map .background {
-  fill: none;
-  pointer-events: all;
-}
-.map .feature {
-  fill: #ccc;
-  cursor: pointer;
-}
-.map .feature.active {
-  fill: orange;
-}
-.map .country {
-  fill: none;
-  stroke: #fff;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.map .node circle {
-    opacity: .75;
-    cursor: pointer;
-    transition: opacity 0.5s;
-}
-.map .node.fade circle {
-    opacity: .15;
-    transition: opacity 0.5s;
-}
-.map .node circle.active {
-    opacity: .9;
-    fill: rgb(0, 138, 179) !important;
-    transition: opacity 0.1s;
-}
-.map .node text {
-    fill: #fff;
-    cursor: pointer;
-}
-.map .region {
-    fill: #ddd;
-    cursor: pointer;
-    transition: fill 0.1s;
-}
-.map .region.active {
-    fill: #bbb;
-    transition: fill 0.1s;
-}
-</style>
+<html>
+<head>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+<div class="b-map"></div>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
 <script src="//d3js.org/queue.v1.min.js"></script>
-<script src="js/map.js"></script>
+<script src="js/map2.js"></script>
 </body></html>
