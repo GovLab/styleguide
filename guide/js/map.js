@@ -28,7 +28,6 @@ var g = svg.append('g')
 .style('stroke-width', '1.5px');
 
 
-
 // d3.json('/js/us.json', function(error, us) {
 //   if (error) throw error;
 
@@ -51,9 +50,9 @@ function shade(rgb, v) {
 }
 
 queue()
-.defer(d3.json, '/js/world.json')
-.defer(d3.json, '/js/studies.json')
-.defer(d3.tsv, '/js/world-country-names.tsv')
+.defer(d3.json, 'js/world.json')
+.defer(d3.json, 'js/studies2.json')
+.defer(d3.tsv, 'js/world-country-names.tsv')
 .await(ready);
 
 function ready(error, world, studies, names) {
@@ -79,10 +78,10 @@ function ready(error, world, studies, names) {
   .attr('id', function(d, i) { return countries[i].name.replace(' ', '-'); })
   .on('click', clicked);
 
-  g.append('path')
-  .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-  .attr('class', 'mesh')
-  .attr('d', path);
+  // g.append('path')
+  // .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+  // .attr('class', 'mesh')
+  // .attr('d', path);
 
 
 
@@ -133,6 +132,7 @@ function ready(error, world, studies, names) {
     return 'node';
   })
   .attr('transform', function(d, i) {
+    console.log (g.select('#' + d.location.replace(' ', '-')).datum());
     var country = g.select('#' + d.location.replace(' ', '-')).datum();
     var b = path.bounds(country),
     x = (b[0][0] + b[1][0]) / 2,
