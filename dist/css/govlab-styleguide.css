@@ -6833,8 +6833,6 @@ Styleguide 6.3.1
     transition: fill 0.1s; }
 
 /*
-Map II
-
 Packlayout map
 
 D3 based bubble map that uses packlayout to nest collections of bubbles into region bounding boxes.
@@ -6848,6 +6846,47 @@ Markup:
 
 Styleguide 6.3.2
 */
+.b-pack-map .background {
+  fill: none;
+  pointer-events: all; }
+
+.b-pack-map .feature {
+  fill: #ccc;
+  cursor: pointer; }
+  .b-pack-map .feature.active {
+    fill: orange; }
+
+.b-pack-map .country {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round; }
+
+.b-pack-map .node.fade circle {
+  opacity: .15;
+  transition: opacity 0.5s; }
+
+.b-pack-map .node circle {
+  opacity: .75;
+  cursor: pointer;
+  transition: opacity 0.5s; }
+  .b-pack-map .node circle.active {
+    opacity: .9;
+    fill: #008ab3 !important;
+    transition: opacity 0.1s; }
+
+.b-pack-map .node text {
+  fill: #fff;
+  cursor: pointer; }
+
+.b-pack-map .region {
+  fill: #ddd;
+  cursor: pointer;
+  transition: fill 0.1s; }
+  .b-pack-map .region.active {
+    fill: #bbb;
+    transition: fill 0.1s; }
+
 .kss-title:hover, .kss-title *:hover {
   text-decoration: none; }
 
