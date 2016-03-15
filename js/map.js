@@ -14,7 +14,7 @@ var projection = d3.geo.mercator()
 var path = d3.geo.path()
 .projection(projection);
 
-var svg = d3.select('.map').append('svg')
+var svg = d3.select('.b-pack-map').append('svg')
 .attr('width', width)
 .attr('height', height);
 
@@ -82,8 +82,6 @@ function ready(error, world, studies, names) {
   // .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
   // .attr('class', 'mesh')
   // .attr('d', path);
-
-
 
   // draw bubbles
   var s = studies.children;

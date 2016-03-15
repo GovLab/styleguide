@@ -5,27 +5,142 @@ Styleguide 6.3
 */
 
 /*
-Map I
+Bubble map
 
-Data driven map via D3, loosely based on several examples from Mike Bostock <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a>
+Data driven bubble map via D3, loosely based on several examples from Mike Bostock <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a>
 
 Markup:
-<div class="map"></div>
+<div class="b-map"></div>
+<!-- ----------------------------------------- -->
 <!-- ignore, just used to link to example page -->
 <a class="b-button" href="map1.html">Map I</a>
+<!-- ----------------------------------------- -->
 
 Styleguide 6.3.1
 */
+.b-map {
+  .background {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .feature {
+    fill: #ccc;
+    cursor: pointer;
+    &.active {
+      fill: orange;
+    }
+  }
+
+  .country {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .node {
+    &.fade circle {
+      opacity: .15;
+      transition: opacity 0.5s;
+    }
+
+    circle {
+      opacity: .75;
+      cursor: pointer;
+      transition: opacity 0.5s;
+      &.active {
+        opacity: .9;
+        fill: rgb(0, 138, 179) !important;
+        transition: opacity 0.1s;
+      }
+    }
+
+    text {
+      fill: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .region {
+    fill: #ddd;
+    cursor: pointer;
+    transition: fill 0.1s;
+    &.active {
+      fill: #bbb;
+      transition: fill 0.1s;
+    }
+  }
+
+}
 
 /*
-Map II
+Packlayout map
 
-D3 packlayout map
+D3 based bubble map that uses packlayout to nest collections of bubbles into region bounding boxes.
 
 Markup:
-<div class="map"></div>
+<div class="b-pack-map"></div>
+<!-- ----------------------------------------- -->
 <!-- ignore, just used to link to example page -->
 <a class="b-button" href="map2.html">Map II</a>
+<!-- ----------------------------------------- -->
 
 Styleguide 6.3.2
 */
+
+.b-pack-map {
+  .background {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .feature {
+    fill: #ccc;
+    cursor: pointer;
+    &.active {
+      fill: orange;
+    }
+  }
+
+  .country {
+    fill: none;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .node {
+    &.fade circle {
+      opacity: .15;
+      transition: opacity 0.5s;
+    }
+
+    circle {
+      opacity: .75;
+      cursor: pointer;
+      transition: opacity 0.5s;
+      &.active {
+        opacity: .9;
+        fill: rgb(0, 138, 179) !important;
+        transition: opacity 0.1s;
+      }
+    }
+
+    text {
+      fill: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .region {
+    fill: #ddd;
+    cursor: pointer;
+    transition: fill 0.1s;
+    &.active {
+      fill: #bbb;
+      transition: fill 0.1s;
+    }
+  }
+
+}
