@@ -56,7 +56,10 @@ gulp.task('ver', function() {
 });
 
 gulp.task('build', ['sass', 'js', 'assets', 'kss', 'distSass'], function () {
-  console.log('Finished building site');
+  //copy static stuff over
+  return gulp.src('kss-template/static/*')
+  .pipe(plumber())
+  .pipe(gulp.dest('guide'));
 })
 
 gulp.task('kss', ['ver'], shell.task([

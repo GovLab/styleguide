@@ -1,61 +1,31 @@
 /*
-Map
+Data Visualization
+
+Styleguide 6.3
+*/
+
+/*
+Map I
 
 Data driven map via D3, loosely based on several examples from Mike Bostock <a href="http://bl.ocks.org/mbostock">http://bl.ocks.org/mbostock</a>
 
 Markup:
 <div class="map"></div>
-<style>
-.background {
-  fill: none;
-  pointer-events: all;
-}
-.feature {
-  fill: #ccc;
-  cursor: pointer;
-}
-.feature.active {
-  fill: orange;
-}
-.country {
-  fill: none;
-  stroke: #fff;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.node circle {
-    opacity: .75;
-    cursor: pointer;
-    transition: opacity 0.5s;
-}
-.node.fade circle {
-    opacity: .15;
-    transition: opacity 0.5s;
-}
-.node circle.active {
-    opacity: .9;
-    fill: rgb(0, 138, 179) !important;
-    transition: opacity 0.1s;
-}
-.node text {
-    fill: #fff;
-    cursor: pointer;
-}
-.region {
-    fill: #ddd;
-    cursor: pointer;
-    transition: fill 0.1s;
-}
-.region.active {
-    fill: #bbb;
-    transition: fill 0.1s;
-}
-</style>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="//d3js.org/d3.geo.projection.v0.min.js"></script>
-<script src="//d3js.org/queue.v1.min.js"></script>
-<script src="js/map2.js"></script>
+<!-- ignore, just used to link to example page -->
+<a class="b-button" href="map1.html">Map I</a>
 
-Styleguide 6.3
+Styleguide 6.3.1
+*/
+
+/*
+Map II
+
+D3 packlayout map
+
+Markup:
+<div class="map"></div>
+<!-- ignore, just used to link to example page -->
+<a class="b-button" href="map2.html">Map II</a>
+
+Styleguide 6.3.2
 */
