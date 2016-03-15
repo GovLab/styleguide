@@ -14,7 +14,7 @@ var projection = d3.geo.mercator()
 var path = d3.geo.path()
 .projection(projection);
 
-var svg = d3.select('.map').append('svg')
+var svg = d3.select('.b-map').append('svg')
 .attr('width', width)
 .attr('height', height);
 
