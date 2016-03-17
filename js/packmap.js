@@ -14,9 +14,9 @@
 // config
 var mobileOnly  = '(max-width: 767px)',
 mapClass        = '.b-pack-map',
-width           = 900,
-height          = 400,
-scale           = 120
+width           = 1200,
+height          = 800,
+scale           = 200
 ;
 
 // disable the map on mobile (ie replace with something else)
@@ -106,21 +106,21 @@ if (window.matchMedia(mobileOnly).matches) {
   // var projection = d3.geo.kavrayskiy7()
   // var projection = d3.geo.equirectangular()
   var projection = d3.geo.mercator()
-    .scale(scale)
-    .translate([width / 2, height / 1.5]),
-    path = d3.geo.path()
-    .projection(projection);
+  .scale(scale)
+  .translate([width / 2, height / 1.5]),
+  path = d3.geo.path()
+  .projection(projection);
 
   // build the base svg and related elements
   var svg = d3.select(mapClass).append('svg')
-    .attr('width', width)
-    .attr('height', height);
+  .attr('width', width)
+  .attr('height', height);
   svg.append('rect')
-    .attr('class', 'background')
-    .attr('width', width)
-    .attr('height', height);
+  .attr('class', 'background')
+  .attr('width', width)
+  .attr('height', height);
   var g = svg.append('g')
-    .style('stroke-width', '1.5px');
+  .style('stroke-width', '1.5px');
 
   // utility function to create a shade based on array of rgb values and scalar
   function shade(rgb, v) {
@@ -133,15 +133,16 @@ if (window.matchMedia(mobileOnly).matches) {
   // event handlers
 
   function clicked(d) {
-    var region = this.id.replace(/_bubble_|_text_/, '');
+    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
-    filterBy('region-' + region);
+    // filterBy('region-' + region);
   }
 
   function highlight(d) {
-    var region = this.id.replace(/_bubble_|_text_/, '');
+    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+    console.log(region);
     d3.selectAll('.node').classed('fade', true);
     d3.select('.map-caption').text(regions[region].name);
     d3.select('.map-caption').classed('default', false);
@@ -151,14 +152,14 @@ if (window.matchMedia(mobileOnly).matches) {
   }
 
   function deHighlight(d) {
-    var region = '#' + this.id.replace(/_bubble_|_text_/, '');
-    var bubble = '#' + this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+    var region = d.location || this.id.replace(/_bubble_|_text_/, '');
+    var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
     d3.selectAll('.node').classed('fade', false);
     d3.select('.map-caption').text('Select a Region');
     d3.select('.map-caption').classed('default', true);
-    d3.select(region).classed('active', false);
-    d3.select(bubble).classed('active', false);
-    zoomBubble(bubble, -1);
+    d3.select('#' + region).classed('active', false);
+    d3.select('#' + bubble).classed('active', false);
+    zoomBubble('#' + bubble, -1);
   }
 
   // bubble radius animation
@@ -170,11 +171,11 @@ if (window.matchMedia(mobileOnly).matches) {
     }
 
     var
-      frames = 100,
-      e = d3.select(elem),
-      r = Number(e.attr('r')),
-      eid = e.attr('id'),
-      x = 0;
+    frames = 100,
+    e = d3.select(elem),
+    r = Number(e.attr('r')),
+    eid = e.attr('id'),
+    x = 0;
 
     var defaultSize = e.datum().size / 2;
 
@@ -225,15 +226,15 @@ if (window.matchMedia(mobileOnly).matches) {
     // add regions
     for (var r in regions) {
       g.append('path')
-        .datum(topojson.merge(world, world.objects.countries.geometries.filter(function(d, i) {
-          return d3.set(regions[r].geometries).has(d.id);
-        })))
-        .attr('class', 'region')
-        .attr('id', r)
-        .attr('d', path)
-        .on("click", clicked)
-        .on("mouseover", highlight)
-        .on("mouseout", deHighlight);
+      .datum(topojson.merge(world, world.objects.countries.geometries.filter(function(d, i) {
+        return d3.set(regions[r].geometries).has(d.id);
+      })))
+      .attr('class', 'region')
+      .attr('id', r)
+      .attr('d', path)
+      .on("click", clicked)
+      .on("mouseover", highlight)
+      .on("mouseout", deHighlight);
     }
 
     // ... finished drawing map
@@ -243,7 +244,7 @@ if (window.matchMedia(mobileOnly).matches) {
     // tally counts for impact categories based on the json data and flag any child nodes that bump the count
     // above 1 as duplicates to be removed when rendering the visual bubbles later
     var s = studies.children,
-      counts = {};
+    counts = {};
     for (var i in s) {
       var loc = s[i].location.replace(/\W+/g, '-');
       if (!(s[i].impact in counts)) {
@@ -265,40 +266,39 @@ if (window.matchMedia(mobileOnly).matches) {
     // assign a size value to each datum based on the count
     var base = 4, // log base for bubble size curve
       scale = 80; // multiplier for bubble size curve
-    for (var i in studies.children) {
-      var l = s[i].location.replace(/\W+/g, '-');
-      studies.children[i].size = (Math.log(counts[s[i].impact][l]['count'] + 1) / Math.log(base)) * scale;
-    }
+      for (var i in studies.children) {
+        var l = s[i].location.replace(/\W+/g, '-');
+        studies.children[i].size = (Math.log(counts[s[i].impact][l]['count'] + 1) / Math.log(base)) * scale;
+      }
 
     // create pack layout
-    var diameter = 120, // diameter of container circles to pack bubbles into
-      pack = d3.layout.pack()
-      .size([diameter, diameter])
-      .value(function(d) {
-        return d.size;
-      });
+    var diameter = 450, // diameter of container circles to pack bubbles into
+    pack = d3.layout.pack()
+    .size([diameter, diameter])
+    .value(function(d) {
+      return d.size;
+    });
 
     // append bubbles to the svg ...
 
     // filter the data, transform, and create groups
-    var node = svg.select('svg')
-      .data(studies.children)
-      .enter().append('g')
-      .filter(pack(studies).filter(function(d) {
+    var node = svg.selectAll('svg')
+    .data(pack(studies).filter(function(d) {
         // filter out any parents (ie nodes that contain children) &&
         // filter out duplicate nodes from the data identified during counting
         return !d.children && !d.duplicate;
       }))
-      .attr('class', function(d, i) {
-        return 'node';
-      })
-      .attr('transform', function(d, i) {
-        var region = g.select('#' + d.location.replace(/\W+/g, '-')).datum();
+    .enter().append('g')
+    .attr('class', function(d, i) {
+      return 'node';
+    })
+    .attr('transform', function(d, i) {
+      var region = g.select('#' + d.location.replace(/\W+/g, '-')).datum();
 
         // find center of the region's bounding box
         var b = path.bounds(region),
-          x = (b[0][0] + b[1][0]) / 2,
-          y = (b[0][1] + b[1][1]) / 2;
+        x = (b[0][0] + b[1][0]) / 2,
+        y = (b[0][1] + b[1][1]) / 2;
 
         // manual adjustments
         // (i.e. some of the bounding boxes don't make visual sense, so just
@@ -309,17 +309,23 @@ if (window.matchMedia(mobileOnly).matches) {
         }
 
         // ?
-        x = (d.x - diameter / 2) + x;
-        y = (d.y - diameter / 2) + y;
+        // x = (d.x - diameter / 2) + x;
+        // y = (d.y - diameter / 2) + y;
+
+        x = d.x;
+        y = d.y;
+
+        console.log ('xy', x, y);
+        console.log ('dxy', d.x, d.y);
 
         return 'translate(' + x + ',' + y + ')';
       });
     // create the circles
     node.append('circle')
-      .attr('r', function(d) {
+    .attr('r', function(d) {
         return d.size / 2; // ie size is a diameter for layout purposes
       })
-      .style('fill', function(d) {
+    .style('fill', function(d) {
         // strip out just the count numbers and put into a flat array, then find the max
         var countsarr = [];
         for (var i in counts[d.impact]) {
@@ -344,34 +350,35 @@ if (window.matchMedia(mobileOnly).matches) {
           return d3.rgb.apply(null, shade(blue, v));
         } else if (d.impact === 'citizens') {
           return d3.rgb.apply(null, shade(orange, v));
-        } else if (d.impact === 'opportunity') {
+        } else if (d.impact === 'economic') {
           return d3.rgb.apply(null, shade(yellow, v));
-        } else if (d.impact === 'problems') {
+        } else if (d.impact === 'public') {
           return d3.rgb.apply(null, shade(fuchsia, v));
-        }
+        } // else
+        console.log(d.impact);
         return d3.rgb(128, 128, 128);
       })
-      .attr('id', function(d, i) {
-        return '_bubble_' + d.location.replace(/\W+/g, '-');
-      })
-      .on("click", clicked)
-      .on("mouseover", highlight)
-      .on("mouseout", deHighlight);
+    .attr('id', function(d, i) {
+      return '_bubble_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+    })
+    .on("click", clicked)
+    .on("mouseover", highlight)
+    .on("mouseout", deHighlight);
     // create text
     node.append('text')
-      .attr('dy', '.3em')
-      .style('text-anchor', 'middle')
-      .text(function(d) {
-        var t =
-          counts[d.impact][d.location.replace(/\W+/g, '-')].count;
-        return t;
-      })
-      .attr('id', function(d, i) {
-        return '_text_' + d.location.replace(/\W+/g, '-');
-      })
-      .on("click", clicked)
-      .on("mouseover", highlight)
-      .on("mouseout", deHighlight);
+    .attr('dy', '.3em')
+    .style('text-anchor', 'middle')
+    .text(function(d) {
+      var t =
+      counts[d.impact][d.location.replace(/\W+/g, '-')].count;
+      return t;
+    })
+    .attr('id', function(d, i) {
+      return '_text_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+    })
+    .on("click", clicked)
+    .on("mouseover", highlight)
+    .on("mouseout", deHighlight);
 
     // ... finished drawing bubbles
 
@@ -381,8 +388,8 @@ if (window.matchMedia(mobileOnly).matches) {
 
   // this allows us to process multiple data sources in a single function using d3, e.g. instead of just d3.json()
   queue()
-    .defer(d3.json, 'js/world.json')
-    .defer(d3.json, 'js/studies.json')
-    .defer(d3.tsv, 'js/world-country-names.tsv')
-    .await(ready);
+  .defer(d3.json, 'js/world.json')
+  .defer(d3.json, 'js/packstudies.json')
+  .defer(d3.tsv, 'js/world-country-names.tsv')
+  .await(ready);
 }
