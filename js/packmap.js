@@ -1,4 +1,4 @@
-// D3 Packlayout Map
+// D3 Pack Layout Map
 //
 // Data visualization map used to show counts of different categories of data per region
 // in a color coded / visually distinct format using d3's pack layout feature to pack
@@ -136,7 +136,6 @@ if (window.matchMedia(mobileOnly).matches) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
-    // filterBy('region-' + region);
   }
 
   function highlight(d) {
@@ -206,6 +205,19 @@ if (window.matchMedia(mobileOnly).matches) {
     return id;
   }
 
+  // Returns a flattened hierarchy containing all leaf nodes under the root.
+  function classes(root) {
+    var classes = [];
+
+    function recurse(name, node) {
+      if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+      else classes.push({packageName: name, className: node.name, value: node.size});
+    }
+
+    recurse(null, root);
+    return {children: classes};
+  }
+
   // process the various input data sets into our map
   // called with queue()
   function ready(error, world, studies, names) {
@@ -242,36 +254,53 @@ if (window.matchMedia(mobileOnly).matches) {
     // draw bubbles ...
 
     // tally counts for impact categories based on the json data and flag any child nodes that bump the count
-    // above 1 as duplicates to be removed when rendering the visual bubbles later
-    var s = studies.children,
-    counts = {};
-    for (var i in s) {
-      var loc = s[i].location.replace(/\W+/g, '-');
-      if (!(s[i].impact in counts)) {
-        counts[s[i].impact] = {};
-      }
-      if (loc in counts[s[i].impact]) {
-        counts[s[i].impact][loc]['count']++;
-        if (counts[s[i].impact][loc]['count'] > 1) {
-          studies.children[i].duplicate = true;
-        }
-      } else {
-        counts[s[i].impact][loc] = {
-          'count': 1,
-          'dup': 0
-        };
-      }
-    }
-
-    // assign a size value to each datum based on the count
-    var base = 4, // log base for bubble size curve
+    // above 1 as plurals to be filtered from the visualization
+    // NOTE: this data could be pre-processed by gulp to improve page load
+    var _sc = studies.children; // trim root node and assign to a temporary var for readability
+    for (var region in _sc) {
+      var _r = _sc[region],
+      base = 4, // log base for bubble size curve
       scale = 80; // multiplier for bubble size curve
-      for (var i in studies.children) {
-        var l = s[i].location.replace(/\W+/g, '-');
-        studies.children[i].size = (Math.log(counts[s[i].impact][l]['count'] + 1) / Math.log(base)) * scale;
-      }
 
-    // create pack layout
+      // set top-level sizes for regions based on log of the total number of children
+      _sc[region].size = (Math.log(_r.children.length + 1) / Math.log(base)) * scale;
+      _sc[region].impacts = {}; // <-- this part needs to be made extensible
+
+      // iterate through each study in the region
+      var _scc = _sc[region].children; // assign and trim for readability
+      for (var study in _scc) {
+        var _s = _scc[study];
+
+        // increment count or add counter if it is not in the parent node yet
+        if (!_sc[region].impacts.hasOwnProperty(_s.impact)) {
+          _sc[region].impacts[_s.impact] = 1;
+        } else {
+          _sc[region].impacts[_s.impact] ++;
+          // flag as a plural entry in the category, in case we want to filter from node structure
+          // in certain visualizations (eg we just want to display counts only)
+          _scc[study].plural = true;
+        }
+        // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
+        // _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
+      }
+      _sc[region].children = _scc; // re-insert modified structure (case studies)
+
+      // calculate sizes for categories based on the count
+      // this may need to be improved to allow for retaining a base size (above) for each most-granular datum
+      // so that we can 'drill' from abstract to specific all the way down to the individual data
+      var _scc = _sc[region].children;
+      for (var study in _scc) {
+        var _s = _scc[study];
+        _scc[study].size = (Math.log(_sc[region].impacts[_s.impact] + 1) / Math.log(base)) * scale;
+      }
+      _sc[region].children = _scc;
+    }
+    studies.children = _sc; // re-insert modified structure (regions)
+
+    console.log(studies);
+
+    // set up pack layout, which will populate studies with layout information
+    // based on the size we calculated from the counts when pack.nodes() is called
     var diameter = 450, // diameter of container circles to pack bubbles into
     pack = d3.layout.pack()
     .size([diameter, diameter])
@@ -281,13 +310,19 @@ if (window.matchMedia(mobileOnly).matches) {
 
     // append bubbles to the svg ...
 
+    // console.log(pack.nodes(studies).filter(function(d) {
+    //   // filter out any parents (ie nodes that contain children) &&
+    //   // filter out duplicate nodes from the data identified during counting
+    //   return !d.children && !d.duplicate && (d.region !== 'world');
+    // }));
+
     // filter the data, transform, and create groups
     var node = svg.selectAll('svg')
-    .data(pack(studies).filter(function(d) {
-        // filter out any parents (ie nodes that contain children) &&
-        // filter out duplicate nodes from the data identified during counting
-        return !d.children && !d.duplicate;
-      }))
+    // .data(pack.nodes(studies).filter(function(d) {
+    //     // filter out any parents (ie nodes that contain children) &&
+    //     // filter out duplicate nodes from the data identified during counting
+    //     return !d.children && !d.duplicate && (d.region !== 'world');
+    //   }))
     .enter().append('g')
     .attr('class', function(d, i) {
       return 'node';
@@ -386,7 +421,7 @@ if (window.matchMedia(mobileOnly).matches) {
     g.select('#Antarctica').remove();
   }
 
-  // this allows us to process multiple data sources in a single function using d3, e.g. instead of just d3.json()
+  // this allows us to process multiple data sources in a single function, ie instead of just d3.json()
   queue()
   .defer(d3.json, 'js/world.json')
   .defer(d3.json, 'js/packstudies.json')
