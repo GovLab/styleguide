@@ -14,9 +14,9 @@
 // config
 var mobileOnly  = '(max-width: 767px)',
 mapClass        = '.b-pack-map',
-width           = 900,
-height          = 400,
-scale           = 120
+width           = 1200,
+height          = 800,
+scale           = 200
 ;
 
 // disable the map on mobile (ie replace with something else)
@@ -136,7 +136,7 @@ if (window.matchMedia(mobileOnly).matches) {
     var region = this.id.replace(/_bubble_|_text_/, '');
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
-    filterBy('region-' + region);
+    // filterBy('region-' + region);
   }
 
   function highlight(d) {
@@ -281,14 +281,13 @@ if (window.matchMedia(mobileOnly).matches) {
     // append bubbles to the svg ...
 
     // filter the data, transform, and create groups
-    var node = svg.select('svg')
-      .data(studies.children)
-      .enter().append('g')
-      .filter(pack(studies).filter(function(d) {
+    var node = svg.selectAll('svg')
+      .data(pack(studies).filter(function(d) {
         // filter out any parents (ie nodes that contain children) &&
         // filter out duplicate nodes from the data identified during counting
         return !d.children && !d.duplicate;
       }))
+      .enter().append('g')
       .attr('class', function(d, i) {
         return 'node';
       })
@@ -352,7 +351,7 @@ if (window.matchMedia(mobileOnly).matches) {
         return d3.rgb(128, 128, 128);
       })
       .attr('id', function(d, i) {
-        return '_bubble_' + d.location.replace(/\W+/g, '-');
+        return 'bubble-' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
       })
       .on("click", clicked)
       .on("mouseover", highlight)
@@ -367,7 +366,7 @@ if (window.matchMedia(mobileOnly).matches) {
         return t;
       })
       .attr('id', function(d, i) {
-        return '_text_' + d.location.replace(/\W+/g, '-');
+        return 'text-' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
       })
       .on("click", clicked)
       .on("mouseover", highlight)
@@ -382,7 +381,7 @@ if (window.matchMedia(mobileOnly).matches) {
   // this allows us to process multiple data sources in a single function using d3, e.g. instead of just d3.json()
   queue()
     .defer(d3.json, 'js/world.json')
-    .defer(d3.json, 'js/studies.json')
+    .defer(d3.json, 'js/studiesodi.json')
     .defer(d3.tsv, 'js/world-country-names.tsv')
     .await(ready);
 }
