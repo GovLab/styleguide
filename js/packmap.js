@@ -133,15 +133,16 @@ if (window.matchMedia(mobileOnly).matches) {
   // event handlers
 
   function clicked(d) {
-    var region = this.id.replace(/_bubble_|_text_/, '');
+    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
     // filterBy('region-' + region);
   }
 
   function highlight(d) {
-    var region = this.id.replace(/_bubble_|_text_/, '');
+    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+    console.log(region);
     d3.selectAll('.node').classed('fade', true);
     d3.select('.map-caption').text(regions[region].name);
     d3.select('.map-caption').classed('default', false);
@@ -151,14 +152,14 @@ if (window.matchMedia(mobileOnly).matches) {
   }
 
   function deHighlight(d) {
-    var region = '#' + this.id.replace(/_bubble_|_text_/, '');
-    var bubble = '#' + this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+    var region = d.location || this.id.replace(/_bubble_|_text_/, '');
+    var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
     d3.selectAll('.node').classed('fade', false);
     d3.select('.map-caption').text('Select a Region');
     d3.select('.map-caption').classed('default', true);
-    d3.select(region).classed('active', false);
-    d3.select(bubble).classed('active', false);
-    zoomBubble(bubble, -1);
+    d3.select('#' + region).classed('active', false);
+    d3.select('#' + bubble).classed('active', false);
+    zoomBubble('#' + bubble, -1);
   }
 
   // bubble radius animation
@@ -352,7 +353,7 @@ if (window.matchMedia(mobileOnly).matches) {
         return d3.rgb(128, 128, 128);
       })
       .attr('id', function(d, i) {
-        return 'bubble-' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+        return '_bubble_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
       })
       .on("click", clicked)
       .on("mouseover", highlight)
@@ -367,7 +368,7 @@ if (window.matchMedia(mobileOnly).matches) {
         return t;
       })
       .attr('id', function(d, i) {
-        return 'text-' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+        return '_text_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
       })
       .on("click", clicked)
       .on("mouseover", highlight)
