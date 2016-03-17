@@ -271,7 +271,7 @@ if (window.matchMedia(mobileOnly).matches) {
     }
 
     // create pack layout
-    var diameter = 120, // diameter of container circles to pack bubbles into
+    var diameter = 200, // diameter of container circles to pack bubbles into
       pack = d3.layout.pack()
       .size([diameter, diameter])
       .value(function(d) {
@@ -343,11 +343,12 @@ if (window.matchMedia(mobileOnly).matches) {
           return d3.rgb.apply(null, shade(blue, v));
         } else if (d.impact === 'citizens') {
           return d3.rgb.apply(null, shade(orange, v));
-        } else if (d.impact === 'opportunity') {
+        } else if (d.impact === 'economic') {
           return d3.rgb.apply(null, shade(yellow, v));
-        } else if (d.impact === 'problems') {
+        } else if (d.impact === 'public') {
           return d3.rgb.apply(null, shade(fuchsia, v));
-        }
+        } // else
+        console.log(d.impact);
         return d3.rgb(128, 128, 128);
       })
       .attr('id', function(d, i) {
