@@ -308,15 +308,15 @@ if (window.matchMedia(mobileOnly).matches) {
       }
     }
     for (var i in studies.impacts) {
-        var max = Math.max.apply(null, studies.impacts[i]);
-        studies.impacts[i] = max;
+      var max = Math.max.apply(null, studies.impacts[i]);
+      studies.impacts[i] = max;
     }
 
     console.log(studies);
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
-    var diameter = 450, // diameter of container circles to pack bubbles into
+    var diameter = 400, // diameter of container circles to pack bubbles into
     pack = d3.layout.pack()
     .size([diameter, diameter])
     .value(function(d) {
@@ -346,32 +346,46 @@ if (window.matchMedia(mobileOnly).matches) {
       return 'node';
     })
     .attr('transform', function(d, i) {
-
-      // select the path for the region
+      var x,y;
       if (d.region) {
+        // select the path for the region
         var region = g.select('#' + d.region.replace(/\W+/g, '-')).datum();
+
+        // find center of the region's bounding box
+        var b = path.bounds(region);
+        x = (b[0][0] + b[1][0]) / 2;
+        y = (b[0][1] + b[1][1]) / 2;
+
+        // manual adjustments
+        // (i.e. some of the bounding boxes don't make visual sense, so just
+        // adjust those manually)
+        x *= regions[d.region].translate.x;
+        y *= regions[d.region].translate.y;
+      } else {
+        x = y = 0;
       }
 
-      // find center of the region's bounding box
-      var b = path.bounds(region),
-      x = (b[0][0] + b[1][0]) / 2,
-      y = (b[0][1] + b[1][1]) / 2;
-
-      // manual adjustments
-      // (i.e. some of the bounding boxes don't make visual sense, so just
-      // adjust those manually)
-      if (d.location in regions) {
-        x *= regions[d.location].translate.x;
-        y *= regions[d.location].translate.y;
+      // find parent region x & y, and add as delta x & y
+      if (!d.children) {
+        var dx,dy;
+        for (var i in studies.children) {
+          if (studies.children[i].region === d.location) {
+            dx = studies.children[i].x;
+            dy = studies.children[i].y;
+          }
+        }
+        x += d.x + dx;
+        y += d.y + dy;
       }
 
       // ?
       // x = (d.x - diameter / 2) + x;
       // y = (d.y - diameter / 2) + y;
 
-      x = d.x;
-      y = d.y;
+      // x = d.x;
+      // y = d.y;
 
+      // console.log ('d', d);
       // console.log ('xy', x, y);
       // console.log ('dxy', d.x, d.y);
 
@@ -384,13 +398,12 @@ if (window.matchMedia(mobileOnly).matches) {
       })
     .style('fill', function(d) {
 
-      var max = d.impact ? studies.impacts[d.impact] : 1;
-
       // calculate the value of the shade (logarithmic)
-      var base = 2; // log base for shade curve
-      var scale = 3; // multiplier for shade curve
-      var c = counts[d.impact][d.location.replace(/\W+/g, '-')].count;
-      var v = (Math.log(c + 1) / Math.log(base)) * scale / max;
+      var base = 2, // log base for shade curve
+      scale = 3, // multiplier for shade curve
+      max = d.impact ? studies.impacts[d.impact] : 1,
+      c = d.impact ? studies.impacts[d.impact] : 1,
+      v = (Math.log(c + 1) / Math.log(base)) * scale / max,
       v = v > 1 ? 1 : v;
 
       var blue = [0, 138, 179];
