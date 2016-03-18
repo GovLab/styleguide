@@ -206,17 +206,17 @@ if (window.matchMedia(mobileOnly).matches) {
   }
 
   // Returns a flattened hierarchy containing all leaf nodes under the root.
-  function classes(root) {
-    var classes = [];
+  // function classes(root) {
+  //   var classes = [];
 
-    function recurse(name, node) {
-      if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-      else classes.push({packageName: name, className: node.name, value: node.size});
-    }
+  //   function recurse(name, node) {
+  //     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+  //     else classes.push({packageName: name, className: node.name, value: node.size});
+  //   }
 
-    recurse(null, root);
-    return {children: classes};
-  }
+  //   recurse(null, root);
+  //   return {children: classes};
+  // }
 
   // process the various input data sets into our map
   // called with queue()
@@ -297,6 +297,21 @@ if (window.matchMedia(mobileOnly).matches) {
     }
     studies.children = _sc; // re-insert modified structure (regions)
 
+    // find max category counts accross children and insert into root node
+    studies.impacts = {};
+    for (var i in studies.children) {
+      for (var j in studies.children[i].impacts) {
+        if (!studies.impacts.hasOwnProperty(j)) {
+          studies.impacts[j] = [];
+        }
+        studies.impacts[j].push(studies.children[i].impacts[j]);
+      }
+    }
+    for (var i in studies.impacts) {
+        var max = Math.max.apply(null, studies.impacts[i]);
+        studies.impacts[i] = max;
+    }
+
     console.log(studies);
 
     // set up pack layout, which will populate studies with layout information
@@ -310,89 +325,90 @@ if (window.matchMedia(mobileOnly).matches) {
 
     // append bubbles to the svg ...
 
-    // console.log(pack.nodes(studies).filter(function(d) {
+    // console.log(pack(studies).filter(function(d) {
     //   // filter out any parents (ie nodes that contain children) &&
     //   // filter out duplicate nodes from the data identified during counting
-    //   return !d.children && !d.duplicate && (d.region !== 'world');
+    //   // return !d.plural && d.region !== 'world';
+    //   return !d.children && !d.plural;
     // }));
 
     // filter the data, transform, and create groups
     var node = svg.selectAll('svg')
-    // .data(pack.nodes(studies).filter(function(d) {
-    //     // filter out any parents (ie nodes that contain children) &&
-    //     // filter out duplicate nodes from the data identified during counting
-    //     return !d.children && !d.duplicate && (d.region !== 'world');
-    //   }))
+    .data(pack.nodes(studies).filter(function(d) {
+        // filter out any parents (ie nodes that contain children) &&
+        // filter out plural nodes from the data identified during counting
+        // return !d.children && !d.plural;
+        // console.log(!d.plural && d.region !== 'world', d);
+        return !d.plural && d.region !== 'world';
+      }))
     .enter().append('g')
     .attr('class', function(d, i) {
       return 'node';
     })
     .attr('transform', function(d, i) {
-      var region = g.select('#' + d.location.replace(/\W+/g, '-')).datum();
 
-        // find center of the region's bounding box
-        var b = path.bounds(region),
-        x = (b[0][0] + b[1][0]) / 2,
-        y = (b[0][1] + b[1][1]) / 2;
+      // select the path for the region
+      if (d.region) {
+        var region = g.select('#' + d.region.replace(/\W+/g, '-')).datum();
+      }
 
-        // manual adjustments
-        // (i.e. some of the bounding boxes don't make visual sense, so just
-        // adjust those manually)
-        if (d.location in regions) {
-          x *= regions[d.location].translate.x;
-          y *= regions[d.location].translate.y;
-        }
+      // find center of the region's bounding box
+      var b = path.bounds(region),
+      x = (b[0][0] + b[1][0]) / 2,
+      y = (b[0][1] + b[1][1]) / 2;
 
-        // ?
-        // x = (d.x - diameter / 2) + x;
-        // y = (d.y - diameter / 2) + y;
+      // manual adjustments
+      // (i.e. some of the bounding boxes don't make visual sense, so just
+      // adjust those manually)
+      if (d.location in regions) {
+        x *= regions[d.location].translate.x;
+        y *= regions[d.location].translate.y;
+      }
 
-        x = d.x;
-        y = d.y;
+      // ?
+      // x = (d.x - diameter / 2) + x;
+      // y = (d.y - diameter / 2) + y;
 
-        console.log ('xy', x, y);
-        console.log ('dxy', d.x, d.y);
+      x = d.x;
+      y = d.y;
 
-        return 'translate(' + x + ',' + y + ')';
-      });
+      // console.log ('xy', x, y);
+      // console.log ('dxy', d.x, d.y);
+
+      return 'translate(' + x + ',' + y + ')';
+    });
     // create the circles
     node.append('circle')
     .attr('r', function(d) {
         return d.size / 2; // ie size is a diameter for layout purposes
       })
     .style('fill', function(d) {
-        // strip out just the count numbers and put into a flat array, then find the max
-        var countsarr = [];
-        for (var i in counts[d.impact]) {
-          countsarr.push(counts[d.impact][i]['count']);
-        }
-        var max = Math.max.apply(null, countsarr);
 
+      var max = d.impact ? studies.impacts[d.impact] : 1;
 
+      // calculate the value of the shade (logarithmic)
+      var base = 2; // log base for shade curve
+      var scale = 3; // multiplier for shade curve
+      var c = counts[d.impact][d.location.replace(/\W+/g, '-')].count;
+      var v = (Math.log(c + 1) / Math.log(base)) * scale / max;
+      v = v > 1 ? 1 : v;
 
-        // calculate the value of the shade (logarithmic)
-        var base = 2; // log base for shade curve
-        var scale = 3; // multiplier for shade curve
-        var c = counts[d.impact][d.location.replace(/\W+/g, '-')].count;
-        var v = (Math.log(c + 1) / Math.log(base)) * scale / max;
-        v = v > 1 ? 1 : v;
-
-        var blue = [0, 138, 179];
-        var orange = [238, 91, 67];
-        var yellow = [194, 195, 59];
-        var fuchsia = [173, 0, 84];
-        if (d.impact === 'government') {
-          return d3.rgb.apply(null, shade(blue, v));
-        } else if (d.impact === 'citizens') {
-          return d3.rgb.apply(null, shade(orange, v));
-        } else if (d.impact === 'economic') {
-          return d3.rgb.apply(null, shade(yellow, v));
-        } else if (d.impact === 'public') {
-          return d3.rgb.apply(null, shade(fuchsia, v));
-        } // else
-        console.log(d.impact);
-        return d3.rgb(128, 128, 128);
-      })
+      var blue = [0, 138, 179];
+      var orange = [238, 91, 67];
+      var yellow = [194, 195, 59];
+      var fuchsia = [173, 0, 84];
+      if (d.impact === 'government') {
+        return d3.rgb.apply(null, shade(blue, v));
+      } else if (d.impact === 'citizens') {
+        return d3.rgb.apply(null, shade(orange, v));
+      } else if (d.impact === 'economic') {
+        return d3.rgb.apply(null, shade(yellow, v));
+      } else if (d.impact === 'public') {
+        return d3.rgb.apply(null, shade(fuchsia, v));
+      } // else
+      console.log(d.impact);
+      return d3.rgb(128, 128, 128);
+    })
     .attr('id', function(d, i) {
       return '_bubble_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
     })
