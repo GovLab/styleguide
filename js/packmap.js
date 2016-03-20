@@ -130,6 +130,32 @@ if (window.matchMedia(mobileOnly).matches) {
     return rgb;
   }
 
+  // filter an object recursively based on a function f
+  function filterObject (obj, f) {
+    var result = {};
+    if (f(obj)) {
+      for (var key in obj) {
+        if (typeof obj[key] === 'object') {
+          if (!Array.isArray(obj[key])) {
+            var r = filterObject(obj[key], f);
+            if (r) { result[key] = r; };
+          }
+          else {
+            result[key] = [];
+            for (i in obj[key]) {
+              var r = filterObject(obj[key][i], f);
+              if (r) { result[key].push(r); }
+            }
+          }
+        } else {
+          result[key] = obj[key];
+        }
+      }
+      return result;
+    }
+    return false;
+  }
+
   // event handlers
 
   function clicked(d) {
@@ -312,11 +338,15 @@ if (window.matchMedia(mobileOnly).matches) {
       studies.impacts[i] = max;
     }
 
+    studies = filterObject(studies, function(d) {
+      return !d.plural;
+    });
+
     console.log(studies);
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
-    var diameter = 400, // diameter of container circles to pack bubbles into
+    var diameter = 600, // diameter of container circles to pack bubbles into
     pack = d3.layout.pack()
     .size([diameter, diameter])
     .value(function(d) {
@@ -339,7 +369,7 @@ if (window.matchMedia(mobileOnly).matches) {
         // filter out plural nodes from the data identified during counting
         // return !d.children && !d.plural;
         // console.log(!d.plural && d.region !== 'world', d);
-        return !d.plural && d.region !== 'world';
+        return d.region !== 'world';
       }))
     .enter().append('g')
     .attr('class', function(d, i) {
@@ -361,12 +391,15 @@ if (window.matchMedia(mobileOnly).matches) {
         // adjust those manually)
         x *= regions[d.region].translate.x;
         y *= regions[d.region].translate.y;
-      } else {
-        x = y = 0;
-      }
 
-      // find parent region x & y, and add as delta x & y
-      if (!d.children) {
+        for (var i in studies.children) {
+          if (studies.children[i].region === d.region) {
+            // studies.children[i].x = x;
+            // studies.children[i].y = y;
+          }
+        }
+
+      } else {
         var dx,dy;
         for (var i in studies.children) {
           if (studies.children[i].region === d.location) {
@@ -374,16 +407,18 @@ if (window.matchMedia(mobileOnly).matches) {
             dy = studies.children[i].y;
           }
         }
-        x += d.x + dx;
-        y += d.y + dy;
+        // x = d.x + dx;
+        // y = d.y + dy;
+        x = d.x;
+        y = d.y;
       }
 
       // ?
       // x = (d.x - diameter / 2) + x;
       // y = (d.y - diameter / 2) + y;
 
-      // x = d.x;
-      // y = d.y;
+      x = d.x;
+      y = d.y;
 
       // console.log ('d', d);
       // console.log ('xy', x, y);
@@ -394,7 +429,7 @@ if (window.matchMedia(mobileOnly).matches) {
     // create the circles
     node.append('circle')
     .attr('r', function(d) {
-        return d.size / 2; // ie size is a diameter for layout purposes
+        return d.r; // ie size is a diameter for layout purposes
       })
     .style('fill', function(d) {
 
@@ -419,7 +454,7 @@ if (window.matchMedia(mobileOnly).matches) {
       } else if (d.impact === 'public') {
         return d3.rgb.apply(null, shade(fuchsia, v));
       } // else
-      console.log(d.impact);
+      // console.log(d.impact);
       return d3.rgb(128, 128, 128);
     })
     .attr('id', function(d, i) {
