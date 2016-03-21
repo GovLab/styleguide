@@ -118,6 +118,7 @@ Styleguide 6.3.2
     circle {
       opacity: .8;
       cursor: pointer;
+      transition: opacity 0.5s;
       &.active {
         opacity: .8;
         transition: opacity 0.1s;

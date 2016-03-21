@@ -165,6 +165,8 @@ if (window.matchMedia(mobileOnly).matches) {
     'public' : [173, 0, 84]
   };
 
+  var baseColors = {};
+
   function clicked(d) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     d3.selectAll('.region').classed('selected', false);
@@ -172,35 +174,67 @@ if (window.matchMedia(mobileOnly).matches) {
   }
 
   function highlight(d) {
-    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
-    var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
-    d3.selectAll('.node, .parent').classed('fade', true);
-    d3.select('.map-caption').text(regions[region].name);
-    d3.select('.map-caption').classed('default', false);
-    d3.select('#' + region).classed('active', true);
-    d3.select('#' + bubble).classed('active', true);
+    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, ''),
+    bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_'),
+    impact = this.id.replace(/^[^-]*-?/, '');
+
+    baseColors[bubble] = d3.select('#' + bubble).style('fill');
     for (var k in colors) {
-      d3.select('#' + bubble + '-' + k).classed('active', true);
+      if (!d3.select('#' + bubble + '-' + k).empty()) {
+        baseColors[bubble + '-' + k] = d3.select('#' + bubble + '-' + k).style('fill');
+        d3.select('#' + bubble + '-' + k).classed('active', true)
+        .style('fill', function(d) {
+          return d3.rgb.apply(null, colors[k]);
+        });
+      }
     }
-    if (!d3.select('#' + this.id).classed('region')) {
+
+    d3.select('.map-caption').text(regions[region].name)
+    .classed('default', false);
+    d3.select('#' + region).classed('active', true);
+    d3.select('#' + bubble).classed('active', true)
+    .style('fill', function(d) {
+      if (impact in colors) {
+        return d3.rgb.apply(null, colors[impact]);
+      } else {
+        return d3.rgb(0, 138, 179);
+      }
+    });
+
+    d3.selectAll('.node, .parent').classed('fade', true);
+
+    if (!(d3.select('#' + this.id).classed('region'))) {
       zoomBubble('#' + bubble, 1.1);
     }
   }
 
   function deHighlight(d) {
-    var region = d.location || this.id.replace(/_bubble_|_text_/, '');
-    var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+    var region = d.location || this.id.replace(/_bubble_|_text_/, ''),
+    bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+
+    if (bubble in baseColors) {
+      d3.select('#' + bubble)
+      .style('fill', function(d) {
+        return baseColors[bubble]
+      });
+    }
+
     d3.selectAll('.node, .parent').classed('fade', false);
-    d3.select('.map-caption').text('Select a Region');
-    d3.select('.map-caption').classed('default', true);
+
+    d3.select('.map-caption').text('Select a Region')
+    .classed('default', true);
     d3.select('#' + region).classed('active', false);
     d3.select('#' + bubble).classed('active', false);
     for (var k in colors) {
-      d3.select('#' + bubble + '-' + k).classed('active', false);
+      d3.select('#' + bubble + '-' + k).classed('active', false)
+      .style('fill', function(d) {
+        return baseColors[bubble + '-' + k];
+      });
     }
     if (!d3.select('#' + this.id).classed('region')) {
       zoomBubble('#' + bubble, -1);
     }
+
     // resetBubble('#' + bubble);
   }
 
@@ -547,6 +581,7 @@ if (window.matchMedia(mobileOnly).matches) {
       }
       return id;
     })
+    .attr('class', 'text')
     .on("click", clicked)
     .on("mouseover", highlight)
     .on("mouseout", deHighlight);
