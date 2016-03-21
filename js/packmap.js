@@ -376,53 +376,49 @@ if (window.matchMedia(mobileOnly).matches) {
       return 'node';
     })
     .attr('transform', function(d, i) {
-      var x,y;
+      var x,y,bx,by,ox,oy;
       if (d.region) {
         // select the path for the region
         var region = g.select('#' + d.region.replace(/\W+/g, '-')).datum();
 
         // find center of the region's bounding box
         var b = path.bounds(region);
-        x = (b[0][0] + b[1][0]) / 2;
-        y = (b[0][1] + b[1][1]) / 2;
-
-        // manual adjustments
-        // (i.e. some of the bounding boxes don't make visual sense, so just
-        // adjust those manually)
-        x *= regions[d.region].translate.x;
-        y *= regions[d.region].translate.y;
+        bx = (b[0][0] + b[1][0]) / 2;
+        by = (b[0][1] + b[1][1]) / 2;
 
         for (var i in studies.children) {
-          if (studies.children[i].region === d.region) {
-            // studies.children[i].x = x;
-            // studies.children[i].y = y;
+          if (d.region === studies.children[i].region) {
+            ox = studies.children[i].x;
+            oy = studies.children[i].y;
           }
         }
 
       } else {
-        var dx,dy;
+        // function?
+        var region = g.select('#' + d.location.replace(/\W+/g, '-')).datum();
+        var b = path.bounds(region);
+        bx = (b[0][0] + b[1][0]) / 2;
+        by = (b[0][1] + b[1][1]) / 2;
+
         for (var i in studies.children) {
-          if (studies.children[i].region === d.location) {
-            dx = studies.children[i].x;
-            dy = studies.children[i].y;
+          if (d.location === studies.children[i].region) {
+            ox = studies.children[i].x;
+            oy = studies.children[i].y;
           }
         }
-        // x = d.x + dx;
-        // y = d.y + dy;
-        x = d.x;
-        y = d.y;
       }
 
-      // ?
-      // x = (d.x - diameter / 2) + x;
-      // y = (d.y - diameter / 2) + y;
+      console.log (bx, d.x, ox);
+      console.log (by, d.y, oy);
 
-      x = d.x;
-      y = d.y;
+      x = bx + d.x - ox;
+      y = by + d.y - oy;
 
-      // console.log ('d', d);
-      // console.log ('xy', x, y);
-      // console.log ('dxy', d.x, d.y);
+      // manual adjustments
+      // (i.e. some of the bounding boxes don't make visual sense, so just
+      // adjust those manually)
+      x += regions[d.region || d.location].translate.x;
+      y += regions[d.region || d.location].translate.y;
 
       return 'translate(' + x + ',' + y + ')';
     });
