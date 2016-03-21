@@ -105,9 +105,27 @@ Styleguide 6.3.2
 
   .country {
     fill: none;
-    stroke: #fff;
+    // stroke: #fff;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  .parent {
+    &.fade circle {
+      opacity: .15;
+      transition: opacity 0.5s;
+    }
+    circle {
+      opacity: .8;
+      cursor: pointer;
+      &.active {
+        opacity: .8;
+        transition: opacity 0.1s;
+      }
+    }
+    text {
+      font-size: 30px;
+    }
   }
 
   .node {
@@ -115,21 +133,17 @@ Styleguide 6.3.2
       opacity: .15;
       transition: opacity 0.5s;
     }
-
     circle {
       opacity: .75;
       cursor: pointer;
       transition: opacity 0.5s;
       &.active {
-        opacity: .9;
-        fill: rgb(0, 138, 179) !important;
+        opacity: .8;
         transition: opacity 0.1s;
       }
     }
-
     text {
-      fill: #fff;
-      cursor: pointer;
+      font-size: 20px;
     }
   }
 
@@ -141,6 +155,11 @@ Styleguide 6.3.2
       fill: #bbb;
       transition: fill 0.1s;
     }
+  }
+
+  text {
+    fill: #fff;
+    cursor: pointer;
   }
 
 }
