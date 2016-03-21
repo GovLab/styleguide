@@ -6858,12 +6858,23 @@ Styleguide 6.3.2
 
 .b-pack-map .country {
   fill: none;
-  stroke: #fff;
   stroke-linecap: round;
   stroke-linejoin: round; }
 
+.b-pack-map .parent.fade circle {
+  opacity: .15;
+  transition: opacity 0.5s; }
+
 .b-pack-map .parent circle {
-  fill: rgba(0, 0, 0, 0.1) !important; }
+  opacity: .8;
+  cursor: pointer;
+  transition: opacity 0.5s; }
+  .b-pack-map .parent circle.active {
+    opacity: .8;
+    transition: opacity 0.1s; }
+
+.b-pack-map .parent text {
+  font-size: 22px; }
 
 .b-pack-map .node.fade circle {
   opacity: .15;
@@ -6874,13 +6885,11 @@ Styleguide 6.3.2
   cursor: pointer;
   transition: opacity 0.5s; }
   .b-pack-map .node circle.active {
-    opacity: .9;
-    fill: #008ab3 !important;
+    opacity: .8;
     transition: opacity 0.1s; }
 
 .b-pack-map .node text {
-  fill: #fff;
-  cursor: pointer; }
+  font-size: 22px; }
 
 .b-pack-map .region {
   fill: #ddd;
@@ -6889,6 +6898,32 @@ Styleguide 6.3.2
   .b-pack-map .region.active {
     fill: #bbb;
     transition: fill 0.1s; }
+
+.b-pack-map text {
+  fill: #fff;
+  cursor: pointer; }
+
+.b-pack-map .parent {
+  opacity: 0;
+  visibility: hidden; }
+  .b-pack-map .parent.show {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s; }
+
+.b-pack-map .node {
+  opacity: 0;
+  visibility: hidden; }
+  .b-pack-map .node.show {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s; }
+
+.map-ui .b-button, .map-ui .b-form input[type="submit"], .b-form .map-ui input[type="submit"] {
+  color: #fff;
+  background-color: rgba(0, 138, 179, 0.4); }
+  .map-ui .b-button.m-active, .map-ui .b-form input.m-active[type="submit"], .b-form .map-ui input.m-active[type="submit"] {
+    background-color: #008ab3; }
 
 .kss-title:hover, .kss-title *:hover {
   text-decoration: none; }

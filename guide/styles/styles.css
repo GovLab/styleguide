@@ -6874,22 +6874,21 @@ Styleguide 6.3.2
     transition: opacity 0.1s; }
 
 .b-pack-map .parent text {
-  font-size: 30px; }
+  font-size: 22px; }
 
 .b-pack-map .node.fade circle {
   opacity: .15;
   transition: opacity 0.5s; }
 
 .b-pack-map .node circle {
-  opacity: .75;
+  opacity: 1;
   cursor: pointer;
   transition: opacity 0.5s; }
   .b-pack-map .node circle.active {
-    opacity: .8;
-    transition: opacity 0.1s; }
+    opacity: 1; }
 
 .b-pack-map .node text {
-  font-size: 20px; }
+  font-size: 22px; }
 
 .b-pack-map .region {
   fill: #ddd;
@@ -6902,6 +6901,28 @@ Styleguide 6.3.2
 .b-pack-map text {
   fill: #fff;
   cursor: pointer; }
+
+.b-pack-map .parent {
+  opacity: 0;
+  visibility: hidden; }
+  .b-pack-map .parent.show {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s; }
+
+.b-pack-map .node {
+  opacity: 0;
+  visibility: hidden; }
+  .b-pack-map .node.show {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s; }
+
+.map-ui .b-button, .map-ui .b-form input[type="submit"], .b-form .map-ui input[type="submit"] {
+  color: #fff;
+  background-color: rgba(0, 138, 179, 0.4); }
+  .map-ui .b-button.m-active, .map-ui .b-form input.m-active[type="submit"], .b-form .map-ui input.m-active[type="submit"] {
+    background-color: #008ab3; }
 
 .kss-title:hover, .kss-title *:hover {
   text-decoration: none; }
