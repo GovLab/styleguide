@@ -107,7 +107,7 @@ if (window.matchMedia(mobileOnly).matches) {
   // var projection = d3.geo.equirectangular()
   var projection = d3.geo.mercator()
   .scale(scale)
-  .translate([width / 2, height / 1.5]),
+  .translate([width / 2, height / 2]),
   path = d3.geo.path()
   .projection(projection);
 
@@ -509,7 +509,7 @@ if (window.matchMedia(mobileOnly).matches) {
       scale = 2, // multiplier for shade curve
       offset = .18, // offset
       v = (Math.log(c/t + 1) / Math.log(base)) * scale + offset;
-      console.log (!d.region ? v : '');
+      // console.log (!d.region ? v : '');
 
       // calc value for parent shade
       base = 8;
