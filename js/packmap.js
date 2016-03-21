@@ -158,6 +158,13 @@ if (window.matchMedia(mobileOnly).matches) {
 
   // event handlers
 
+  var colors = {
+    'government' : [0, 138, 179],
+    'citizens' : [238, 91, 67],
+    'economic' : [194, 195, 59],
+    'public' : [173, 0, 84]
+  };
+
   function clicked(d) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     d3.selectAll('.region').classed('selected', false);
@@ -172,6 +179,9 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.select('.map-caption').classed('default', false);
     d3.select('#' + region).classed('active', true);
     d3.select('#' + bubble).classed('active', true);
+    for (var k in colors) {
+      d3.select('#' + bubble + '-' + k).classed('active', true);
+    }
     if (!d3.select('#' + this.id).classed('region')) {
       zoomBubble('#' + bubble, 1.1);
     }
@@ -185,7 +195,12 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.select('.map-caption').classed('default', true);
     d3.select('#' + region).classed('active', false);
     d3.select('#' + bubble).classed('active', false);
-    zoomBubble('#' + bubble, -1);
+    for (var k in colors) {
+      d3.select('#' + bubble + '-' + k).classed('active', false);
+    }
+    if (!d3.select('#' + this.id).classed('region')) {
+      zoomBubble('#' + bubble, -1);
+    }
     // resetBubble('#' + bubble);
   }
 
