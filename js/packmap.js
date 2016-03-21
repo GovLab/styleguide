@@ -1,4 +1,4 @@
-// D3 Packlayout Map
+// D3 Pack Layout Map
 //
 // Data visualization map used to show counts of different categories of data per region
 // in a color coded / visually distinct format using d3's pack layout feature to pack
@@ -43,8 +43,8 @@ if (window.matchMedia(mobileOnly).matches) {
       706, 710, 728, 729, 748, 834, 768, 788, 800, 894, 716
       ],
       'translate': {
-        x: 1,
-        y: .9
+        x: 0,
+        y: -1
       }
     },
     'as': {
@@ -54,8 +54,8 @@ if (window.matchMedia(mobileOnly).matches) {
       634, 643, 682, 702, 144, 760, 762, 764, 792, 795, 784, 860, 704, 887
       ],
       'translate': {
-        x: 1.5,
-        y: 1
+        x: 4,
+        y: 0
       }
     },
     'eu': {
@@ -66,8 +66,8 @@ if (window.matchMedia(mobileOnly).matches) {
       336, 304, 352
       ],
       'translate': {
-        x: 1,
-        y: 1
+        x: 0,
+        y: 0
       }
     },
     'na': {
@@ -76,24 +76,24 @@ if (window.matchMedia(mobileOnly).matches) {
       558, 591, 659, 662, 670, 780, 840
       ],
       'translate': {
-        x: .5,
-        y: 1.5
+        x: -4,
+        y: 1
       }
     },
     'oc': {
       'name': 'Oceania',
       'geometries': [36, 242, 296, 584, 583, 520, 554, 585, 598, 882, 90, 776, 548],
       'translate': {
-        x: 1.6,
-        y: 1
+        x: 6,
+        y: 0
       }
     },
     'sa': {
       'name': 'South America',
       'geometries': [32, 68, 76, 152, 170, 218, 328, 600, 604, 740, 858, 862],
       'translate': {
-        x: 1.1,
-        y: .9
+        x: 1,
+        y: 0
       }
     }
   };
@@ -130,40 +130,132 @@ if (window.matchMedia(mobileOnly).matches) {
     return rgb;
   }
 
+  // filter an object recursively based on a function f
+  function filterObject (obj, f) {
+    var result = {};
+    if (f(obj)) {
+      for (var key in obj) {
+        if (typeof obj[key] === 'object') {
+          if (!Array.isArray(obj[key])) {
+            var r = filterObject(obj[key], f);
+            if (r) { result[key] = r; };
+          }
+          else {
+            result[key] = [];
+            for (i in obj[key]) {
+              var r = filterObject(obj[key][i], f);
+              if (r) { result[key].push(r); }
+            }
+          }
+        } else {
+          result[key] = obj[key];
+        }
+      }
+      return result;
+    }
+    return false;
+  }
+
   // event handlers
+
+  var colors = {
+    'government' : [0, 138, 179],
+    'citizens' : [238, 91, 67],
+    'economic' : [194, 195, 59],
+    'public' : [173, 0, 84]
+  };
+
+  var baseColors = {};
 
   function clicked(d) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
-    // filterBy('region-' + region);
   }
 
   function highlight(d) {
-    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
-    var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
-    console.log(region);
-    d3.selectAll('.node').classed('fade', true);
-    d3.select('.map-caption').text(regions[region].name);
-    d3.select('.map-caption').classed('default', false);
+    var region = d.location || this.id.replace(/^(_bubble_|_text_)/, ''),
+    bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_'),
+    impact = this.id.replace(/^[^-]*-?/, '');
+
+    baseColors[bubble] = d3.select('#' + bubble).style('fill');
+    for (var k in colors) {
+      if (!d3.select('#' + bubble + '-' + k).empty()) {
+        baseColors[bubble + '-' + k] = d3.select('#' + bubble + '-' + k).style('fill');
+        d3.select('#' + bubble + '-' + k).classed('active', true)
+        .style('fill', function(d) {
+          return d3.rgb.apply(null, colors[k]);
+        });
+      }
+    }
+
+    d3.select('.map-caption').text(regions[region].name)
+    .classed('default', false);
     d3.select('#' + region).classed('active', true);
-    d3.select('#' + bubble).classed('active', true);
-    zoomBubble('#' + bubble, 1.4);
+    d3.select('#' + bubble).classed('active', true)
+    .style('fill', function(d) {
+      if (impact in colors) {
+        return d3.rgb.apply(null, colors[impact]);
+      } else {
+        return d3.rgb(0, 138, 179);
+      }
+    });
+
+    d3.selectAll('.node, .parent').classed('fade', true);
+
+    if (!(d3.select('#' + this.id).classed('region'))) {
+      zoomBubble('#' + bubble, 1.1);
+    }
   }
 
   function deHighlight(d) {
-    var region = d.location || this.id.replace(/_bubble_|_text_/, '');
-    var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
-    d3.selectAll('.node').classed('fade', false);
-    d3.select('.map-caption').text('Select a Region');
-    d3.select('.map-caption').classed('default', true);
+    var region = d.location || this.id.replace(/_bubble_|_text_/, ''),
+    bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
+
+    if (bubble in baseColors) {
+      d3.select('#' + bubble)
+      .style('fill', function(d) {
+        return baseColors[bubble]
+      });
+    }
+
+    d3.selectAll('.node, .parent').classed('fade', false);
+
+    d3.select('.map-caption').text('Select a Region')
+    .classed('default', true);
     d3.select('#' + region).classed('active', false);
     d3.select('#' + bubble).classed('active', false);
-    zoomBubble('#' + bubble, -1);
+    for (var k in colors) {
+      d3.select('#' + bubble + '-' + k).classed('active', false)
+      .style('fill', function(d) {
+        return baseColors[bubble + '-' + k];
+      });
+    }
+    if (!d3.select('#' + this.id).classed('region')) {
+      zoomBubble('#' + bubble, -1);
+    }
+
+    // resetBubble('#' + bubble);
   }
 
   // bubble radius animation
   var intervals = {};
+
+  function resetBubble(elem) {
+    if (d3.select(elem)[0][0] === null) {
+      return -1;
+    }
+
+    var e = d3.select(elem),
+    eid = e.attr('id'),
+    defaultSize = e.datum().r;
+
+    if (eid in intervals && intervals[eid] > 0) {
+      clearInterval(intervals[eid]);
+    }
+
+    e.attr('r', defaultSize);
+  }
 
   function zoomBubble(elem, zoom) {
     if (d3.select(elem)[0][0] === null) {
@@ -171,13 +263,13 @@ if (window.matchMedia(mobileOnly).matches) {
     }
 
     var
-    frames = 100,
+    frames = 60,
     e = d3.select(elem),
     r = Number(e.attr('r')),
     eid = e.attr('id'),
     x = 0;
 
-    var defaultSize = e.datum().size / 2;
+    var defaultSize = e.datum().r;
 
     function frame() {
       if (zoom > 0) {
@@ -205,6 +297,19 @@ if (window.matchMedia(mobileOnly).matches) {
 
     return id;
   }
+
+  // Returns a flattened hierarchy containing all leaf nodes under the root.
+  // function classes(root) {
+  //   var classes = [];
+
+  //   function recurse(name, node) {
+  //     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+  //     else classes.push({packageName: name, className: node.name, value: node.size});
+  //   }
+
+  //   recurse(null, root);
+  //   return {children: classes};
+  // }
 
   // process the various input data sets into our map
   // called with queue()
@@ -242,37 +347,78 @@ if (window.matchMedia(mobileOnly).matches) {
     // draw bubbles ...
 
     // tally counts for impact categories based on the json data and flag any child nodes that bump the count
-    // above 1 as duplicates to be removed when rendering the visual bubbles later
-    var s = studies.children,
-    counts = {};
-    for (var i in s) {
-      var loc = s[i].location.replace(/\W+/g, '-');
-      if (!(s[i].impact in counts)) {
-        counts[s[i].impact] = {};
-      }
-      if (loc in counts[s[i].impact]) {
-        counts[s[i].impact][loc]['count']++;
-        if (counts[s[i].impact][loc]['count'] > 1) {
-          studies.children[i].duplicate = true;
+    // above 1 as plurals to be filtered from the visualization
+    // NOTE: this data could be pre-processed by gulp to improve page load
+    var _sc = studies.children; // trim root node and assign to a temporary var for readability
+    for (var region in _sc) {
+      var _r = _sc[region],
+      base = 2, // log base for bubble size curve
+      scale = 80; // multiplier for bubble size curve
+
+      // set top-level sizes for regions based on log of the total number of children
+      // _sc[region].size = (Math.log(_r.children.length + 1) / Math.log(base)) * scale;
+      _sc[region].impacts = {}; // <-- this part needs to be made extensible
+
+      // iterate through each study in the region
+      var _scc = _sc[region].children; // assign and trim for readability
+      for (var study in _scc) {
+        var _s = _scc[study];
+
+        // increment count or add counter if it is not in the parent node yet
+        if (!_sc[region].impacts.hasOwnProperty(_s.impact)) {
+          _sc[region].impacts[_s.impact] = 1;
+        } else {
+          _sc[region].impacts[_s.impact] ++;
+          // flag as a plural entry in the category, in case we want to filter from node structure
+          // in certain visualizations (eg we just want to display counts only)
+          _scc[study].plural = true;
         }
-      } else {
-        counts[s[i].impact][loc] = {
-          'count': 1,
-          'dup': 0
-        };
+        // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
+        // _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
+      }
+      _sc[region].children = _scc; // re-insert modified structure (case studies)
+
+      // calculate totals
+      _sc[region].total = 0;
+      for (var i in _sc[region].impacts) {
+        _sc[region].total += _sc[region].impacts[i];
+      }
+      _sc[region].size = (Math.log(_sc[region].total + 1) / Math.log(base)) * scale;
+
+      // calculate sizes for categories based on the count
+      // this may need to be improved to allow for retaining a base size (above) for each most-granular datum
+      // so that we can 'drill' from abstract to specific all the way down to the individual data
+      var _scc = _sc[region].children;
+      for (var study in _scc) {
+        var _s = _scc[study];
+        _scc[study].size = (Math.log(_sc[region].impacts[_s.impact] + 1) / Math.log(base)) * scale;
+      }
+      _sc[region].children = _scc;
+    }
+    studies.children = _sc; // re-insert modified structure (regions)
+
+    // find max category counts accross children and insert into root node
+    studies.impacts = {};
+    for (var i in studies.children) {
+      for (var j in studies.children[i].impacts) {
+        if (!studies.impacts.hasOwnProperty(j)) {
+          studies.impacts[j] = [];
+        }
+        studies.impacts[j].push(studies.children[i].impacts[j]);
       }
     }
+    for (var i in studies.impacts) {
+      var max = Math.max.apply(null, studies.impacts[i]);
+      studies.impacts[i] = max;
+    }
 
-    // assign a size value to each datum based on the count
-    var base = 4, // log base for bubble size curve
-      scale = 80; // multiplier for bubble size curve
-      for (var i in studies.children) {
-        var l = s[i].location.replace(/\W+/g, '-');
-        studies.children[i].size = (Math.log(counts[s[i].impact][l]['count'] + 1) / Math.log(base)) * scale;
-      }
+    studies = filterObject(studies, function(d) {
+      return !d.plural;
+    });
 
-    // create pack layout
-    var diameter = 450, // diameter of container circles to pack bubbles into
+    // set up pack layout, which will populate studies with layout information
+    // based on the size we calculated from the counts when pack.nodes() is called
+    var diameter = 600, // diameter of container circles to pack bubbles into
     pack = d3.layout.pack()
     .size([diameter, diameter])
     .value(function(d) {
@@ -283,65 +429,102 @@ if (window.matchMedia(mobileOnly).matches) {
 
     // filter the data, transform, and create groups
     var node = svg.selectAll('svg')
-    .data(pack(studies).filter(function(d) {
-        // filter out any parents (ie nodes that contain children) &&
-        // filter out duplicate nodes from the data identified during counting
-        return !d.children && !d.duplicate;
+    .data(pack.nodes(studies).filter(function(d) {
+        // filter out root node
+        return d.region !== 'world';
       }))
     .enter().append('g')
     .attr('class', function(d, i) {
-      return 'node';
+      var c;
+      if (d.region) {
+        c = 'parent';
+      } else {
+        c = 'node';
+      }
+      return c;
     })
     .attr('transform', function(d, i) {
-      var region = g.select('#' + d.location.replace(/\W+/g, '-')).datum();
+      var x,y,bx,by,ox,oy;
+      if (d.region) {
+        // select the path for the region
+        var region = g.select('#' + d.region.replace(/\W+/g, '-')).datum();
 
         // find center of the region's bounding box
-        var b = path.bounds(region),
-        x = (b[0][0] + b[1][0]) / 2,
-        y = (b[0][1] + b[1][1]) / 2;
+        var b = path.bounds(region);
+        bx = (b[0][0] + b[1][0]) / 2;
+        by = (b[0][1] + b[1][1]) / 2;
 
-        // manual adjustments
-        // (i.e. some of the bounding boxes don't make visual sense, so just
-        // adjust those manually)
-        if (d.location in regions) {
-          x *= regions[d.location].translate.x;
-          y *= regions[d.location].translate.y;
+        for (var i in studies.children) {
+          if (d.region === studies.children[i].region) {
+            ox = studies.children[i].x;
+            oy = studies.children[i].y;
+          }
         }
 
-        // ?
-        // x = (d.x - diameter / 2) + x;
-        // y = (d.y - diameter / 2) + y;
+      } else {
+        // function?
+        var region = g.select('#' + d.location.replace(/\W+/g, '-')).datum();
+        var b = path.bounds(region);
+        bx = (b[0][0] + b[1][0]) / 2;
+        by = (b[0][1] + b[1][1]) / 2;
 
-        x = d.x;
-        y = d.y;
+        for (var i in studies.children) {
+          if (d.location === studies.children[i].region) {
+            ox = studies.children[i].x;
+            oy = studies.children[i].y;
+          }
+        }
+      }
 
-        console.log ('xy', x, y);
-        console.log ('dxy', d.x, d.y);
+      x = bx + d.x - ox;
+      y = by + d.y - oy;
 
-        return 'translate(' + x + ',' + y + ')';
-      });
+      // manual adjustments
+      // (i.e. some of the bounding boxes don't make visual sense, so just
+      // adjust those manually)
+      x += (regions[d.region || d.location].translate.x)*scale;
+      y += (regions[d.region || d.location].translate.y)*scale;
+
+      return 'translate(' + x + ',' + y + ')';
+    });
     // create the circles
     node.append('circle')
     .attr('r', function(d) {
-        return d.size / 2; // ie size is a diameter for layout purposes
+        return d.r; // ie size is a diameter for layout purposes
       })
     .style('fill', function(d) {
-        // strip out just the count numbers and put into a flat array, then find the max
-        var countsarr = [];
-        for (var i in counts[d.impact]) {
-          countsarr.push(counts[d.impact][i]['count']);
+      // could be cleaned up
+      var c,t;
+      if (!d.region) {
+        for (i in studies.children) {
+          if (d.location === studies.children[i].region) {
+            c = studies.children[i].impacts[d.impact];
+            t = studies.impacts[d.impact];
+          }
         }
-        var max = Math.max.apply(null, countsarr);
+      }
 
+      // calculate the value of the shade (logarithmic)
+      var base = 4, // log base for shade curve
+      scale = 2, // multiplier for shade curve
+      offset = .18, // offset
+      v = (Math.log(c/t + 1) / Math.log(base)) * scale + offset;
+      console.log (!d.region ? v : '');
 
+      // calc value for parent shade
+      base = 8;
+      scale = 1;
+      offset = -1.3;
+      vv = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
+      // console.log (d.region ? vv : '');
 
-        // calculate the value of the shade (logarithmic)
-        var base = 2; // log base for shade curve
-        var scale = 3; // multiplier for shade curve
-        var c = counts[d.impact][d.location.replace(/\W+/g, '-')].count;
-        var v = (Math.log(c + 1) / Math.log(base)) * scale / max;
-        v = v > 1 ? 1 : v;
+      // cap at 1
+      v = v > 1 ? 1 : v;
+      vv = vv > 1 ? 1 : vv;
 
+      if (d.region) {
+        return d3.rgb.apply(null, shade([0, 138, 179], vv))
+      } else {
         var blue = [0, 138, 179];
         var orange = [238, 91, 67];
         var yellow = [194, 195, 59];
@@ -355,27 +538,50 @@ if (window.matchMedia(mobileOnly).matches) {
         } else if (d.impact === 'public') {
           return d3.rgb.apply(null, shade(fuchsia, v));
         } // else
-        console.log(d.impact);
         return d3.rgb(128, 128, 128);
-      })
+      }
+    })
     .attr('id', function(d, i) {
-      return '_bubble_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      var id, l = d.region || d.location;
+      if (d.region) {
+        id = '_bubble_' + l.replace(/\W+/g, '-');
+      } else {
+        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      }
+      return id;
     })
     .on("click", clicked)
     .on("mouseover", highlight)
     .on("mouseout", deHighlight);
+
     // create text
     node.append('text')
     .attr('dy', '.3em')
     .style('text-anchor', 'middle')
     .text(function(d) {
-      var t =
-      counts[d.impact][d.location.replace(/\W+/g, '-')].count;
+      var t = '';
+      if (d.region) {
+        t = d.total;
+      }
+      else {
+        for (i in studies.children) {
+          if (d.location === studies.children[i].region) {
+            t = studies.children[i].impacts[d.impact];
+          }
+        }
+      }
       return t;
     })
     .attr('id', function(d, i) {
-      return '_text_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      var id, l = d.region || d.location;
+      if (d.region) {
+        id = '_text_' + l.replace(/\W+/g, '-');
+      } else {
+        id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      }
+      return id;
     })
+    .attr('class', 'text')
     .on("click", clicked)
     .on("mouseover", highlight)
     .on("mouseout", deHighlight);
@@ -386,7 +592,7 @@ if (window.matchMedia(mobileOnly).matches) {
     g.select('#Antarctica').remove();
   }
 
-  // this allows us to process multiple data sources in a single function using d3, e.g. instead of just d3.json()
+  // this allows us to process multiple data sources in a single function, ie instead of just d3.json()
   queue()
   .defer(d3.json, 'js/world.json')
   .defer(d3.json, 'js/packstudies.json')
