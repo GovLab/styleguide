@@ -43,8 +43,8 @@ if (window.matchMedia(mobileOnly).matches) {
       706, 710, 728, 729, 748, 834, 768, 788, 800, 894, 716
       ],
       'translate': {
-        x: 1,
-        y: .9
+        x: 0,
+        y: -1
       }
     },
     'as': {
@@ -54,8 +54,8 @@ if (window.matchMedia(mobileOnly).matches) {
       634, 643, 682, 702, 144, 760, 762, 764, 792, 795, 784, 860, 704, 887
       ],
       'translate': {
-        x: 1.5,
-        y: 1
+        x: 4,
+        y: 0
       }
     },
     'eu': {
@@ -66,8 +66,8 @@ if (window.matchMedia(mobileOnly).matches) {
       336, 304, 352
       ],
       'translate': {
-        x: 1,
-        y: 1
+        x: 0,
+        y: 0
       }
     },
     'na': {
@@ -76,24 +76,24 @@ if (window.matchMedia(mobileOnly).matches) {
       558, 591, 659, 662, 670, 780, 840
       ],
       'translate': {
-        x: .5,
-        y: 1.5
+        x: -4,
+        y: 1
       }
     },
     'oc': {
       'name': 'Oceania',
       'geometries': [36, 242, 296, 584, 583, 520, 554, 585, 598, 882, 90, 776, 548],
       'translate': {
-        x: 1.6,
-        y: 1
+        x: 6,
+        y: 0
       }
     },
     'sa': {
       'name': 'South America',
       'geometries': [32, 68, 76, 152, 170, 218, 328, 600, 604, 740, 858, 862],
       'translate': {
-        x: 1.1,
-        y: .9
+        x: 0,
+        y: 0
       }
     }
   };
@@ -408,17 +408,14 @@ if (window.matchMedia(mobileOnly).matches) {
         }
       }
 
-      console.log (bx, d.x, ox);
-      console.log (by, d.y, oy);
-
       x = bx + d.x - ox;
       y = by + d.y - oy;
 
       // manual adjustments
       // (i.e. some of the bounding boxes don't make visual sense, so just
       // adjust those manually)
-      x += regions[d.region || d.location].translate.x;
-      y += regions[d.region || d.location].translate.y;
+      x += (regions[d.region || d.location].translate.x)*scale;
+      y += (regions[d.region || d.location].translate.y)*scale;
 
       return 'translate(' + x + ',' + y + ')';
     });
