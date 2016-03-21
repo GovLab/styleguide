@@ -92,7 +92,7 @@ if (window.matchMedia(mobileOnly).matches) {
       'name': 'South America',
       'geometries': [32, 68, 76, 152, 170, 218, 328, 600, 604, 740, 858, 862],
       'translate': {
-        x: 0,
+        x: 1,
         y: 0
       }
     }
@@ -167,28 +167,46 @@ if (window.matchMedia(mobileOnly).matches) {
   function highlight(d) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
-    console.log(region);
-    d3.selectAll('.node').classed('fade', true);
+    d3.selectAll('.node, .parent').classed('fade', true);
     d3.select('.map-caption').text(regions[region].name);
     d3.select('.map-caption').classed('default', false);
     d3.select('#' + region).classed('active', true);
     d3.select('#' + bubble).classed('active', true);
-    zoomBubble('#' + bubble, 1.4);
+    if (!d3.select('#' + this.id).classed('region')) {
+      zoomBubble('#' + bubble, 1.1);
+    }
   }
 
   function deHighlight(d) {
     var region = d.location || this.id.replace(/_bubble_|_text_/, '');
     var bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
-    d3.selectAll('.node').classed('fade', false);
+    d3.selectAll('.node, .parent').classed('fade', false);
     d3.select('.map-caption').text('Select a Region');
     d3.select('.map-caption').classed('default', true);
     d3.select('#' + region).classed('active', false);
     d3.select('#' + bubble).classed('active', false);
     zoomBubble('#' + bubble, -1);
+    // resetBubble('#' + bubble);
   }
 
   // bubble radius animation
   var intervals = {};
+
+  function resetBubble(elem) {
+    if (d3.select(elem)[0][0] === null) {
+      return -1;
+    }
+
+    var e = d3.select(elem),
+    eid = e.attr('id'),
+    defaultSize = e.datum().r;
+
+    if (eid in intervals && intervals[eid] > 0) {
+      clearInterval(intervals[eid]);
+    }
+
+    e.attr('r', defaultSize);
+  }
 
   function zoomBubble(elem, zoom) {
     if (d3.select(elem)[0][0] === null) {
@@ -196,13 +214,13 @@ if (window.matchMedia(mobileOnly).matches) {
     }
 
     var
-    frames = 100,
+    frames = 60,
     e = d3.select(elem),
     r = Number(e.attr('r')),
     eid = e.attr('id'),
     x = 0;
 
-    var defaultSize = e.datum().size / 2;
+    var defaultSize = e.datum().r;
 
     function frame() {
       if (zoom > 0) {
@@ -285,11 +303,11 @@ if (window.matchMedia(mobileOnly).matches) {
     var _sc = studies.children; // trim root node and assign to a temporary var for readability
     for (var region in _sc) {
       var _r = _sc[region],
-      base = 4, // log base for bubble size curve
+      base = 2, // log base for bubble size curve
       scale = 80; // multiplier for bubble size curve
 
       // set top-level sizes for regions based on log of the total number of children
-      _sc[region].size = (Math.log(_r.children.length + 1) / Math.log(base)) * scale;
+      // _sc[region].size = (Math.log(_r.children.length + 1) / Math.log(base)) * scale;
       _sc[region].impacts = {}; // <-- this part needs to be made extensible
 
       // iterate through each study in the region
@@ -310,6 +328,13 @@ if (window.matchMedia(mobileOnly).matches) {
         // _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
       }
       _sc[region].children = _scc; // re-insert modified structure (case studies)
+
+      // calculate totals
+      _sc[region].total = 0;
+      for (var i in _sc[region].impacts) {
+        _sc[region].total += _sc[region].impacts[i];
+      }
+      _sc[region].size = (Math.log(_sc[region].total + 1) / Math.log(base)) * scale;
 
       // calculate sizes for categories based on the count
       // this may need to be improved to allow for retaining a base size (above) for each most-granular datum
@@ -342,8 +367,6 @@ if (window.matchMedia(mobileOnly).matches) {
       return !d.plural;
     });
 
-    console.log(studies);
-
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
     var diameter = 600, // diameter of container circles to pack bubbles into
@@ -355,25 +378,21 @@ if (window.matchMedia(mobileOnly).matches) {
 
     // append bubbles to the svg ...
 
-    // console.log(pack(studies).filter(function(d) {
-    //   // filter out any parents (ie nodes that contain children) &&
-    //   // filter out duplicate nodes from the data identified during counting
-    //   // return !d.plural && d.region !== 'world';
-    //   return !d.children && !d.plural;
-    // }));
-
     // filter the data, transform, and create groups
     var node = svg.selectAll('svg')
     .data(pack.nodes(studies).filter(function(d) {
-        // filter out any parents (ie nodes that contain children) &&
-        // filter out plural nodes from the data identified during counting
-        // return !d.children && !d.plural;
-        // console.log(!d.plural && d.region !== 'world', d);
+        // filter out root node
         return d.region !== 'world';
       }))
     .enter().append('g')
     .attr('class', function(d, i) {
-      return 'node';
+      var c;
+      if (d.region) {
+        c = 'parent';
+      } else {
+        c = 'node';
+      }
+      return c;
     })
     .attr('transform', function(d, i) {
       var x,y,bx,by,ox,oy;
@@ -425,48 +444,93 @@ if (window.matchMedia(mobileOnly).matches) {
         return d.r; // ie size is a diameter for layout purposes
       })
     .style('fill', function(d) {
+      // could be cleaned up
+      var c,t;
+      if (!d.region) {
+        for (i in studies.children) {
+          if (d.location === studies.children[i].region) {
+            c = studies.children[i].impacts[d.impact];
+            t = studies.impacts[d.impact];
+          }
+        }
+      }
 
       // calculate the value of the shade (logarithmic)
-      var base = 2, // log base for shade curve
-      scale = 3, // multiplier for shade curve
-      max = d.impact ? studies.impacts[d.impact] : 1,
-      c = d.impact ? studies.impacts[d.impact] : 1,
-      v = (Math.log(c + 1) / Math.log(base)) * scale / max,
-      v = v > 1 ? 1 : v;
+      var base = 4, // log base for shade curve
+      scale = 2, // multiplier for shade curve
+      offset = .18, // offset
+      v = (Math.log(c/t + 1) / Math.log(base)) * scale + offset;
+      console.log (!d.region ? v : '');
 
-      var blue = [0, 138, 179];
-      var orange = [238, 91, 67];
-      var yellow = [194, 195, 59];
-      var fuchsia = [173, 0, 84];
-      if (d.impact === 'government') {
-        return d3.rgb.apply(null, shade(blue, v));
-      } else if (d.impact === 'citizens') {
-        return d3.rgb.apply(null, shade(orange, v));
-      } else if (d.impact === 'economic') {
-        return d3.rgb.apply(null, shade(yellow, v));
-      } else if (d.impact === 'public') {
-        return d3.rgb.apply(null, shade(fuchsia, v));
-      } // else
-      // console.log(d.impact);
-      return d3.rgb(128, 128, 128);
+      // calc value for parent shade
+      base = 8;
+      scale = 1;
+      offset = -1.3;
+      vv = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
+      // console.log (d.region ? vv : '');
+
+      // cap at 1
+      v = v > 1 ? 1 : v;
+      vv = vv > 1 ? 1 : vv;
+
+      if (d.region) {
+        return d3.rgb.apply(null, shade([0, 138, 179], vv))
+      } else {
+        var blue = [0, 138, 179];
+        var orange = [238, 91, 67];
+        var yellow = [194, 195, 59];
+        var fuchsia = [173, 0, 84];
+        if (d.impact === 'government') {
+          return d3.rgb.apply(null, shade(blue, v));
+        } else if (d.impact === 'citizens') {
+          return d3.rgb.apply(null, shade(orange, v));
+        } else if (d.impact === 'economic') {
+          return d3.rgb.apply(null, shade(yellow, v));
+        } else if (d.impact === 'public') {
+          return d3.rgb.apply(null, shade(fuchsia, v));
+        } // else
+        return d3.rgb(128, 128, 128);
+      }
     })
     .attr('id', function(d, i) {
-      return '_bubble_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      var id, l = d.region || d.location;
+      if (d.region) {
+        id = '_bubble_' + l.replace(/\W+/g, '-');
+      } else {
+        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      }
+      return id;
     })
     .on("click", clicked)
     .on("mouseover", highlight)
     .on("mouseout", deHighlight);
+
     // create text
     node.append('text')
     .attr('dy', '.3em')
     .style('text-anchor', 'middle')
     .text(function(d) {
-      var t =
-      counts[d.impact][d.location.replace(/\W+/g, '-')].count;
+      var t = '';
+      if (d.region) {
+        t = d.total;
+      }
+      else {
+        for (i in studies.children) {
+          if (d.location === studies.children[i].region) {
+            t = studies.children[i].impacts[d.impact];
+          }
+        }
+      }
       return t;
     })
     .attr('id', function(d, i) {
-      return '_text_' + d.location.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      var id, l = d.region || d.location;
+      if (d.region) {
+        id = '_text_' + l.replace(/\W+/g, '-');
+      } else {
+        id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
+      }
+      return id;
     })
     .on("click", clicked)
     .on("mouseover", highlight)
