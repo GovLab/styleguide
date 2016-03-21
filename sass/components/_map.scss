@@ -135,12 +135,11 @@ Styleguide 6.3.2
       transition: opacity 0.5s;
     }
     circle {
-      opacity: .75;
+      opacity: 1;
       cursor: pointer;
       transition: opacity 0.5s;
       &.active {
-        opacity: .8;
-        transition: opacity 0.1s;
+        opacity: 1;
       }
     }
     text {
