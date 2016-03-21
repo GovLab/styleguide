@@ -299,6 +299,11 @@ if (window.matchMedia(mobileOnly).matches) {
   }
 
   // filter bubble handlers for ui
+  function filterAll(d) {
+    d3.selectAll('.parent, .node').classed('show', true);
+    d3.selectAll('.map-ui .b-button').classed('m-active', false)
+    d3.select('#' + this.id).classed('m-active', true);
+  }
   function filterTotals(d) {
     d3.selectAll('.parent').classed('show', true);
     d3.selectAll('.node').classed('show', false);
@@ -332,6 +337,7 @@ if (window.matchMedia(mobileOnly).matches) {
     });
 
     // hook up UI events
+    d3.select('#button-all').on('click', filterAll);
     d3.select('#button-totals').on('click', filterTotals);
     d3.select('#button-impacts').on('click', filterImpacts);
     d3.select('#button-sectors').on('click', filterSectors);
