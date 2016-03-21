@@ -6862,6 +6862,9 @@ Styleguide 6.3.2
   stroke-linecap: round;
   stroke-linejoin: round; }
 
+.b-pack-map .parent circle {
+  fill: rgba(0, 0, 0, 0.1) !important; }
+
 .b-pack-map .node.fade circle {
   opacity: .15;
   transition: opacity 0.5s; }
