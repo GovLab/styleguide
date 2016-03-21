@@ -156,6 +156,66 @@ if (window.matchMedia(mobileOnly).matches) {
     return false;
   }
 
+  // bubble radius animation
+  var intervals = {};
+
+  function resetBubble(elem) {
+    if (d3.select(elem)[0][0] === null) {
+      return -1;
+    }
+
+    var e = d3.select(elem),
+    eid = e.attr('id'),
+    defaultSize = e.datum().r;
+
+    if (eid in intervals && intervals[eid] > 0) {
+      clearInterval(intervals[eid]);
+    }
+
+    e.attr('r', defaultSize);
+  }
+
+  function zoomBubble(elem, zoom) {
+    if (d3.select(elem)[0][0] === null) {
+      return -1;
+    }
+
+    var
+    frames = 60,
+    e = d3.select(elem),
+    r = Number(e.attr('r')),
+    eid = e.attr('id'),
+    x = 0;
+
+    var defaultSize = e.datum().r;
+
+    function frame() {
+      if (zoom > 0) {
+        e.attr('r', r + (zoom * defaultSize - r) * (x / frames));
+        x++;
+
+        if (x >= frames) {
+          clearInterval(id);
+        }
+      } else { // reset to original size
+        e.attr('r', r - (r - defaultSize) * (x / frames));
+        x++;
+
+        if (x >= frames) {
+          clearInterval(id);
+        }
+      }
+    }
+
+    if (eid in intervals && intervals[eid] > 0) {
+      clearInterval(intervals[eid]);
+    }
+    var id = setInterval(frame, 1);
+    intervals[eid] = id;
+
+    return id;
+  }
+
   // event handlers
 
   var colors = {
@@ -238,78 +298,23 @@ if (window.matchMedia(mobileOnly).matches) {
     // resetBubble('#' + bubble);
   }
 
-  // bubble radius animation
-  var intervals = {};
-
-  function resetBubble(elem) {
-    if (d3.select(elem)[0][0] === null) {
-      return -1;
-    }
-
-    var e = d3.select(elem),
-    eid = e.attr('id'),
-    defaultSize = e.datum().r;
-
-    if (eid in intervals && intervals[eid] > 0) {
-      clearInterval(intervals[eid]);
-    }
-
-    e.attr('r', defaultSize);
+  // filter bubble handlers for ui
+  function filterTotals(d) {
+    d3.selectAll('.parent').classed('show', true);
+    d3.selectAll('.node').classed('show', false);
+    d3.selectAll('.map-ui .b-button').classed('m-active', false)
+    d3.select('#' + this.id).classed('m-active', true);
   }
-
-  function zoomBubble(elem, zoom) {
-    if (d3.select(elem)[0][0] === null) {
-      return -1;
-    }
-
-    var
-    frames = 60,
-    e = d3.select(elem),
-    r = Number(e.attr('r')),
-    eid = e.attr('id'),
-    x = 0;
-
-    var defaultSize = e.datum().r;
-
-    function frame() {
-      if (zoom > 0) {
-        e.attr('r', r + (zoom * defaultSize - r) * (x / frames));
-        x++;
-
-        if (x >= frames) {
-          clearInterval(id);
-        }
-      } else { // reset to original size
-        e.attr('r', r - (r - defaultSize) * (x / frames));
-        x++;
-
-        if (x >= frames) {
-          clearInterval(id);
-        }
-      }
-    }
-
-    if (eid in intervals && intervals[eid] > 0) {
-      clearInterval(intervals[eid]);
-    }
-    var id = setInterval(frame, 1);
-    intervals[eid] = id;
-
-    return id;
+  function filterImpacts(d) {
+    d3.selectAll('.parent').classed('show', false);
+    d3.selectAll('.node').classed('show', true);
+    d3.selectAll('.map-ui .b-button').classed('m-active', false)
+    d3.select('#' + this.id).classed('m-active', true);
   }
-
-  // Returns a flattened hierarchy containing all leaf nodes under the root.
-  // function classes(root) {
-  //   var classes = [];
-
-  //   function recurse(name, node) {
-  //     if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-  //     else classes.push({packageName: name, className: node.name, value: node.size});
-  //   }
-
-  //   recurse(null, root);
-  //   return {children: classes};
-  // }
+  function filterSectors(d) {
+  }
+  function filterStudies(d) {
+  }
 
   // process the various input data sets into our map
   // called with queue()
@@ -325,6 +330,12 @@ if (window.matchMedia(mobileOnly).matches) {
     }).sort(function(a, b) {
       return a.name.localeCompare(b.name);
     });
+
+    // hook up UI events
+    d3.select('#button-totals').on('click', filterTotals);
+    d3.select('#button-impacts').on('click', filterImpacts);
+    d3.select('#button-sectors').on('click', filterSectors);
+    d3.select('#button-studies').on('click', filterStudies);
 
     // draw map ...
 
@@ -590,6 +601,9 @@ if (window.matchMedia(mobileOnly).matches) {
 
     // no one needs you antarctica
     g.select('#Antarctica').remove();
+
+    // select totals by default
+    document.getElementById('button-totals').dispatchEvent(new MouseEvent('click'));
   }
 
   // this allows us to process multiple data sources in a single function, ie instead of just d3.json()

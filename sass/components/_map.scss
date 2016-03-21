@@ -125,7 +125,7 @@ Styleguide 6.3.2
       }
     }
     text {
-      font-size: 30px;
+      font-size: 22px;
     }
   }
 
@@ -144,7 +144,7 @@ Styleguide 6.3.2
       }
     }
     text {
-      font-size: 20px;
+      font-size: 22px;
     }
   }
 
@@ -163,4 +163,34 @@ Styleguide 6.3.2
     cursor: pointer;
   }
 
+  .parent {
+    opacity: 0;
+    visibility: hidden;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s;
+    }
+  }
+
+  .node {
+    opacity: 0;
+    visibility: hidden;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s;
+    }
+  }
+}
+
+.map-ui {
+  .b-button {
+    color: #fff;
+    background-color: rgba(0, 138, 179, 0.4);
+
+    &.m-active {
+      background-color: rgba(0, 138, 179, 1);
+    }
+  }
 }
