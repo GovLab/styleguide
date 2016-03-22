@@ -115,16 +115,8 @@ Styleguide 6.3.2
       opacity: .15;
       transition: opacity 0.2s;
     }
-    &.faded {
-      text {
-        display: none;
-      }
-      circle {
-        visibility: hidden;
-      }
-    }
     circle {
-      opacity: .8;
+      opacity: .4;
       cursor: pointer;
       transition: opacity 0.2s;
       &.active {
@@ -134,6 +126,15 @@ Styleguide 6.3.2
     }
     text {
       font-size: 22px;
+    }
+    &.invisible {
+      text {
+        visibility: hidden;
+      }
+      circle {
+        opacity: 0;
+        visibility: visible;
+      }
     }
   }
 
@@ -180,7 +181,7 @@ Styleguide 6.3.2
     &.show {
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.1s;
+      transition: opacity 0.5s;
     }
   }
 
@@ -190,7 +191,7 @@ Styleguide 6.3.2
     &.show {
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.1s;
+      transition: opacity 0.5s;
     }
   }
 }

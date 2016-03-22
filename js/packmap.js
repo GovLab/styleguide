@@ -237,7 +237,9 @@ if (window.matchMedia(mobileOnly).matches) {
     'politics' : [0, 136, 149],
     'transportation' : [0, 136, 149],
     'weather' : [0, 136, 149],
-    'base' : [118, 148, 169]
+    'base' : [0, 138, 179]
+    // 'base' : [106, 145, 149]
+    // 'base' : [118, 148, 169]
   };
 
   var baseColors = {};
@@ -316,7 +318,7 @@ if (window.matchMedia(mobileOnly).matches) {
   // filter bubble handlers for ui
   function filterAll(d) {
     d3.selectAll('.parent, .node').classed('show', true);
-    d3.selectAll('.parent').classed('faded', true);
+    d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
