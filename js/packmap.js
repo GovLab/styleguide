@@ -324,6 +324,7 @@ if (window.matchMedia(mobileOnly).matches) {
   }
   function filterTotals(d) {
     d3.selectAll('.parent').classed('show', true);
+    d3.selectAll('.parent').classed('invisible', false);
     d3.selectAll('.node').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
