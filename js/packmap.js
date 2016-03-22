@@ -400,7 +400,8 @@ if (window.matchMedia(mobileOnly).matches) {
     for (var region in _sc) {
       var _r = _sc[region],
       base = 2, // log base for bubble size curve
-      scale = 80; // multiplier for bubble size curve
+      scale = 80, // multiplier for bubble size curve
+      sectorScale = 20; // independent scaling for sectors
 
       // set top-level sizes for regions based on log of the total number of children
       // _sc[region].size = (Math.log(_r.children.length + 1) / Math.log(base)) * scale;
@@ -486,10 +487,13 @@ if (window.matchMedia(mobileOnly).matches) {
       var _scc = _sc[region].children;
       for (var study in _scc) {
         var _s = _scc[study];
+        // impact sizes
         _scc[study].size = (Math.log(_sc[region].impacts[_s.impact] + 1) / Math.log(base)) * scale;
+        // sector sizes
         if (_scc[study].name === 'sectorNode') {
           for (var i in _scc[study].children) {
-            _scc[study].children[i].size = (Math.log(_sc[region].sectors[_scc[study].children[i].sector] + 1) / Math.log(base)) * scale;
+            _scc[study].children[i].size =
+            (Math.log(_sc[region].sectors[_scc[study].children[i].sector] + 1) / Math.log(base)) * sectorScale;
           }
         }
       }
