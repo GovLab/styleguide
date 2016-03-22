@@ -124,6 +124,9 @@ Styleguide 6.3.2
         transition: opacity 0.2s;
       }
     }
+    &.sector circle {
+      opacity: .5;
+    }
     text {
       font-size: 22px;
     }
@@ -134,6 +137,9 @@ Styleguide 6.3.2
       circle {
         opacity: 0;
         visibility: visible;
+      }
+      &.sector circle {
+        opacity: .2;
       }
     }
   }

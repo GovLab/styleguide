@@ -237,9 +237,10 @@ if (window.matchMedia(mobileOnly).matches) {
     'politics' : [0, 136, 149],
     'transportation' : [0, 136, 149],
     'weather' : [0, 136, 149],
-    'base' : [0, 138, 179]
+    'base' : [0, 138, 179],
     // 'base' : [106, 145, 149]
     // 'base' : [118, 148, 169]
+    'none' : [118, 148, 169]
   };
 
   var baseColors = {};
@@ -325,6 +326,7 @@ if (window.matchMedia(mobileOnly).matches) {
   function filterTotals(d) {
     d3.selectAll('.parent').classed('show', true);
     d3.selectAll('.parent').classed('invisible', false);
+    d3.selectAll('.sector.parent').classed('show', false);
     d3.selectAll('.node').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
@@ -405,6 +407,18 @@ if (window.matchMedia(mobileOnly).matches) {
       _sc[region].impacts = {}; // <-- this part needs to be made extensible
       _sc[region].sectors = {};
 
+      var sn = {
+        'region' : _sc[region].region,
+        'title' : 'All Sectors',
+        'name' : 'sectorNode',
+        'impact' : 'none',
+        'sector' : 'none',
+        'children' : [],
+        'meta' : true
+      };
+      sn.location = _sc[region].region;
+      _sc[region].children.push(sn);
+
       // iterate through each study in the region
       var _scc = _sc[region].children; // assign and trim for readability
       for (var study in _scc) {
@@ -429,30 +443,42 @@ if (window.matchMedia(mobileOnly).matches) {
 
           if (!_sc[region].sectors.hasOwnProperty(_s.sector)) {
             _sc[region].sectors[_s.sector] = 1;
-            var _n = {};
+            var _sn, _n = {};
             _n.title = 'Total ' + _s.sector;
             _n.impact = _s.impact;
             _n.sector = _s.sector;
             _n.location = _s.location;
             _n.meta = true;
             _n.metaSector = true;
-            _scc.push(_n);
+            for (var _c in _sc[region].children) {
+              if (_sc[region].children[_c].name === 'sectorNode') {
+                _sn = _c;
+              }
+            }
+            // push to sectorNode leaf
+            _sc[region].children[_sn].children.push(_n);
           } else {
             _sc[region].sectors[_s.sector]++;
           }
+          _scc[study].plural = true;
         }
-        _scc[study].plural = true;
         // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
         // _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
       }
       _sc[region].children = _scc; // re-insert modified structure (case studies)
 
-      // calculate totals
+      // calculate totals of all cases in region which have an impact, (which should be every case)
       _sc[region].total = 0;
       for (var i in _sc[region].impacts) {
         _sc[region].total += _sc[region].impacts[i];
       }
       _sc[region].size = (Math.log(_sc[region].total + 1) / Math.log(base)) * scale;
+
+      // calculate the totally number of UNIQUE sectors in region
+      _sc[region].totalSectors = 0;
+      for (var i in _sc[region].sectors) {
+        _sc[region].totalSectors++;
+      }
 
       // calculate sizes for categories based on the count
       // this may need to be improved to allow for retaining a base size (above) for each most-granular datum
@@ -460,10 +486,11 @@ if (window.matchMedia(mobileOnly).matches) {
       var _scc = _sc[region].children;
       for (var study in _scc) {
         var _s = _scc[study];
-        if (_s.metaSector) {
-          _scc[study].size = (Math.log(_sc[region].sectors[_s.sector] + 1) / Math.log(base)) * scale;
-        } else {
-          _scc[study].size = (Math.log(_sc[region].impacts[_s.impact] + 1) / Math.log(base)) * scale;
+        _scc[study].size = (Math.log(_sc[region].impacts[_s.impact] + 1) / Math.log(base)) * scale;
+        if (_scc[study].name === 'sectorNode') {
+          for (var i in _scc[study].children) {
+            _scc[study].children[i].size = (Math.log(_sc[region].sectors[_scc[study].children[i].sector] + 1) / Math.log(base)) * scale;
+          }
         }
       }
       _sc[region].children = _scc;
@@ -487,15 +514,27 @@ if (window.matchMedia(mobileOnly).matches) {
 
     studies.sectors = {};
     for (var i in studies.children) {
+      // individual totals
       for (var j in studies.children[i].sectors) {
         if (!studies.sectors.hasOwnProperty(j)) {
           studies.sectors[j] = [];
         }
         studies.sectors[j].push(studies.children[i].sectors[j]);
       }
+      // apply sum to sectorNode size
+      for (var x in studies.children[i].children) {
+        if (studies.children[i].children[x].name === 'sectorNode') {
+          var t = studies.children[i].totalSectors,
+          base = 2,
+          scale = 80;
+          studies.children[i].children[x].size =
+          (Math.log(t + 1) / Math.log(base)) * scale;
+        }
+      }
     }
+    // max individual total
     for (var i in studies.sectors) {
-      var max = Math.max.apply(null, studies.sectors[i]);
+      max = Math.max.apply(null, studies.sectors[i]);
       studies.sectors[i] = max;
     }
 
@@ -504,7 +543,7 @@ if (window.matchMedia(mobileOnly).matches) {
       return !d.plural;
     });
 
-    // console.log (studies);
+    console.log (studies);
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
@@ -527,9 +566,12 @@ if (window.matchMedia(mobileOnly).matches) {
     .attr('class', function(d, i) {
       var c;
       if (d.metaSector) {
-        c = 'sector node'
+        c = 'sector node';
       } else if (d.region) {
         c = 'parent';
+        if (d.name === 'sectorNode') {
+          c = 'sector parent';
+        }
       } else {
         c = 'impact node';
       }
@@ -651,12 +693,22 @@ if (window.matchMedia(mobileOnly).matches) {
     };
     // create text
     node.append('text')
-    .attr('dy', '.5em')
+    .attr('dy', function(d) {
+      if (d.region) {
+        return '-.3em';
+      } else {
+        return '.5em';
+      }
+    })
     .style('text-anchor', 'middle')
     .text(function(d) {
       var t = '';
       if (d.region) {
-        t = d.total;
+        if (d.name === 'sectorNode') {
+          t = d.parent.totalSectors;
+        } else {
+          t = d.total;
+        }
       }
       else if (d.metaSector) {
         for (i in studies.children) {
@@ -698,7 +750,26 @@ if (window.matchMedia(mobileOnly).matches) {
     })
     .on("click", clicked)
     .on("mouseover", highlight)
-    .on("mouseout", deHighlight);
+    .on("mouseout", deHighlight)
+    .append('tspan')
+    .attr('x', '0')
+    .attr('dy', '1em')
+    .style('text-anchor', 'middle')
+    .text(function(d) {
+      var t = '';
+      if (d.region) {
+        if (d.name === 'sectorNode') {
+          t = 'Sectors';
+        } else {
+          if (d.total > 1) {
+            t = 'Studies';
+          } else {
+            t = 'Study';
+          }
+        }
+      }
+      return t;
+    });
 
     // ... finished drawing bubbles
 
