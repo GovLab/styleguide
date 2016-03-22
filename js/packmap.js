@@ -226,6 +226,17 @@ if (window.matchMedia(mobileOnly).matches) {
     'economic' : [194, 195, 59],
     'public' : [173, 0, 84],
     'sector' : [0, 136, 149],
+    'pub' : [0, 136, 149],
+    'business' : [0, 136, 149],
+    'education' : [0, 136, 149],
+    'emergency' : [0, 136, 149],
+    'geospatial' : [0, 136, 149],
+    'health' : [0, 136, 149],
+    'law' : [0, 136, 149],
+    'philantropy' : [0, 136, 149],
+    'politics' : [0, 136, 149],
+    'transportation' : [0, 136, 149],
+    'weather' : [0, 136, 149],
     'base' : [118, 148, 169]
   };
 
@@ -594,7 +605,9 @@ if (window.matchMedia(mobileOnly).matches) {
       })
     .attr('id', function(d, i) {
       var id, l = d.region || d.location;
-      if (d.region) {
+      if (d.metaSector) {
+        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.region) {
         id = '_bubble_' + l.replace(/\W+/g, '-');
       } else {
         id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
@@ -612,6 +625,7 @@ if (window.matchMedia(mobileOnly).matches) {
       'economic' : 'trending_up',
       'public' : 'public',
       // sector
+      'pub' : 'language',
       'business' : 'business_center',
       'education' : 'school',
       'emergency' : 'report_problem',
@@ -652,7 +666,9 @@ if (window.matchMedia(mobileOnly).matches) {
     })
     .attr('id', function(d, i) {
       var id, l = d.region || d.location;
-      if (d.region) {
+      if (d.metaSector) {
+        id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.region) {
         id = '_text_' + l.replace(/\W+/g, '-');
       } else {
         id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');

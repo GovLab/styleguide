@@ -141,7 +141,7 @@ Styleguide 6.3.2
   .node {
     &.fade circle {
       opacity: .15;
-      transition: opacity 0.2s;
+      transition: opacity 0.5s;
     }
     circle {
       opacity: 1;
@@ -149,6 +149,7 @@ Styleguide 6.3.2
       transition: opacity 0.2s;
       &.active {
         opacity: 1;
+        transition: opacity 0.2s;
       }
     }
     text {
