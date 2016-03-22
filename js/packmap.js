@@ -329,12 +329,19 @@ if (window.matchMedia(mobileOnly).matches) {
   }
   function filterImpacts(d) {
     d3.selectAll('.parent').classed('show', false);
-    d3.selectAll('.node').classed('show', true);
+    d3.selectAll('.impact.node').classed('show', true);
+    d3.selectAll('.sector.node').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
   function filterSectors(d) {
+    d3.selectAll('.parent').classed('show', false);
+    d3.selectAll('.impact.node').classed('show', false);
+    d3.selectAll('.sector.node').classed('show', true);
+    d3.selectAll('.parent').classed('faded', false);
+    d3.selectAll('.map-ui .b-button').classed('m-active', false)
+    d3.select('#' + this.id).classed('m-active', true);
   }
   function filterStudies(d) {
   }
@@ -516,10 +523,12 @@ if (window.matchMedia(mobileOnly).matches) {
     .enter().append('g')
     .attr('class', function(d, i) {
       var c;
-      if (d.region) {
+      if (d.metaSector) {
+        c = 'sector node'
+      } else if (d.region) {
         c = 'parent';
       } else {
-        c = 'node';
+        c = 'impact node';
       }
       return c;
     })

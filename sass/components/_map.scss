@@ -120,8 +120,7 @@ Styleguide 6.3.2
         display: none;
       }
       circle {
-        opacity: .4;
-        transition: opacity 0.1s;
+        visibility: hidden;
       }
     }
     circle {
