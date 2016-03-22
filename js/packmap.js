@@ -124,10 +124,12 @@ if (window.matchMedia(mobileOnly).matches) {
 
   // utility function to create a shade based on array of rgb values and scalar
   function shade(rgb, v) {
+    var _rgb = [];
+    v = v > 1 ? 1 : v;
     for (var i in rgb) {
-      rgb[i] = rgb[i] * v > 255 ? 255 : rgb[i] * v;
+      _rgb[i] = rgb[i] * v;
     }
-    return rgb;
+    return _rgb;
   }
 
   // filter an object recursively based on a function f
@@ -223,7 +225,8 @@ if (window.matchMedia(mobileOnly).matches) {
     'citizens' : [238, 91, 67],
     'economic' : [194, 195, 59],
     'public' : [173, 0, 84],
-    'sector' : [0, 136, 149]
+    'sector' : [0, 136, 149],
+    'base' : [118, 148, 169]
   };
 
   var baseColors = {};
@@ -258,7 +261,7 @@ if (window.matchMedia(mobileOnly).matches) {
       if (impact in colors) {
         return d3.rgb.apply(null, colors[impact]);
       } else {
-        return d3.rgb(0, 138, 179);
+        return d3.rgb.apply(null, colors.base);
       }
     });
 
@@ -560,24 +563,20 @@ if (window.matchMedia(mobileOnly).matches) {
       })
     .style('fill', function(d) {
       // could be cleaned up
-
       if (d.region) {
         // calc value for parent shade
         var base = 8,
         scale = 1,
         offset = -1.3,
         v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
-        // cap at 1
-        v = v > 1 ? 1 : v;
-        return d3.rgb.apply(null, shade([0, 138, 179], v));
+        console.log(colors.base);
+        return d3.rgb.apply(null, shade(colors.base, v));
       } else if (d.metaSector) {
         var base = 6, // log base for shade curve
           scale = 2, // multiplier for shade curve
           offset = -3, // offset
           v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
-          console.log(v);
-          v = v > 1 ? 1 : v;
-          return d3.rgb.apply(null, shade([0, 136, 149], v));
+          return d3.rgb.apply(null, shade(colors.sector, v));
         } else {
           var c, t;
           for (i in studies.children) {
@@ -591,23 +590,9 @@ if (window.matchMedia(mobileOnly).matches) {
           scale = 2, // multiplier for shade curve
           offset = .18, // offset
           v = (Math.log(c / t + 1) / Math.log(base)) * scale + offset;
-          v = v > 1 ? 1 : v;
-          var blue = [0, 138, 179];
-          var orange = [238, 91, 67];
-          var yellow = [194, 195, 59];
-          var fuchsia = [173, 0, 84];
-          if (d.impact === 'government') {
-            return d3.rgb.apply(null, shade(blue, v));
-          } else if (d.impact === 'citizens') {
-            return d3.rgb.apply(null, shade(orange, v));
-          } else if (d.impact === 'economic') {
-            return d3.rgb.apply(null, shade(yellow, v));
-          } else if (d.impact === 'public') {
-            return d3.rgb.apply(null, shade(fuchsia, v));
-        } // else
-        return d3.rgb(128, 128, 128);
-      }
-    })
+          return d3.rgb.apply(null, shade(colors[d.impact], v));
+        }
+      })
     .attr('id', function(d, i) {
       var id, l = d.region || d.location;
       if (d.region) {
@@ -664,7 +649,6 @@ if (window.matchMedia(mobileOnly).matches) {
         }
         t = textMap[d.impact];
       }
-      console.log (t);
       return t;
     })
     .attr('id', function(d, i) {
