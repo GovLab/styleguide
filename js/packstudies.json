@@ -8,7 +8,7 @@
             "title" : "Brazil’s Open Budget Transparency Portal",
             "location" : "sa",
             "impact" : "government",
-            "sector" : "public"
+            "sector" : "pub"
         }
         ,
         {
@@ -34,7 +34,7 @@
             "title" : "Kenya's Open Duka",
             "location" : "af",
             "impact" : "citizens",
-            "sector" : "public"
+            "sector" : "pub"
         }
         ,
         {
@@ -114,7 +114,7 @@
             "title" : "Open Contracting And Procurement In Slovakia",
             "location" : "eu",
             "impact" : "government",
-            "sector" : "public"
+            "sector" : "pub"
         }
         ,
         {
@@ -129,7 +129,7 @@
             "title" : "United Kingdom's TheyWorkForYou",
             "location" : "eu",
             "impact" : "government",
-            "sector" : "public"
+            "sector" : "pub"
         }
         ,
         {

@@ -124,10 +124,12 @@ if (window.matchMedia(mobileOnly).matches) {
 
   // utility function to create a shade based on array of rgb values and scalar
   function shade(rgb, v) {
+    var _rgb = [];
+    v = v > 1 ? 1 : v;
     for (var i in rgb) {
-      rgb[i] = rgb[i] * v > 255 ? 255 : rgb[i] * v;
+      _rgb[i] = rgb[i] * v;
     }
-    return rgb;
+    return _rgb;
   }
 
   // filter an object recursively based on a function f
@@ -222,7 +224,23 @@ if (window.matchMedia(mobileOnly).matches) {
     'government' : [0, 138, 179],
     'citizens' : [238, 91, 67],
     'economic' : [194, 195, 59],
-    'public' : [173, 0, 84]
+    'public' : [173, 0, 84],
+    'sector' : [0, 136, 149],
+    'pub' : [0, 136, 149],
+    'business' : [0, 136, 149],
+    'education' : [0, 136, 149],
+    'emergency' : [0, 136, 149],
+    'geospatial' : [0, 136, 149],
+    'health' : [0, 136, 149],
+    'law' : [0, 136, 149],
+    'philantropy' : [0, 136, 149],
+    'politics' : [0, 136, 149],
+    'transportation' : [0, 136, 149],
+    'weather' : [0, 136, 149],
+    'base' : [0, 138, 179],
+    // 'base' : [106, 145, 149]
+    // 'base' : [118, 148, 169]
+    'none' : [118, 148, 169]
   };
 
   var baseColors = {};
@@ -257,7 +275,7 @@ if (window.matchMedia(mobileOnly).matches) {
       if (impact in colors) {
         return d3.rgb.apply(null, colors[impact]);
       } else {
-        return d3.rgb(0, 138, 179);
+        return d3.rgb.apply(null, colors.base);
       }
     });
 
@@ -301,22 +319,34 @@ if (window.matchMedia(mobileOnly).matches) {
   // filter bubble handlers for ui
   function filterAll(d) {
     d3.selectAll('.parent, .node').classed('show', true);
+    d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
   function filterTotals(d) {
     d3.selectAll('.parent').classed('show', true);
+    d3.selectAll('.parent').classed('invisible', false);
+    d3.selectAll('.sector.parent').classed('show', false);
     d3.selectAll('.node').classed('show', false);
+    d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
   function filterImpacts(d) {
     d3.selectAll('.parent').classed('show', false);
-    d3.selectAll('.node').classed('show', true);
+    d3.selectAll('.impact.node').classed('show', true);
+    d3.selectAll('.sector.node').classed('show', false);
+    d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
   function filterSectors(d) {
+    d3.selectAll('.parent').classed('show', false);
+    d3.selectAll('.impact.node').classed('show', false);
+    d3.selectAll('.sector.node').classed('show', true);
+    d3.selectAll('.parent').classed('faded', false);
+    d3.selectAll('.map-ui .b-button').classed('m-active', false)
+    d3.select('#' + this.id).classed('m-active', true);
   }
   function filterStudies(d) {
   }
@@ -370,24 +400,67 @@ if (window.matchMedia(mobileOnly).matches) {
     for (var region in _sc) {
       var _r = _sc[region],
       base = 2, // log base for bubble size curve
-      scale = 80; // multiplier for bubble size curve
+      scale = 80, // multiplier for bubble size curve
+      sectorScale = 20; // independent scaling for sectors
 
       // set top-level sizes for regions based on log of the total number of children
       // _sc[region].size = (Math.log(_r.children.length + 1) / Math.log(base)) * scale;
       _sc[region].impacts = {}; // <-- this part needs to be made extensible
+      _sc[region].sectors = {};
+
+      var sn = {
+        'region' : _sc[region].region,
+        'title' : 'All Sectors',
+        'name' : 'sectorNode',
+        'impact' : 'none',
+        'sector' : 'none',
+        'children' : [],
+        'meta' : true
+      };
+      sn.location = _sc[region].region;
+      _sc[region].children.push(sn);
 
       // iterate through each study in the region
       var _scc = _sc[region].children; // assign and trim for readability
       for (var study in _scc) {
         var _s = _scc[study];
 
-        // increment count or add counter if it is not in the parent node yet
-        if (!_sc[region].impacts.hasOwnProperty(_s.impact)) {
-          _sc[region].impacts[_s.impact] = 1;
-        } else {
-          _sc[region].impacts[_s.impact] ++;
-          // flag as a plural entry in the category, in case we want to filter from node structure
-          // in certain visualizations (eg we just want to display counts only)
+        if (!_s.meta) {
+          // increment count or add counter if it is not in the parent node yet
+          if (!_sc[region].impacts.hasOwnProperty(_s.impact)) {
+            _sc[region].impacts[_s.impact] = 1;
+            var _n = {};
+            _n.title = 'Total ' + _s.impact;
+            _n.impact = _s.impact;
+            _n.sector = _s.sector;
+            _n.location = _s.location;
+            _n.meta = true;
+            _scc.push(_n);
+          } else {
+            _sc[region].impacts[_s.impact]++;
+            // flag as a plural entry in the category, in case we want to filter from node structure
+            // in certain visualizations (eg we just want to display counts only)
+          }
+
+          if (!_sc[region].sectors.hasOwnProperty(_s.sector)) {
+            _sc[region].sectors[_s.sector] = 1;
+            var _sn, _n = {};
+            _n.title = 'Total ' + _s.sector;
+            _n.impact = _s.impact;
+            _n.sector = _s.sector;
+            _n.location = _s.location;
+            _n.meta = true;
+            _n.metaSector = true;
+            for (var _c in _sc[region].children) {
+              if (_sc[region].children[_c].name === 'sectorNode') {
+                _sn = _c;
+              }
+            }
+            // push to sectorNode leaf
+            _sc[region].children[_sn].children.push(_n);
+          } else {
+            _sc[region].sectors[_s.sector]++;
+          }
           _scc[study].plural = true;
         }
         // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
@@ -395,12 +468,18 @@ if (window.matchMedia(mobileOnly).matches) {
       }
       _sc[region].children = _scc; // re-insert modified structure (case studies)
 
-      // calculate totals
+      // calculate totals of all cases in region which have an impact, (which should be every case)
       _sc[region].total = 0;
       for (var i in _sc[region].impacts) {
         _sc[region].total += _sc[region].impacts[i];
       }
       _sc[region].size = (Math.log(_sc[region].total + 1) / Math.log(base)) * scale;
+
+      // calculate the totally number of UNIQUE sectors in region
+      _sc[region].totalSectors = 0;
+      for (var i in _sc[region].sectors) {
+        _sc[region].totalSectors++;
+      }
 
       // calculate sizes for categories based on the count
       // this may need to be improved to allow for retaining a base size (above) for each most-granular datum
@@ -408,7 +487,15 @@ if (window.matchMedia(mobileOnly).matches) {
       var _scc = _sc[region].children;
       for (var study in _scc) {
         var _s = _scc[study];
+        // impact sizes
         _scc[study].size = (Math.log(_sc[region].impacts[_s.impact] + 1) / Math.log(base)) * scale;
+        // sector sizes
+        if (_scc[study].name === 'sectorNode') {
+          for (var i in _scc[study].children) {
+            _scc[study].children[i].size =
+            (Math.log(_sc[region].sectors[_scc[study].children[i].sector] + 1) / Math.log(base)) * sectorScale;
+          }
+        }
       }
       _sc[region].children = _scc;
     }
@@ -429,9 +516,38 @@ if (window.matchMedia(mobileOnly).matches) {
       studies.impacts[i] = max;
     }
 
+    studies.sectors = {};
+    for (var i in studies.children) {
+      // individual totals
+      for (var j in studies.children[i].sectors) {
+        if (!studies.sectors.hasOwnProperty(j)) {
+          studies.sectors[j] = [];
+        }
+        studies.sectors[j].push(studies.children[i].sectors[j]);
+      }
+      // apply sum to sectorNode size
+      for (var x in studies.children[i].children) {
+        if (studies.children[i].children[x].name === 'sectorNode') {
+          var t = studies.children[i].totalSectors,
+          base = 2,
+          scale = 80;
+          studies.children[i].children[x].size =
+          (Math.log(t + 1) / Math.log(base)) * scale;
+        }
+      }
+    }
+    // max individual total
+    for (var i in studies.sectors) {
+      max = Math.max.apply(null, studies.sectors[i]);
+      studies.sectors[i] = max;
+    }
+
+    // filter the studies based on whatever rule we want
     studies = filterObject(studies, function(d) {
       return !d.plural;
     });
+
+    console.log (studies);
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
@@ -453,10 +569,15 @@ if (window.matchMedia(mobileOnly).matches) {
     .enter().append('g')
     .attr('class', function(d, i) {
       var c;
-      if (d.region) {
+      if (d.metaSector) {
+        c = 'sector node';
+      } else if (d.region) {
         c = 'parent';
+        if (d.name === 'sectorNode') {
+          c = 'sector parent';
+        }
       } else {
-        c = 'node';
+        c = 'impact node';
       }
       return c;
     })
@@ -511,56 +632,40 @@ if (window.matchMedia(mobileOnly).matches) {
       })
     .style('fill', function(d) {
       // could be cleaned up
-      var c,t;
-      if (!d.region) {
-        for (i in studies.children) {
-          if (d.location === studies.children[i].region) {
-            c = studies.children[i].impacts[d.impact];
-            t = studies.impacts[d.impact];
-          }
-        }
-      }
-
-      // calculate the value of the shade (logarithmic)
-      var base = 4, // log base for shade curve
-      scale = 2, // multiplier for shade curve
-      offset = .18, // offset
-      v = (Math.log(c/t + 1) / Math.log(base)) * scale + offset;
-      // console.log (!d.region ? v : '');
-
-      // calc value for parent shade
-      base = 8;
-      scale = 1;
-      offset = -1.3;
-      vv = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
-      // console.log (d.region ? vv : '');
-
-      // cap at 1
-      v = v > 1 ? 1 : v;
-      vv = vv > 1 ? 1 : vv;
-
       if (d.region) {
-        return d3.rgb.apply(null, shade([0, 138, 179], vv))
-      } else {
-        var blue = [0, 138, 179];
-        var orange = [238, 91, 67];
-        var yellow = [194, 195, 59];
-        var fuchsia = [173, 0, 84];
-        if (d.impact === 'government') {
-          return d3.rgb.apply(null, shade(blue, v));
-        } else if (d.impact === 'citizens') {
-          return d3.rgb.apply(null, shade(orange, v));
-        } else if (d.impact === 'economic') {
-          return d3.rgb.apply(null, shade(yellow, v));
-        } else if (d.impact === 'public') {
-          return d3.rgb.apply(null, shade(fuchsia, v));
-        } // else
-        return d3.rgb(128, 128, 128);
-      }
-    })
+        // calc value for parent shade
+        var base = 8,
+        scale = 1,
+        offset = -1.3,
+        v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
+        return d3.rgb.apply(null, shade(colors.base, v));
+      } else if (d.metaSector) {
+        var base = 6, // log base for shade curve
+          scale = 2, // multiplier for shade curve
+          offset = -3, // offset
+          v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
+          return d3.rgb.apply(null, shade(colors.sector, v));
+        } else {
+          var c, t;
+          for (i in studies.children) {
+            if (d.location === studies.children[i].region) {
+              c = studies.children[i].impacts[d.impact];
+              t = studies.impacts[d.impact];
+            }
+          }
+        // calculate the value of the shade (logarithmic)
+        var base = 4, // log base for shade curve
+          scale = 2, // multiplier for shade curve
+          offset = .18, // offset
+          v = (Math.log(c / t + 1) / Math.log(base)) * scale + offset;
+          return d3.rgb.apply(null, shade(colors[d.impact], v));
+        }
+      })
     .attr('id', function(d, i) {
       var id, l = d.region || d.location;
-      if (d.region) {
+      if (d.metaSector) {
+        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.region) {
         id = '_bubble_' + l.replace(/\W+/g, '-');
       } else {
         id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
@@ -571,14 +676,51 @@ if (window.matchMedia(mobileOnly).matches) {
     .on("mouseover", highlight)
     .on("mouseout", deHighlight);
 
+    var textMap = {
+      // impact
+      'government' : 'account_balance',
+      'citizens' : 'person_pin_circle',
+      'economic' : 'trending_up',
+      'public' : 'public',
+      // sector
+      'pub' : 'language',
+      'business' : 'business_center',
+      'education' : 'school',
+      'emergency' : 'report_problem',
+      'geospatial' : 'add_location',
+      'health' : 'local_hospital',
+      'law' : 'gavel',
+      'philantropy' : 'accessibility',
+      'politics' : 'done',
+      'transportation' : 'directions_car',
+      'weather' : 'beach_access'
+    };
     // create text
     node.append('text')
-    .attr('dy', '.3em')
+    .attr('dy', function(d) {
+      if (d.region) {
+        return '-.3em';
+      } else {
+        return '.5em';
+      }
+    })
     .style('text-anchor', 'middle')
     .text(function(d) {
       var t = '';
       if (d.region) {
-        t = d.total;
+        if (d.name === 'sectorNode') {
+          t = d.parent.totalSectors;
+        } else {
+          t = d.total;
+        }
+      }
+      else if (d.metaSector) {
+        for (i in studies.children) {
+          if (d.location === studies.children[i].region) {
+            t = studies.children[i].sectors[d.sector];
+          }
+        }
+        t = textMap[d.sector];
       }
       else {
         for (i in studies.children) {
@@ -586,30 +728,60 @@ if (window.matchMedia(mobileOnly).matches) {
             t = studies.children[i].impacts[d.impact];
           }
         }
+        t = textMap[d.impact];
       }
       return t;
     })
     .attr('id', function(d, i) {
       var id, l = d.region || d.location;
-      if (d.region) {
+      if (d.metaSector) {
+        id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.region) {
         id = '_text_' + l.replace(/\W+/g, '-');
       } else {
         id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.impact.replace(/\W+/g, '-');
       }
       return id;
     })
-    .attr('class', 'text')
+    .attr('class', function (d) {
+      if (d.metaSector) {
+        return 'material-icons sector-text';
+      } else if (d.region) {
+        return 'text';
+      } else {
+        return 'material-icons';
+      }
+    })
     .on("click", clicked)
     .on("mouseover", highlight)
-    .on("mouseout", deHighlight);
+    .on("mouseout", deHighlight)
+    .append('tspan')
+    .attr('x', '0')
+    .attr('dy', '1em')
+    .style('text-anchor', 'middle')
+    .text(function(d) {
+      var t = '';
+      if (d.region) {
+        if (d.name === 'sectorNode') {
+          t = 'Sectors';
+        } else {
+          if (d.total > 1) {
+            t = 'Studies';
+          } else {
+            t = 'Study';
+          }
+        }
+      }
+      return t;
+    });
 
     // ... finished drawing bubbles
 
     // no one needs you antarctica
     g.select('#Antarctica').remove();
 
-    // select totals by default
-    document.getElementById('button-totals').dispatchEvent(new MouseEvent('click'));
+    // select all by default
+    document.getElementById('button-all').dispatchEvent(new MouseEvent('click'));
   }
 
   // this allows us to process multiple data sources in a single function, ie instead of just d3.json()
