@@ -113,15 +113,19 @@ Styleguide 6.3.2
   .parent {
     &.fade circle {
       opacity: .15;
-      transition: opacity 0.5s;
+      transition: opacity 0.2s;
+    }
+    &.faded circle {
+      opacity: .15;
+      transition: opacity 0.1s;
     }
     circle {
       opacity: .8;
       cursor: pointer;
-      transition: opacity 0.5s;
+      transition: opacity 0.2s;
       &.active {
-        opacity: .8;
-        transition: opacity 0.1s;
+        opacity: 1;
+        transition: opacity 0.2s;
       }
     }
     text {
@@ -132,28 +136,31 @@ Styleguide 6.3.2
   .node {
     &.fade circle {
       opacity: .15;
-      transition: opacity 0.5s;
+      transition: opacity 0.2s;
     }
     circle {
       opacity: 1;
       cursor: pointer;
-      transition: opacity 0.5s;
+      transition: opacity 0.2s;
       &.active {
         opacity: 1;
       }
     }
     text {
       font-size: 22px;
+      &.sector-text {
+        font-size: 8px;
+      }
     }
   }
 
   .region {
     fill: #ddd;
     cursor: pointer;
-    transition: fill 0.1s;
+    transition: fill 0.2s;
     &.active {
       fill: #bbb;
-      transition: fill 0.1s;
+      transition: fill 0.2s;
     }
   }
 
@@ -168,7 +175,7 @@ Styleguide 6.3.2
     &.show {
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.5s;
+      transition: opacity 0.1s;
     }
   }
 
@@ -178,7 +185,7 @@ Styleguide 6.3.2
     &.show {
       opacity: 1;
       visibility: visible;
-      transition: opacity 0.5s;
+      transition: opacity 0.1s;
     }
   }
 }
