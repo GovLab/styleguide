@@ -622,10 +622,22 @@ if (window.matchMedia(mobileOnly).matches) {
     .on("mouseout", deHighlight);
 
     var textMap = {
+      // impact
       'government' : 'account_balance',
-      'citizens' : 'person_pin',
+      'citizens' : 'person_pin_circle',
       'economic' : 'trending_up',
-      'public' : 'public'
+      'public' : 'public',
+      // sector
+      'business' : 'business_center',
+      'education' : 'school',
+      'emergency' : 'report_problem',
+      'geospatial' : 'add_location',
+      'health' : 'local_hospital',
+      'law' : 'gavel',
+      'philantropy' : 'accessibility',
+      'politics' : 'done',
+      'transportation' : 'directions_car',
+      'weather' : 'beach_access'
     };
     // create text
     node.append('text')
@@ -642,6 +654,7 @@ if (window.matchMedia(mobileOnly).matches) {
             t = studies.children[i].sectors[d.sector];
           }
         }
+        t = textMap[d.sector];
       }
       else {
         for (i in studies.children) {
@@ -665,7 +678,7 @@ if (window.matchMedia(mobileOnly).matches) {
     })
     .attr('class', function (d) {
       if (d.metaSector) {
-        return 'sector-text';
+        return 'material-icons sector-text';
       } else if (d.region) {
         return 'text';
       } else {
