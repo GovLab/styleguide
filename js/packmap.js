@@ -569,7 +569,6 @@ if (window.matchMedia(mobileOnly).matches) {
         scale = 1,
         offset = -1.3,
         v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
-        console.log(colors.base);
         return d3.rgb.apply(null, shade(colors.base, v));
       } else if (d.metaSector) {
         var base = 6, // log base for shade curve

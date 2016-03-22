@@ -115,9 +115,14 @@ Styleguide 6.3.2
       opacity: .15;
       transition: opacity 0.2s;
     }
-    &.faded circle {
-      opacity: .15;
-      transition: opacity 0.1s;
+    &.faded {
+      text {
+        display: none;
+      }
+      circle {
+        opacity: .4;
+        transition: opacity 0.1s;
+      }
     }
     circle {
       opacity: .8;
