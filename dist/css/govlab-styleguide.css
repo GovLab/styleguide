@@ -6863,41 +6863,56 @@ Styleguide 6.3.2
 
 .b-pack-map .parent.fade circle {
   opacity: .15;
-  transition: opacity 0.5s; }
+  transition: opacity 0.2s; }
 
 .b-pack-map .parent circle {
-  opacity: .8;
+  opacity: .4;
   cursor: pointer;
-  transition: opacity 0.5s; }
+  transition: opacity 0.2s; }
   .b-pack-map .parent circle.active {
-    opacity: .8;
-    transition: opacity 0.1s; }
+    opacity: 1;
+    transition: opacity 0.2s; }
+
+.b-pack-map .parent.sector circle {
+  opacity: .5; }
 
 .b-pack-map .parent text {
   font-size: 22px; }
+
+.b-pack-map .parent.invisible text {
+  visibility: hidden; }
+
+.b-pack-map .parent.invisible circle {
+  opacity: 0;
+  visibility: visible; }
+
+.b-pack-map .parent.invisible.sector circle {
+  opacity: .2; }
 
 .b-pack-map .node.fade circle {
   opacity: .15;
   transition: opacity 0.5s; }
 
 .b-pack-map .node circle {
-  opacity: .75;
+  opacity: 1;
   cursor: pointer;
-  transition: opacity 0.5s; }
+  transition: opacity 0.2s; }
   .b-pack-map .node circle.active {
-    opacity: .8;
-    transition: opacity 0.1s; }
+    opacity: 1;
+    transition: opacity 0.2s; }
 
 .b-pack-map .node text {
   font-size: 22px; }
+  .b-pack-map .node text.sector-text {
+    font-size: 22px; }
 
 .b-pack-map .region {
   fill: #ddd;
   cursor: pointer;
-  transition: fill 0.1s; }
+  transition: fill 0.2s; }
   .b-pack-map .region.active {
     fill: #bbb;
-    transition: fill 0.1s; }
+    transition: fill 0.2s; }
 
 .b-pack-map text {
   fill: #fff;
