@@ -44,7 +44,7 @@ if (window.matchMedia(mobileOnly).matches) {
       ],
       'translate': {
         x: 0,
-        y: -1
+        y: -.5
       }
     },
     'as': {
@@ -76,8 +76,8 @@ if (window.matchMedia(mobileOnly).matches) {
       558, 591, 659, 662, 670, 780, 840
       ],
       'translate': {
-        x: -4,
-        y: 1
+        x: -4.4,
+        y: 1.5
       }
     },
     'oc': {
@@ -92,8 +92,8 @@ if (window.matchMedia(mobileOnly).matches) {
       'name': 'South America',
       'geometries': [32, 68, 76, 152, 170, 218, 328, 600, 604, 740, 858, 862],
       'translate': {
-        x: 1,
-        y: 0
+        x: .8,
+        y: -.5
       }
     }
   };
@@ -111,6 +111,7 @@ if (window.matchMedia(mobileOnly).matches) {
   path = d3.geo.path()
   .projection(projection);
 
+
   // build the base svg and related elements
   var svg = d3.select(mapClass).append('svg')
   .attr('width', width)
@@ -119,8 +120,25 @@ if (window.matchMedia(mobileOnly).matches) {
   .attr('class', 'background')
   .attr('width', width)
   .attr('height', height);
+
   var g = svg.append('g')
-  .style('stroke-width', '1.5px');
+  .style('stroke-width', '1.5px')
+  ;
+
+  var tip = document.getElementById('tooltip');
+  tip.style.position = 'absolute';
+  tip.style.opacity = 0;
+
+  var mousex, mousey;
+  d3.select('html')
+  .on('mousemove', function() {
+    c = d3.mouse(this);
+    mousex = c[0];
+    mousey = c[1];
+    tip.style.left = mousex - 75 + 'px';
+    tip.style.top = mousey + 50 + 'px';
+  });
+
 
   // utility function to create a shade based on array of rgb values and scalar
   function shade(rgb, v) {
@@ -240,18 +258,67 @@ if (window.matchMedia(mobileOnly).matches) {
     'base' : [0, 138, 179],
     // 'base' : [106, 145, 149]
     // 'base' : [118, 148, 169]
+    'study' : [191, 207, 217],
+    'studySector' : [106, 145, 149],
     'none' : [118, 148, 169]
   };
+
+  var verboseMap = {
+    'government' : 'Improving Government',
+    'citizens' : 'Empowering Citizens',
+    'economic' : 'Creating Opportunity',
+    'public' : 'Solving Public Problems',
+    'pub' : 'Public Sector',
+    'business' : 'Business',
+    'education' : 'Education',
+    'emergency' : 'Emergency Services',
+    'geospatial' : 'Geospatial Services',
+    'health' : 'Health',
+    'law' : 'Law',
+    'philantropy' : 'Philantropy and Aid',
+    'politics' : 'Politics and Elections',
+    'transportation' : 'Transportation',
+    'weather' : 'Weather',
+  }
 
   var baseColors = {};
 
   function clicked(d) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
+    if (d.study) {
+      location.href = d.url;
+    }
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
+    if (d.type === 'impactNode') {
+      document.getElementById('button-studies').dispatchEvent(new MouseEvent('click'));
+      d3.selectAll('.node.study').classed('show', false);
+      d3.selectAll('.node.study.' + d.impact + '.' + d.location).classed('show', true);
+    } else if (d.type === 'sectorChildNode') {
+      document.getElementById('button-studies').dispatchEvent(new MouseEvent('click'));
+      d3.selectAll('.node.study').classed('show', false);
+      d3.selectAll('.node.study.' + d.sector + '.' + d.location).classed('show', true);
+    } else if (d.region) {
+      document.getElementById('button-studies').dispatchEvent(new MouseEvent('click'));
+      d3.selectAll('.node.study').classed('show', false);
+      d3.selectAll('.node.study.studyImpact.' + d.region).classed('show', true);
+    }
   }
 
   function highlight(d) {
+
+console.log (d);
+    if (d.type === 'impactNode' || d.type === 'sectorChildNode' || d.study) {
+      tip.style.opacity = 1;
+      if (d.type === 'impactNode') {
+        tip.innerHTML = verboseMap[d.impact];
+      } else if (d.study) {
+        tip.innerHTML = d.title;
+      } else {
+        tip.innerHTML = verboseMap[d.sector];
+      }
+    }
+
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, ''),
     bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_'),
     impact = this.id.replace(/^[^-]*-?/, '');
@@ -287,6 +354,8 @@ if (window.matchMedia(mobileOnly).matches) {
   }
 
   function deHighlight(d) {
+    tip.style.opacity = 0;
+
     var region = d.location || this.id.replace(/_bubble_|_text_/, ''),
     bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
 
@@ -320,6 +389,7 @@ if (window.matchMedia(mobileOnly).matches) {
   function filterAll(d) {
     d3.selectAll('.parent, .node').classed('show', true);
     d3.selectAll('.parent').classed('invisible', true);
+    d3.selectAll('.node.study').classed('show', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
@@ -334,22 +404,33 @@ if (window.matchMedia(mobileOnly).matches) {
   }
   function filterImpacts(d) {
     d3.selectAll('.parent').classed('show', false);
+    d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.impact.node').classed('show', true);
     d3.selectAll('.sector.node').classed('show', false);
+    d3.selectAll('.node.study').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
   function filterSectors(d) {
     d3.selectAll('.parent').classed('show', false);
+    d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.impact.node').classed('show', false);
     d3.selectAll('.sector.node').classed('show', true);
+    d3.selectAll('.node.study').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
   function filterStudies(d) {
+    d3.selectAll('.node, .parent').classed('show', false);
+    d3.selectAll('.parent').classed('invisible', true);
+    d3.selectAll('.node.study').classed('show', true);
+    d3.selectAll('.map-ui .b-button').classed('m-active', false)
+    d3.select('#' + this.id).classed('m-active', true);
   }
+
+
 
   // process the various input data sets into our map
   // called with queue()
@@ -412,6 +493,7 @@ if (window.matchMedia(mobileOnly).matches) {
         'region' : _sc[region].region,
         'title' : 'All Sectors',
         'name' : 'sectorNode',
+        'type' : 'sectorNode',
         'impact' : 'none',
         'sector' : 'none',
         'children' : [],
@@ -431,41 +513,48 @@ if (window.matchMedia(mobileOnly).matches) {
             _sc[region].impacts[_s.impact] = 1;
             var _n = {};
             _n.title = 'Total ' + _s.impact;
+            _n.name = _s.impact + 'Node';
+            _n.type = 'impactNode';
             _n.impact = _s.impact;
             _n.sector = _s.sector;
             _n.location = _s.location;
             _n.meta = true;
+            _n.children = [];
             _scc.push(_n);
           } else {
             _sc[region].impacts[_s.impact]++;
-            // flag as a plural entry in the category, in case we want to filter from node structure
-            // in certain visualizations (eg we just want to display counts only)
           }
 
           if (!_sc[region].sectors.hasOwnProperty(_s.sector)) {
             _sc[region].sectors[_s.sector] = 1;
             var _sn, _n = {};
             _n.title = 'Total ' + _s.sector;
+            _n.name = _s.sector + 'Node';
+            _n.type = 'sectorChildNode';
             _n.impact = _s.impact;
             _n.sector = _s.sector;
             _n.location = _s.location;
             _n.meta = true;
             _n.metaSector = true;
+            _n.children = [];
             for (var _c in _sc[region].children) {
               if (_sc[region].children[_c].name === 'sectorNode') {
                 _sn = _c;
               }
             }
-            // push to sectorNode leaf
+            // push to sectorNode
             _sc[region].children[_sn].children.push(_n);
           } else {
             _sc[region].sectors[_s.sector]++;
           }
+          // flag as a plural entry in the category, in case we want to filter from node structure
+          // in certain visualizations (eg we just want to display counts only)
           _scc[study].plural = true;
+          // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
+          _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
         }
-        // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
-        // _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
       }
+
       _sc[region].children = _scc; // re-insert modified structure (case studies)
 
       // calculate totals of all cases in region which have an impact, (which should be every case)
@@ -500,6 +589,83 @@ if (window.matchMedia(mobileOnly).matches) {
       _sc[region].children = _scc;
     }
     studies.children = _sc; // re-insert modified structure (regions)
+
+    // pack individual studies into bubbles
+    // impacts
+    _sc = studies.children;
+    for (var n in _sc) {
+      var _scc = _sc[n];
+      var impactNodeIndex = false;
+      if (_scc.children) {
+        for (var s in _scc.children) {
+          if (typeof _scc.children[s].type != 'undefined') {
+            if (_scc.children[s].type === 'impactNode') {
+              impactNodeIndex = s;
+              for (var x in _scc.children) {
+                if (_scc.children[x].type !== 'impactNode') {
+                  if (typeof _scc.children[x].plural != 'undefined' && _scc.children[x].impact == _scc.children[impactNodeIndex].impact) {
+                    var _x = {};
+                    _x.title = _scc.children[x].title;
+                    _x.impact = _scc.children[x].impact;
+                    _x.sector = _scc.children[x].sector;
+                    _x.location = _scc.children[x].location;
+                    _x.url = _scc.children[x].url;
+                    _x.study = true;
+                    _x.meta = false;
+                    _x.metaSector = false;
+                    _x.plural = false;
+                    _x.packsize = 2;
+                    _scc.children[impactNodeIndex].children.push(_x);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // sectors
+    _sc = studies.children;
+    for (var n in _sc) {
+      var _scc = _sc[n];
+      var sectorNodeIndex = false;
+      if (_scc.children) {
+        for (var s in _scc.children) {
+          if (typeof _scc.children[s].type != 'undefined') {
+            if (_scc.children[s].type === 'sectorNode') {
+              for (var z in _scc.children[s].children) {
+                if (typeof _scc.children[s].children[z].type != 'undefined') {
+                  if (_scc.children[s].children[z].type === 'sectorChildNode') {
+                    sectorNodeIndexS = s;
+                    sectorNodeIndexZ = z;
+                    for (var x in _scc.children) {
+                      if (_scc.children[x].type !== 'sectorChildNode') {
+                        if (typeof _scc.children[x].plural != 'undefined' && _scc.children[x].sector ==  _scc.children[sectorNodeIndexS].children[sectorNodeIndexZ].sector) {
+                          var _x = {};
+                          _x.title = _scc.children[x].title;
+                          _x.impact = _scc.children[x].impact;
+                          _x.sector = _scc.children[x].sector;
+                          _x.location = _scc.children[x].location;
+                          _x.url = _scc.children[x].url;
+                          _x.study = true;
+                          _x.studySector = true;
+                          _x.meta = false;
+                          _x.metaSector = false;
+                          _x.plural = false;
+                          _x.packsize = 1;
+                          _scc.children[sectorNodeIndexS].children[sectorNodeIndexZ].children.push(_x);
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
     // find max category counts accross children and insert into root node
     studies.impacts = {};
@@ -545,17 +711,18 @@ if (window.matchMedia(mobileOnly).matches) {
     // filter the studies based on whatever rule we want
     studies = filterObject(studies, function(d) {
       return !d.plural;
+      // return true;
     });
 
-    console.log (studies);
+    // console.log (studies);
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
-    var diameter = 600, // diameter of container circles to pack bubbles into
+    var diameter = 700, // diameter of container circles to pack bubbles into
     pack = d3.layout.pack()
     .size([diameter, diameter])
     .value(function(d) {
-      return d.size;
+      return d.packsize;
     });
 
     // append bubbles to the svg ...
@@ -575,6 +742,13 @@ if (window.matchMedia(mobileOnly).matches) {
         c = 'parent';
         if (d.name === 'sectorNode') {
           c = 'sector parent';
+        }
+      } else if (d.study) {
+        c = 'study node ' + d.location;
+        if (d.studySector) {
+          c += ' ' + d.sector + ' ' + 'studySector';
+        } else {
+          c += ' ' + d.impact + ' ' + 'studyImpact';
         }
       } else {
         c = 'impact node';
@@ -642,9 +816,15 @@ if (window.matchMedia(mobileOnly).matches) {
       } else if (d.metaSector) {
         var base = 6, // log base for shade curve
           scale = 2, // multiplier for shade curve
-          offset = -3, // offset
-          v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
+          offset = -2.5, // offset
+          v = (Math.log(d.size + 1) / Math.log(base)) * scale + offset;
           return d3.rgb.apply(null, shade(colors.sector, v));
+        } else if (d.study) {
+          if (d.studySector) {
+            return d3.rgb.apply(null, colors.studySector);
+          } else {
+            return d3.rgb.apply(null, colors.study);
+          }
         } else {
           var c, t;
           for (i in studies.children) {
@@ -654,9 +834,9 @@ if (window.matchMedia(mobileOnly).matches) {
             }
           }
         // calculate the value of the shade (logarithmic)
-        var base = 4, // log base for shade curve
+        var base = 8, // log base for shade curve
           scale = 2, // multiplier for shade curve
-          offset = .18, // offset
+          offset = .5, // offset
           v = (Math.log(c / t + 1) / Math.log(base)) * scale + offset;
           return d3.rgb.apply(null, shade(colors[d.impact], v));
         }
@@ -665,6 +845,8 @@ if (window.matchMedia(mobileOnly).matches) {
       var id, l = d.region || d.location;
       if (d.metaSector) {
         id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.study) {
+        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + (d.studySector ? 'sector' : 'impact') + '-' + d.title.replace(/\W+/g, '-');
       } else if (d.region) {
         id = '_bubble_' + l.replace(/\W+/g, '-');
       } else {
@@ -693,7 +875,12 @@ if (window.matchMedia(mobileOnly).matches) {
       'philantropy' : 'accessibility',
       'politics' : 'done',
       'transportation' : 'directions_car',
-      'weather' : 'beach_access'
+      'weather' : 'beach_access',
+      'study' : 'subject'
+      // 'study' : 'format_align_left'
+      // 'study' : 'sort'
+      // 'study' : 'library_books'
+      // 'study' : 'import_contacts'
     };
     // create text
     node.append('text')
@@ -722,6 +909,9 @@ if (window.matchMedia(mobileOnly).matches) {
         }
         t = textMap[d.sector];
       }
+      else if (d.study) {
+        t = textMap['study'];
+      }
       else {
         for (i in studies.children) {
           if (d.location === studies.children[i].region) {
@@ -736,6 +926,8 @@ if (window.matchMedia(mobileOnly).matches) {
       var id, l = d.region || d.location;
       if (d.metaSector) {
         id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.study) {
+        id = '_text_' + l.replace(/\W+/g, '-') + '-' + (d.studySector ? 'sector' : 'impact') + '-' + d.title.replace(/\W+/g, '-');
       } else if (d.region) {
         id = '_text_' + l.replace(/\W+/g, '-');
       } else {
@@ -775,6 +967,7 @@ if (window.matchMedia(mobileOnly).matches) {
       return t;
     });
 
+
     // ... finished drawing bubbles
 
     // no one needs you antarctica
@@ -783,6 +976,8 @@ if (window.matchMedia(mobileOnly).matches) {
     // select all by default
     document.getElementById('button-all').dispatchEvent(new MouseEvent('click'));
   }
+
+  // d3.selectAll('.tooltip').moveToFront();
 
   // this allows us to process multiple data sources in a single function, ie instead of just d3.json()
   queue()

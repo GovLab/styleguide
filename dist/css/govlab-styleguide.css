@@ -6866,7 +6866,7 @@ Styleguide 6.3.2
   transition: opacity 0.2s; }
 
 .b-pack-map .parent circle {
-  opacity: .4;
+  opacity: .6;
   cursor: pointer;
   transition: opacity 0.2s; }
   .b-pack-map .parent circle.active {
@@ -6902,9 +6902,23 @@ Styleguide 6.3.2
     transition: opacity 0.2s; }
 
 .b-pack-map .node text {
-  font-size: 22px; }
+  font-size: 26px; }
   .b-pack-map .node text.sector-text {
-    font-size: 22px; }
+    font-size: 16px; }
+
+.b-pack-map .node.study {
+  display: none; }
+  .b-pack-map .node.study.fade circle {
+    opacity: .8;
+    transition: opacity 0.5s; }
+    .b-pack-map .node.study.fade circle.active {
+      opacity: 1;
+      transition: opacity 0.2s; }
+  .b-pack-map .node.study text {
+    fill: rgba(0, 0, 0, 0.6);
+    font-size: 16px; }
+  .b-pack-map .node.study.show {
+    display: initial; }
 
 .b-pack-map .region {
   fill: #ddd;
@@ -6939,6 +6953,16 @@ Styleguide 6.3.2
   background-color: rgba(0, 138, 179, 0.4); }
   .map-ui .b-button.m-active, .map-ui .b-form input.m-active[type="submit"], .b-form .map-ui input.m-active[type="submit"] {
     background-color: #008ab3; }
+
+.tooltip {
+  color: white;
+  font-size: 16px;
+  border-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.02s;
+  width: 200px; }
+  .tooltip::before {
+    border-bottom-color: rgba(0, 0, 0, 0.5); }
 
 .kss-title:hover, .kss-title *:hover {
   text-decoration: none; }
