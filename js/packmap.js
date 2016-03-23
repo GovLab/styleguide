@@ -259,6 +259,10 @@ if (window.matchMedia(mobileOnly).matches) {
       document.getElementById('button-studies').dispatchEvent(new MouseEvent('click'));
       d3.selectAll('.node.study').classed('show', false);
       d3.selectAll('.node.study.' + d.sector + '.' + d.location).classed('show', true);
+    } else if (d.region) {
+      document.getElementById('button-studies').dispatchEvent(new MouseEvent('click'));
+      d3.selectAll('.node.study').classed('show', false);
+      d3.selectAll('.node.study.studyImpact.' + d.region).classed('show', true);
     }
     console.log(d);
   }
@@ -685,9 +689,9 @@ if (window.matchMedia(mobileOnly).matches) {
       } else if (d.study) {
         c = 'study node ' + d.location;
         if (d.studySector) {
-          c += ' ' + d.sector;
+          c += ' ' + d.sector + ' ' + 'studySector';
         } else {
-          c += ' ' + d.impact;
+          c += ' ' + d.impact + ' ' + 'studyImpact';
         }
       } else {
         c = 'impact node';
