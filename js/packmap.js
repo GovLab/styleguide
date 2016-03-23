@@ -283,6 +283,7 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.selectAll('.node, .parent').classed('fade', true);
 
     if (!(d3.select('#' + this.id).classed('region'))) {
+      console.log (this.id, d);
       zoomBubble('#' + bubble, 1.1);
     }
   }
@@ -758,6 +759,8 @@ if (window.matchMedia(mobileOnly).matches) {
       var id, l = d.region || d.location;
       if (d.metaSector) {
         id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.study) {
+        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.title.replace(/\W+/g, '-');
       } else if (d.region) {
         id = '_bubble_' + l.replace(/\W+/g, '-');
       } else {
@@ -837,6 +840,8 @@ if (window.matchMedia(mobileOnly).matches) {
       var id, l = d.region || d.location;
       if (d.metaSector) {
         id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
+      } else if (d.study) {
+        id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.title.replace(/\W+/g, '-');
       } else if (d.region) {
         id = '_text_' + l.replace(/\W+/g, '-');
       } else {
