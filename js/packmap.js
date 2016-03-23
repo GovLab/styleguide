@@ -321,6 +321,7 @@ if (window.matchMedia(mobileOnly).matches) {
   function filterAll(d) {
     d3.selectAll('.parent, .node').classed('show', true);
     d3.selectAll('.parent').classed('invisible', true);
+    d3.selectAll('.node.study').classed('show', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
@@ -338,6 +339,7 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.impact.node').classed('show', true);
     d3.selectAll('.sector.node').classed('show', false);
+    d3.selectAll('.node.study').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
@@ -347,6 +349,7 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.impact.node').classed('show', false);
     d3.selectAll('.sector.node').classed('show', true);
+    d3.selectAll('.node.study').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
@@ -535,7 +538,7 @@ if (window.matchMedia(mobileOnly).matches) {
                     _x.meta = false;
                     _x.metaSector = false;
                     _x.plural = false;
-                    _x.size = _scc.children[x].size / 4;
+                    _x.packsize = 2;
                     _scc.children[impactNodeIndex].children.push(_x);
                   }
                 }
@@ -572,7 +575,7 @@ if (window.matchMedia(mobileOnly).matches) {
                           _x.meta = false;
                           _x.metaSector = false;
                           _x.plural = false;
-                          _x.size = _scc.children[x].size / 16;
+                          _x.packsize = 1;
                           _scc.children[sectorNodeIndexS].children[sectorNodeIndexZ].children.push(_x);
                         }
                       }
@@ -637,11 +640,11 @@ if (window.matchMedia(mobileOnly).matches) {
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
-    var diameter = 600, // diameter of container circles to pack bubbles into
+    var diameter = 800, // diameter of container circles to pack bubbles into
     pack = d3.layout.pack()
     .size([diameter, diameter])
     .value(function(d) {
-      return d.size;
+      return d.packsize;
     });
 
     // append bubbles to the svg ...
@@ -731,7 +734,7 @@ if (window.matchMedia(mobileOnly).matches) {
         var base = 6, // log base for shade curve
           scale = 2, // multiplier for shade curve
           offset = -2.5, // offset
-          v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
+          v = (Math.log(d.size + 1) / Math.log(base)) * scale + offset;
           return d3.rgb.apply(null, shade(colors.sector, v));
         } else if (d.study) {
           return d3.rgb.apply(null, colors.study);
