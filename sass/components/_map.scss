@@ -167,10 +167,15 @@ Styleguide 6.3.2
       }
     }
     &.study {
-      // stroke: $gray-20;
-      // stroke-width: 1;
+      &.fade circle {
+        opacity: .8;
+        transition: opacity 0.5s;
+        &.active {
+          opacity: 1;
+          transition: opacity 0.2s;
+        }
+      }
       text {
-        stroke-width: 0;
         fill: $gray-60;
         font-size: 16px;
       }

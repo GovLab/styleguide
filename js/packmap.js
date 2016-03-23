@@ -241,6 +241,7 @@ if (window.matchMedia(mobileOnly).matches) {
     // 'base' : [106, 145, 149]
     // 'base' : [118, 148, 169]
     'study' : [191, 207, 217],
+    'studySector' : [106, 145, 149],
     'none' : [118, 148, 169]
   };
 
@@ -250,6 +251,16 @@ if (window.matchMedia(mobileOnly).matches) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
+    if (d.type === 'impactNode') {
+      document.getElementById('button-studies').dispatchEvent(new MouseEvent('click'));
+      d3.selectAll('.node.study').classed('show', false);
+      d3.selectAll('.node.study.' + d.impact + '.' + d.location).classed('show', true);
+    } else if (d.type === 'sectorChildNode') {
+      document.getElementById('button-studies').dispatchEvent(new MouseEvent('click'));
+      d3.selectAll('.node.study').classed('show', false);
+      d3.selectAll('.node.study.' + d.sector + '.' + d.location).classed('show', true);
+    }
+    console.log(d);
   }
 
   function highlight(d) {
@@ -283,7 +294,6 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.selectAll('.node, .parent').classed('fade', true);
 
     if (!(d3.select('#' + this.id).classed('region'))) {
-      console.log (this.id, d);
       zoomBubble('#' + bubble, 1.1);
     }
   }
@@ -578,6 +588,7 @@ if (window.matchMedia(mobileOnly).matches) {
                           _x.sector = _scc.children[x].sector;
                           _x.location = _scc.children[x].location;
                           _x.study = true;
+                          _x.studySector = true;
                           _x.meta = false;
                           _x.metaSector = false;
                           _x.plural = false;
@@ -642,7 +653,7 @@ if (window.matchMedia(mobileOnly).matches) {
       // return true;
     });
 
-    console.log (studies);
+    // console.log (studies);
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
@@ -672,7 +683,12 @@ if (window.matchMedia(mobileOnly).matches) {
           c = 'sector parent';
         }
       } else if (d.study) {
-        c = 'study node';
+        c = 'study node ' + d.location;
+        if (d.studySector) {
+          c += ' ' + d.sector;
+        } else {
+          c += ' ' + d.impact;
+        }
       } else {
         c = 'impact node';
       }
@@ -743,7 +759,11 @@ if (window.matchMedia(mobileOnly).matches) {
           v = (Math.log(d.size + 1) / Math.log(base)) * scale + offset;
           return d3.rgb.apply(null, shade(colors.sector, v));
         } else if (d.study) {
-          return d3.rgb.apply(null, colors.study);
+          if (d.studySector) {
+            return d3.rgb.apply(null, colors.studySector);
+          } else {
+            return d3.rgb.apply(null, colors.study);
+          }
         } else {
           var c, t;
           for (i in studies.children) {
@@ -765,7 +785,7 @@ if (window.matchMedia(mobileOnly).matches) {
       if (d.metaSector) {
         id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
       } else if (d.study) {
-        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + d.title.replace(/\W+/g, '-');
+        id = '_bubble_' + l.replace(/\W+/g, '-') + '-' + (d.studySector ? 'sector' : 'impact') + '-' + d.title.replace(/\W+/g, '-');
       } else if (d.region) {
         id = '_bubble_' + l.replace(/\W+/g, '-');
       } else {
@@ -846,7 +866,7 @@ if (window.matchMedia(mobileOnly).matches) {
       if (d.metaSector) {
         id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.sector.replace(/\W+/g, '-');
       } else if (d.study) {
-        id = '_text_' + l.replace(/\W+/g, '-') + '-' + d.title.replace(/\W+/g, '-');
+        id = '_text_' + l.replace(/\W+/g, '-') + '-' + (d.studySector ? 'sector' : 'impact') + '-' + d.title.replace(/\W+/g, '-');
       } else if (d.region) {
         id = '_text_' + l.replace(/\W+/g, '-');
       } else {
