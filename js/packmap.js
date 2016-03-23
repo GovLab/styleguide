@@ -334,6 +334,7 @@ if (window.matchMedia(mobileOnly).matches) {
   }
   function filterImpacts(d) {
     d3.selectAll('.parent').classed('show', false);
+    d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.impact.node').classed('show', true);
     d3.selectAll('.sector.node').classed('show', false);
     d3.selectAll('.parent').classed('faded', false);
@@ -342,6 +343,7 @@ if (window.matchMedia(mobileOnly).matches) {
   }
   function filterSectors(d) {
     d3.selectAll('.parent').classed('show', false);
+    d3.selectAll('.parent').classed('invisible', true);
     d3.selectAll('.impact.node').classed('show', false);
     d3.selectAll('.sector.node').classed('show', true);
     d3.selectAll('.parent').classed('faded', false);
