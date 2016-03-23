@@ -356,6 +356,11 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.select('#' + this.id).classed('m-active', true);
   }
   function filterStudies(d) {
+    d3.selectAll('.node, .parent').classed('show', false);
+    d3.selectAll('.parent').classed('invisible', true);
+    d3.selectAll('.node.study').classed('show', true);
+    d3.selectAll('.map-ui .b-button').classed('m-active', false)
+    d3.select('#' + this.id).classed('m-active', true);
   }
 
   // process the various input data sets into our map
