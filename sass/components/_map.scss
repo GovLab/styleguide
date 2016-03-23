@@ -149,6 +149,7 @@ Styleguide 6.3.2
       opacity: .15;
       transition: opacity 0.5s;
     }
+
     circle {
       opacity: 1;
       cursor: pointer;
@@ -158,11 +159,16 @@ Styleguide 6.3.2
         transition: opacity 0.2s;
       }
     }
+
     text {
       font-size: 26px;
       &.sector-text {
         font-size: 16px;
       }
+    }
+    &.study text {
+      fill: $gray-60;
+      font-size: 16px;
     }
   }
 

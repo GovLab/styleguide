@@ -240,7 +240,7 @@ if (window.matchMedia(mobileOnly).matches) {
     'base' : [0, 138, 179],
     // 'base' : [106, 145, 149]
     // 'base' : [118, 148, 169]
-    'study' : [106, 145, 149],
+    'study' : [191, 207, 217],
     'none' : [118, 148, 169]
   };
 
@@ -471,9 +471,9 @@ if (window.matchMedia(mobileOnly).matches) {
           // flag as a plural entry in the category, in case we want to filter from node structure
           // in certain visualizations (eg we just want to display counts only)
           _scc[study].plural = true;
+          // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
+          _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
         }
-        // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
-        _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
       }
 
       _sc[region].children = _scc; // re-insert modified structure (case studies)
@@ -533,7 +533,7 @@ if (window.matchMedia(mobileOnly).matches) {
                     _x.meta = false;
                     _x.metaSector = false;
                     _x.plural = false;
-                    _x.size = _scc.children[x].size;
+                    _x.size = _scc.children[x].size / 4;
                     console.log (_x);
                     _scc.children[impactNodeIndex].children.push(_x);
                   }
@@ -621,6 +621,8 @@ if (window.matchMedia(mobileOnly).matches) {
         if (d.name === 'sectorNode') {
           c = 'sector parent';
         }
+      } else if (d.study) {
+        c = 'study node';
       } else {
         c = 'impact node';
       }
@@ -741,7 +743,11 @@ if (window.matchMedia(mobileOnly).matches) {
       'politics' : 'done',
       'transportation' : 'directions_car',
       'weather' : 'beach_access',
-      'study' : 'import_contacts'
+      'study' : 'subject'
+      // 'study' : 'format_align_left'
+      // 'study' : 'sort'
+      // 'study' : 'library_books'
+      // 'study' : 'import_contacts'
     };
     // create text
     node.append('text')
@@ -769,6 +775,9 @@ if (window.matchMedia(mobileOnly).matches) {
           }
         }
         t = textMap[d.sector];
+      }
+      else if (d.study) {
+        t = textMap['study'];
       }
       else {
         for (i in studies.children) {
