@@ -44,7 +44,7 @@ if (window.matchMedia(mobileOnly).matches) {
       ],
       'translate': {
         x: 0,
-        y: -1
+        y: -.5
       }
     },
     'as': {
@@ -76,8 +76,8 @@ if (window.matchMedia(mobileOnly).matches) {
       558, 591, 659, 662, 670, 780, 840
       ],
       'translate': {
-        x: -4,
-        y: 1
+        x: -4.4,
+        y: 1.5
       }
     },
     'oc': {
@@ -92,8 +92,8 @@ if (window.matchMedia(mobileOnly).matches) {
       'name': 'South America',
       'geometries': [32, 68, 76, 152, 170, 218, 328, 600, 604, 740, 858, 862],
       'translate': {
-        x: 1,
-        y: 0
+        x: .8,
+        y: -.5
       }
     }
   };
@@ -240,6 +240,7 @@ if (window.matchMedia(mobileOnly).matches) {
     'base' : [0, 138, 179],
     // 'base' : [106, 145, 149]
     // 'base' : [118, 148, 169]
+    'study' : [106, 145, 149],
     'none' : [118, 148, 169]
   };
 
@@ -433,41 +434,48 @@ if (window.matchMedia(mobileOnly).matches) {
             _sc[region].impacts[_s.impact] = 1;
             var _n = {};
             _n.title = 'Total ' + _s.impact;
+            _n.name = _s.impact + 'Node';
+            _n.type = 'impactNode';
             _n.impact = _s.impact;
             _n.sector = _s.sector;
             _n.location = _s.location;
             _n.meta = true;
+            _n.children = [];
             _scc.push(_n);
           } else {
             _sc[region].impacts[_s.impact]++;
-            // flag as a plural entry in the category, in case we want to filter from node structure
-            // in certain visualizations (eg we just want to display counts only)
           }
 
           if (!_sc[region].sectors.hasOwnProperty(_s.sector)) {
             _sc[region].sectors[_s.sector] = 1;
             var _sn, _n = {};
             _n.title = 'Total ' + _s.sector;
+            _n.name = _s.sector + 'Node';
+            _n.type = 'sectorChildNode';
             _n.impact = _s.impact;
             _n.sector = _s.sector;
             _n.location = _s.location;
             _n.meta = true;
             _n.metaSector = true;
+            _n.children = [];
             for (var _c in _sc[region].children) {
               if (_sc[region].children[_c].name === 'sectorNode') {
                 _sn = _c;
               }
             }
-            // push to sectorNode leaf
+            // push to sectorNode
             _sc[region].children[_sn].children.push(_n);
           } else {
             _sc[region].sectors[_s.sector]++;
           }
+          // flag as a plural entry in the category, in case we want to filter from node structure
+          // in certain visualizations (eg we just want to display counts only)
           _scc[study].plural = true;
         }
         // add a normalized default size to the study based on the log scaling (ie with a parameter of 1)
-        // _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
+        _scc[study].size = (Math.log(2) / Math.log(base)) * scale;
       }
+
       _sc[region].children = _scc; // re-insert modified structure (case studies)
 
       // calculate totals of all cases in region which have an impact, (which should be every case)
@@ -502,6 +510,40 @@ if (window.matchMedia(mobileOnly).matches) {
       _sc[region].children = _scc;
     }
     studies.children = _sc; // re-insert modified structure (regions)
+
+    // pack individual studies into bubbles
+    _sc = studies.children;
+    for (var n in _sc) {
+      _scc = _sc[n];
+      var impactNodeIndex = false;
+      if (_scc.children) {
+        for (var s in _scc.children) {
+          if (typeof _scc.children[s].type != 'undefined') {
+            if (_scc.children[s].type === 'impactNode') {
+              impactNodeIndex = s;
+              for (var x in _scc.children) {
+                if (_scc.children[x].type !== 'impactNode') {
+                  if (typeof _scc.children[x].plural != 'undefined' && _scc.children[x].impact == _scc.children[impactNodeIndex].impact) {
+                    var _x = {};
+                    _x.title = _scc.children[x].title;
+                    _x.impact = _scc.children[x].impact;
+                    _x.sector = _scc.children[x].sector;
+                    _x.location = _scc.children[x].location;
+                    _x.study = true;
+                    _x.meta = false;
+                    _x.metaSector = false;
+                    _x.plural = false;
+                    _x.size = _scc.children[x].size;
+                    console.log (_x);
+                    _scc.children[impactNodeIndex].children.push(_x);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
     // find max category counts accross children and insert into root node
     studies.impacts = {};
@@ -547,6 +589,7 @@ if (window.matchMedia(mobileOnly).matches) {
     // filter the studies based on whatever rule we want
     studies = filterObject(studies, function(d) {
       return !d.plural;
+      // return true;
     });
 
     console.log (studies);
@@ -647,6 +690,8 @@ if (window.matchMedia(mobileOnly).matches) {
           offset = -2.5, // offset
           v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
           return d3.rgb.apply(null, shade(colors.sector, v));
+        } else if (d.study) {
+          return d3.rgb.apply(null, colors.study);
         } else {
           var c, t;
           for (i in studies.children) {
@@ -660,7 +705,6 @@ if (window.matchMedia(mobileOnly).matches) {
           scale = 2, // multiplier for shade curve
           offset = .5, // offset
           v = (Math.log(c / t + 1) / Math.log(base)) * scale + offset;
-          console.log(v);
           return d3.rgb.apply(null, shade(colors[d.impact], v));
         }
       })
@@ -696,7 +740,8 @@ if (window.matchMedia(mobileOnly).matches) {
       'philantropy' : 'accessibility',
       'politics' : 'done',
       'transportation' : 'directions_car',
-      'weather' : 'beach_access'
+      'weather' : 'beach_access',
+      'study' : 'import_contacts'
     };
     // create text
     node.append('text')
