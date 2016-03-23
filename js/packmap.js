@@ -415,6 +415,7 @@ if (window.matchMedia(mobileOnly).matches) {
         'region' : _sc[region].region,
         'title' : 'All Sectors',
         'name' : 'sectorNode',
+        'type' : 'sectorNode',
         'impact' : 'none',
         'sector' : 'none',
         'children' : [],
@@ -512,9 +513,10 @@ if (window.matchMedia(mobileOnly).matches) {
     studies.children = _sc; // re-insert modified structure (regions)
 
     // pack individual studies into bubbles
+    // impacts
     _sc = studies.children;
     for (var n in _sc) {
-      _scc = _sc[n];
+      var _scc = _sc[n];
       var impactNodeIndex = false;
       if (_scc.children) {
         for (var s in _scc.children) {
@@ -534,8 +536,47 @@ if (window.matchMedia(mobileOnly).matches) {
                     _x.metaSector = false;
                     _x.plural = false;
                     _x.size = _scc.children[x].size / 4;
-                    console.log (_x);
                     _scc.children[impactNodeIndex].children.push(_x);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // sectors
+    _sc = studies.children;
+    for (var n in _sc) {
+      var _scc = _sc[n];
+      var sectorNodeIndex = false;
+      if (_scc.children) {
+        for (var s in _scc.children) {
+          if (typeof _scc.children[s].type != 'undefined') {
+            if (_scc.children[s].type === 'sectorNode') {
+              for (var z in _scc.children[s].children) {
+                if (typeof _scc.children[s].children[z].type != 'undefined') {
+                  if (_scc.children[s].children[z].type === 'sectorChildNode') {
+                    sectorNodeIndexS = s;
+                    sectorNodeIndexZ = z;
+                    for (var x in _scc.children) {
+                      if (_scc.children[x].type !== 'sectorChildNode') {
+                        if (typeof _scc.children[x].plural != 'undefined' && _scc.children[x].sector ==  _scc.children[sectorNodeIndexS].children[sectorNodeIndexZ].sector) {
+                          var _x = {};
+                          _x.title = _scc.children[x].title;
+                          _x.impact = _scc.children[x].impact;
+                          _x.sector = _scc.children[x].sector;
+                          _x.location = _scc.children[x].location;
+                          _x.study = true;
+                          _x.meta = false;
+                          _x.metaSector = false;
+                          _x.plural = false;
+                          _x.size = _scc.children[x].size / 16;
+                          _scc.children[sectorNodeIndexS].children[sectorNodeIndexZ].children.push(_x);
+                        }
+                      }
+                    }
                   }
                 }
               }

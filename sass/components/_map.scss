@@ -166,9 +166,14 @@ Styleguide 6.3.2
         font-size: 16px;
       }
     }
-    &.study text {
-      fill: $gray-60;
-      font-size: 16px;
+    &.study {
+      // stroke: $gray-20;
+      // stroke-width: 1;
+      text {
+        stroke-width: 0;
+        fill: $gray-60;
+        font-size: 16px;
+      }
     }
   }
 
