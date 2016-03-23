@@ -642,7 +642,7 @@ if (window.matchMedia(mobileOnly).matches) {
       } else if (d.metaSector) {
         var base = 6, // log base for shade curve
           scale = 2, // multiplier for shade curve
-          offset = -3, // offset
+          offset = -2.5, // offset
           v = (Math.log(d.r + 1) / Math.log(base)) * scale + offset;
           return d3.rgb.apply(null, shade(colors.sector, v));
         } else {
@@ -654,10 +654,11 @@ if (window.matchMedia(mobileOnly).matches) {
             }
           }
         // calculate the value of the shade (logarithmic)
-        var base = 4, // log base for shade curve
+        var base = 8, // log base for shade curve
           scale = 2, // multiplier for shade curve
-          offset = .18, // offset
+          offset = .5, // offset
           v = (Math.log(c / t + 1) / Math.log(base)) * scale + offset;
+          console.log(v);
           return d3.rgb.apply(null, shade(colors[d.impact], v));
         }
       })
