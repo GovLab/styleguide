@@ -6,6 +6,7 @@
         "children" : [
         {
             "title" : "Brazil’s Open Budget Transparency Portal",
+            "url" : "http://odimpact.org/case-brazils-open-budget-transparency-portal.html",
             "location" : "sa",
             "impact" : "government",
             "sector" : "pub"
@@ -13,6 +14,7 @@
         ,
         {
             "title" : "Uruguay's A Tu Servicio",
+            "url" : "http://odimpact.org/case-uruguays-a-tu-servicio.html",
             "location" : "sa",
             "impact" : "citizens",
             "sector" : "health"
@@ -25,6 +27,7 @@
         "children" : [
         {
             "title" : "Open Education Information In Tanzania",
+            "url" : "http://odimpact.org/case-open-education-information-in-tanzania.html",
             "location" : "af",
             "impact" : "citizens",
             "sector" : "education"
@@ -32,6 +35,7 @@
         ,
         {
             "title" : "Kenya's Open Duka",
+            "url" : "http://odimpact.org/case-kenyas-open-duka.html",
             "location" : "af",
             "impact" : "citizens",
             "sector" : "pub"
@@ -39,6 +43,7 @@
         ,
         {
             "title" : "Battling Ebola in Sierra Leone",
+            "url" : "http://odimpact.org/case-battling-ebola-in-sierra-leone.html",
             "location" : "af",
             "impact" : "public",
             "sector" : "health"
@@ -51,6 +56,7 @@
         "children" : [
         {
             "title" : "Mexico’s Mejora Tu Escuela",
+            "url" : "http://odimpact.org/case-mexicos-mejora-tu-escuela.html",
             "location" : "na",
             "impact" : "citizens",
             "sector" : "education"
@@ -58,6 +64,7 @@
         ,
         {
             "title" : "Opening Canada’s T3010 Charity Information Return Data",
+            "url" : "http://odimpact.org/case-opening-canadas-t3010-charity-information-return-data.html",
             "location" : "na",
             "impact" : "government",
             "sector" : "philantropy"
@@ -65,6 +72,7 @@
         ,
         {
             "title" : "United States' Eightmaps",
+            "url" : "http://odimpact.org/case-united-states-eightmaps.html",
             "location" : "na",
             "impact" : "public",
             "sector" : "politics"
@@ -72,6 +80,7 @@
         ,
         {
             "title" : "Kennedy vs. the City of Zanesville, United States",
+            "url" : "http://odimpact.org/case-kennedy-vs-the-city-of-zanesville-united-states.html",
             "location" : "na",
             "impact" : "public",
             "sector" : "law"
@@ -79,6 +88,7 @@
         ,
         {
             "title" : "United States' New York City Business Atlas",
+            "url" : "http://odimpact.org/case-united-states-new-york-city-business-atlas.html",
             "location" : "na",
             "impact" : "economic",
             "sector" : "business"
@@ -86,6 +96,7 @@
         ,
         {
             "title" : "United States' NOAA: Opening Up Global Weather Data in Collaboration with Businesses",
+            "url" : "http://odimpact.org/case-united-states-noaa-opening-up-global-weather-data-in-collaboration-with-businesses.html",
             "location" : "na",
             "impact" : "economic",
             "sector" : "weather"
@@ -93,6 +104,7 @@
         ,
         {
             "title" : "United States Opening GPS Data for Civilian Use",
+            "url" : "http://odimpact.org/case-united-states-opening-gps-data-for-civilian-use.html",
             "location" : "na",
             "impact" : "economic",
             "sector" : "geospatial"
@@ -105,6 +117,7 @@
         "children" : [
         {
             "title" : "Openaid In Sweden",
+            "url" : "http://odimpact.org/case-openaid-in-sweden.html",
             "location" : "eu",
             "impact" : "government",
             "sector" : "philantropy"
@@ -112,6 +125,7 @@
         ,
         {
             "title" : "Open Contracting And Procurement In Slovakia",
+            "url" : "http://odimpact.org/case-open-contracting-and-procurement-in-slovakia.html",
             "location" : "eu",
             "impact" : "government",
             "sector" : "pub"
@@ -119,6 +133,7 @@
         ,
         {
             "title" : "Denmark’s Open Address Data Set",
+            "url" : "http://odimpact.org/case-denmarks-open-address-data-set.html",
             "location" : "eu",
             "impact" : "government",
             "sector" : "geospatial"
@@ -127,6 +142,7 @@
 
         {
             "title" : "United Kingdom's TheyWorkForYou",
+            "url" : "http://odimpact.org/case-united-kingdoms-theyworkforyou.html",
             "location" : "eu",
             "impact" : "government",
             "sector" : "pub"
@@ -134,6 +150,7 @@
         ,
         {
             "title" : "United Kingdom's Open Public Services Network",
+            "url" : "http://odimpact.org/case-united-kingdoms-open-public-services-network.html",
             "location" : "eu",
             "impact" : "government",
             "sector" : "education"
@@ -141,6 +158,7 @@
         ,
         {
             "title" : "United Kingdom's OpenCorporates",
+            "url" : "http://odimpact.org/case-united-kingdoms-opencorporates.html",
             "location" : "eu",
             "impact" : "government",
             "sector" : "business"
@@ -148,6 +166,7 @@
         ,
         {
             "title" : "United Kingdom's Coeliac UK and Brandbank",
+            "url" : "http://odimpact.org/case-united-kingdoms-coeliac-uk-and-brandbank.html",
             "location" : "eu",
             "impact" : "public",
             "sector" : "health"
@@ -155,6 +174,7 @@
         ,
         {
             "title" : "United Kingdom's Ordnance Survey OpenData",
+            "url" : "http://odimpact.org/case-united-kingdoms-ordnance-survey-opendata.html",
             "location" : "eu",
             "impact" : "economic",
             "sector" : "geospatial"
@@ -162,6 +182,7 @@
         ,
         {
             "title" : "United Kingdom's Transport for London",
+            "url" : "http://odimpact.org/case-united-kingdoms-transport-for-london.html",
             "location" : "eu",
             "impact" : "economic",
             "sector" : "transportation"
@@ -169,6 +190,7 @@
         ,
         {
             "title" : "United Kingdom's HM Land Registry Price Paid Data",
+            "url" : "http://odimpact.org/case-united-kingdoms-hm-land-registry-price-paid-data.html",
             "location" : "eu",
             "impact" : "economic",
             "sector" : "geospatial"
@@ -181,6 +203,7 @@
         "children" : [
         {
             "title" : "Indonesia’s Kawal Pemilu",
+            "url" : "http://odimpact.org/case-indonesias-kawal-pemilu.html",
             "location" : "as",
             "impact" : "government",
             "sector" : "politics"
@@ -188,6 +211,7 @@
         ,
         {
             "title" : "Singapore's Dengue Cluster Map",
+            "url" : "http://odimpact.org/case-singapores-dengue-cluster-map.html",
             "location" : "as",
             "impact" : "public",
             "sector" : "health"
@@ -200,6 +224,7 @@
         "children" : [
         {
             "title" : "New Zealand's Christchurch Earthquake Clusters",
+            "url" : "http://odimpact.org/case-new-zealands-christchurch-earthquake-clusters.html",
             "location" : "oc",
             "impact" : "public",
             "sector" : "emergency"

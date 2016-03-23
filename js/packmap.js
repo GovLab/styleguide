@@ -285,6 +285,9 @@ if (window.matchMedia(mobileOnly).matches) {
 
   function clicked(d) {
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, '');
+    if (d.study) {
+      location.href = d.url;
+    }
     d3.selectAll('.region').classed('selected', false);
     d3.select('#' + region).classed('selected', true);
     if (d.type === 'impactNode') {
@@ -606,6 +609,7 @@ console.log (d);
                     _x.impact = _scc.children[x].impact;
                     _x.sector = _scc.children[x].sector;
                     _x.location = _scc.children[x].location;
+                    _x.url = _scc.children[x].url;
                     _x.study = true;
                     _x.meta = false;
                     _x.metaSector = false;
@@ -643,6 +647,7 @@ console.log (d);
                           _x.impact = _scc.children[x].impact;
                           _x.sector = _scc.children[x].sector;
                           _x.location = _scc.children[x].location;
+                          _x.url = _scc.children[x].url;
                           _x.study = true;
                           _x.studySector = true;
                           _x.meta = false;
