@@ -232,3 +232,15 @@ Styleguide 6.3.2
     }
   }
 }
+
+.tooltip {
+  color: $white;
+  font-size: 16px;
+  border-color: $gray-50;
+  background-color: $gray-50;
+  transition: opacity 0.02s;
+  width: 200px;
+  &::before {
+    border-bottom-color: $gray-50;
+  }
+}

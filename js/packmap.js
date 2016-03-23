@@ -111,6 +111,7 @@ if (window.matchMedia(mobileOnly).matches) {
   path = d3.geo.path()
   .projection(projection);
 
+
   // build the base svg and related elements
   var svg = d3.select(mapClass).append('svg')
   .attr('width', width)
@@ -119,8 +120,25 @@ if (window.matchMedia(mobileOnly).matches) {
   .attr('class', 'background')
   .attr('width', width)
   .attr('height', height);
+
   var g = svg.append('g')
-  .style('stroke-width', '1.5px');
+  .style('stroke-width', '1.5px')
+  ;
+
+  var tip = document.getElementById('tooltip');
+  tip.style.position = 'absolute';
+  tip.style.opacity = 0;
+
+  var mousex, mousey;
+  d3.select('html')
+  .on('mousemove', function() {
+    c = d3.mouse(this);
+    mousex = c[0];
+    mousey = c[1];
+    tip.style.left = mousex - 75 + 'px';
+    tip.style.top = mousey + 50 + 'px';
+  });
+
 
   // utility function to create a shade based on array of rgb values and scalar
   function shade(rgb, v) {
@@ -245,6 +263,24 @@ if (window.matchMedia(mobileOnly).matches) {
     'none' : [118, 148, 169]
   };
 
+  var verboseMap = {
+    'government' : 'Improving Government',
+    'citizens' : 'Empowering Citizens',
+    'economic' : 'Creating Opportunity',
+    'public' : 'Solving Public Problems',
+    'pub' : 'Public Sector',
+    'business' : 'Business',
+    'education' : 'Education',
+    'emergency' : 'Emergency Services',
+    'geospatial' : 'Geospatial Services',
+    'health' : 'Health',
+    'law' : 'Law',
+    'philantropy' : 'Philantropy and Aid',
+    'politics' : 'Politics and Elections',
+    'transportation' : 'Transportation',
+    'weather' : 'Weather',
+  }
+
   var baseColors = {};
 
   function clicked(d) {
@@ -264,10 +300,22 @@ if (window.matchMedia(mobileOnly).matches) {
       d3.selectAll('.node.study').classed('show', false);
       d3.selectAll('.node.study.studyImpact.' + d.region).classed('show', true);
     }
-    console.log(d);
   }
 
   function highlight(d) {
+
+console.log (d);
+    if (d.type === 'impactNode' || d.type === 'sectorChildNode' || d.study) {
+      tip.style.opacity = 1;
+      if (d.type === 'impactNode') {
+        tip.innerHTML = verboseMap[d.impact];
+      } else if (d.study) {
+        tip.innerHTML = d.title;
+      } else {
+        tip.innerHTML = verboseMap[d.sector];
+      }
+    }
+
     var region = d.location || this.id.replace(/^(_bubble_|_text_)/, ''),
     bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_'),
     impact = this.id.replace(/^[^-]*-?/, '');
@@ -303,6 +351,8 @@ if (window.matchMedia(mobileOnly).matches) {
   }
 
   function deHighlight(d) {
+    tip.style.opacity = 0;
+
     var region = d.location || this.id.replace(/_bubble_|_text_/, ''),
     bubble = this.id.replace(/^(?!_bubble_|_text_)|_text_/, '_bubble_');
 
@@ -376,6 +426,8 @@ if (window.matchMedia(mobileOnly).matches) {
     d3.selectAll('.map-ui .b-button').classed('m-active', false)
     d3.select('#' + this.id).classed('m-active', true);
   }
+
+
 
   // process the various input data sets into our map
   // called with queue()
@@ -661,7 +713,7 @@ if (window.matchMedia(mobileOnly).matches) {
 
     // set up pack layout, which will populate studies with layout information
     // based on the size we calculated from the counts when pack.nodes() is called
-    var diameter = 800, // diameter of container circles to pack bubbles into
+    var diameter = 700, // diameter of container circles to pack bubbles into
     pack = d3.layout.pack()
     .size([diameter, diameter])
     .value(function(d) {
@@ -910,6 +962,7 @@ if (window.matchMedia(mobileOnly).matches) {
       return t;
     });
 
+
     // ... finished drawing bubbles
 
     // no one needs you antarctica
@@ -918,6 +971,8 @@ if (window.matchMedia(mobileOnly).matches) {
     // select all by default
     document.getElementById('button-all').dispatchEvent(new MouseEvent('click'));
   }
+
+  // d3.selectAll('.tooltip').moveToFront();
 
   // this allows us to process multiple data sources in a single function, ie instead of just d3.json()
   queue()
