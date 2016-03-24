@@ -5972,6 +5972,8 @@ Markup:
 .m-purple - $purple background
 .m-teal - $teal background
 .m-orange - $orange background
+.m-purple-40k - $purple-40k background
+.m-blue-20k - $blue-20k background
 
 Styleguide 3.4
 */
@@ -6011,6 +6013,12 @@ Styleguide 3.4
 
 .b-divider.m-teal {
   background-color: #008895; }
+
+.b-divider.m-purple-40k {
+  background-color: #381759; }
+
+.b-divider.m-blue-20k {
+  background-color: #006e8f; }
 
 /*
 Slide
