@@ -43,7 +43,6 @@ gulp.task('js', function() {
 gulp.task('distJs', function () {
   return gulp.src('js/*')
   .pipe(plumber())
-  .pipe(rename('guide/js'))
   .pipe(gulp.dest('dist/js'))
 });
 
