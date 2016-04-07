@@ -15,7 +15,7 @@ gulp.task('browserSync', function() {
     },
     open: false
   })
-})
+});
 
 gulp.task('sass', function() {
   return gulp.src('sass/styles.scss')
@@ -40,6 +40,12 @@ gulp.task('js', function() {
   .pipe(browserSync.stream());
 });
 
+gulp.task('distJs', function () {
+  return gulp.src('js/*')
+  .pipe(plumber())
+  .pipe(gulp.dest('dist/js'))
+});
+
 gulp.task('assets', function() {
   return gulp.src('img/**/*')
   .pipe(plumber())
@@ -55,7 +61,7 @@ gulp.task('ver', function() {
   .pipe(gulp.dest('sass/'));
 });
 
-gulp.task('build', ['sass', 'js', 'assets', 'kss', 'distSass'], function () {
+gulp.task('build', ['sass', 'js', 'assets', 'kss', 'distSass', 'distJs'], function () {
   //copy static stuff over
   return gulp.src('kss-template/static/*')
   .pipe(plumber())
