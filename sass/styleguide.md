@@ -1,1 +1,1 @@
-govlab-styleguide - 1.0.11
+govlab-styleguide - 1.0.12
