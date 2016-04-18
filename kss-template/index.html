@@ -53,6 +53,21 @@
 
   </header>
 
+  <!-- Main Menu (Off Canvas) -->
+  <nav class="b-main-menu">
+      <!-- generated content here for side menu -->
+    <a href="./">
+      <span>0</span> <span>Overview</span>
+    </a>
+
+    {{#eachRoot}}
+    <a href="section-{{referenceURI}}.html">
+      <span>{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> <span>{{header}}</span>
+    </a>
+    {{/eachRoot}}
+  </nav>
+
+
 
   <main role="main">
 
