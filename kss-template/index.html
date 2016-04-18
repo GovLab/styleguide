@@ -59,7 +59,6 @@
     <a href="./">
       <span>0</span> <span>Overview</span>
     </a>
-
     {{#eachRoot}}
     <a href="section-{{referenceURI}}.html">
       <span>{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</span> <span>{{header}}</span>
@@ -153,6 +152,8 @@
 
 {{#eachSection rootName}}
 {{#ifDepth 1}}
+
+
 <div class="b-top-section m-purple">
   <h1>
     <span class="kss-title__ref">
@@ -161,6 +162,7 @@
       {{/ifNumeric}}
     </span>
     {{header}}
+
   </h1>
 </div>
 {{/ifDepth}}
