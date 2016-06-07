@@ -132,3 +132,8 @@ Styleguide 3.1
         @include transition;
     }
 }
+
+.b-button.m-disabled{
+  pointer-events: none;
+  opacity: 0.5;
+}
