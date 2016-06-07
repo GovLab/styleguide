@@ -5249,6 +5249,7 @@ Markup:
 .m-black     - Uses $black background
 .m-icon-only - For buttons without any text, can be used with any color modifier
 .m-naked     - Transparent style, will blend in with background of parent element
+.m-disabled - Will disable button so there is no click action
 
 Styleguide 3.1
 */
@@ -5316,6 +5317,10 @@ Styleguide 3.1
   .b-button.m-naked:hover, .b-form input.m-naked[type="submit"]:hover {
     background-color: rgba(0, 0, 0, 0.2);
     transition: all .4s ease; }
+
+.b-button.m-disabled, .b-form input.m-disabled[type="submit"] {
+  pointer-events: none;
+  opacity: 0.5; }
 
 /*
 Form
@@ -6018,6 +6023,9 @@ Styleguide 3.4
 
 .b-divider.m-blue-20k {
   background-color: #006e8f; }
+
+.b-divider.m-gray-20 {
+  background-color: rgba(0, 0, 0, 0.2); }
 
 /*
 Slide
